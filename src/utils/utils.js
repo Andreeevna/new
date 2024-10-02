@@ -12,7 +12,7 @@ const columnsCodeLogins = [
 	{ field: `FOREIGN_KEY_client_id`, headerName: `Внешний ключ ID клиента` },
 ]
 
-export const rowsCodeLogins = [
+export const rowsSmsLogins = [
 	{
 		id: 1,
 		user_id: 22,

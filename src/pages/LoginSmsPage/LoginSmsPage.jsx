@@ -6,7 +6,7 @@ import { DataGrid } from '@mui/x-data-grid'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
 
 import { Link } from 'react-router-dom'
-import { rowsCodeLogins } from '../../utils/utils'
+import { rowsSmsLogins } from '../../utils/utils'
 import './LoginSmsPage.css'
 
 const filterNames = {
@@ -18,7 +18,7 @@ const filterNames = {
 	last_used: 'Поиск по дате использования',
 }
 const LoginSmsPage = () => {
-	const [rows, setRows] = useState(rowsCodeLogins)
+	const [rows, setRows] = useState(rowsSmsLogins)
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
