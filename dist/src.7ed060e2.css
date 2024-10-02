@@ -28,6 +28,15 @@ ul {
 	padding-right: 20px;
 }
 
+.table__container {
+	padding-top: 60px;
+	/* padding-bottom: 60px; */
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	max-width: 1330px;
+}
+
 /* search */
 
 .search__container {
@@ -94,7 +103,7 @@ F1F1F1 */
 
 .sidebar {
 	flex-shrink: 0;
-	width: 300px;
+	width: 260px;
 	height: 100vh;
 	background-color: #f1f1f1;
 	position: sticky;
@@ -170,14 +179,6 @@ F1F1F1 */
 .clients {
 	flex: 4;
 	height: 100vh;
-}
-.clients__container {
-	padding-top: 60px;
-	/* padding-bottom: 60px; */
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	max-width: 1230px;
 }
 
 .clients-list {

@@ -2,14 +2,6 @@
 	flex: 4;
 	height: 100vh;
 }
-.clients__container {
-	padding-top: 60px;
-	/* padding-bottom: 60px; */
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	max-width: 1230px;
-}
 
 .clients-list {
 	height: 100%;

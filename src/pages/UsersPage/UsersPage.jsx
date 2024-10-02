@@ -40,7 +40,7 @@ export default function UsersPage() {
 		{
 			field: `bitrix_id`,
 			headerName: `bitrix_ID`,
-			width: 100,
+			width: 130,
 			editable: false,
 			filterable: false,
 			hideable: false,
@@ -136,7 +136,7 @@ export default function UsersPage() {
 
 	return (
 		<div className='users'>
-			<div className='users__container'>
+			<div className='table__container'>
 				<div className='search__container'>{filters}</div>
 
 				<div className='users-list'>

@@ -133,7 +133,7 @@ const ClientsPage = () => {
 	})
 	return (
 		<div className='clients'>
-			<div className='clients__container'>
+			<div className='table__container'>
 				<div className='search__container'>{filters}</div>
 
 				<div className='clients-list'>

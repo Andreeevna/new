@@ -29,7 +29,7 @@ const LoginSmsPage = () => {
 		{
 			field: `id`,
 			headerName: `ID`,
-			width: 50,
+			width: 70,
 			sortable: false,
 			editable: false,
 			hideable: false,
@@ -181,7 +181,7 @@ const LoginSmsPage = () => {
 	})
 	return (
 		<div className='login'>
-			<div className='login__container'>
+			<div className='table__container'>
 				<div className='search__container'>{filters}</div>
 
 				<div className='login-list'>

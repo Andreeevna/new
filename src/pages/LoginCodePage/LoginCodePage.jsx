@@ -27,13 +27,56 @@ const LoginCodePage = () => {
 		console.log(id)
 	}
 	const columnsCodeLogins = [
-		{ field: `id`, headerName: `ID`, width: 60 },
-		{ field: `user_id`, headerName: `ID пользователя` },
-		{ field: `client_id`, headerName: `ID клиента` },
-		{ field: `secret`, headerName: `Внутренний ключ` },
-		{ field: `login`, headerName: `Логин`, width: 70 },
-		{ field: `password`, headerName: `Пароль` },
-		{ field: `instruction`, headerName: `Инструкция` },
+		{
+			field: `id`,
+			headerName: `ID`,
+			width: 70,
+			sortable: true,
+			editable: false,
+			hideable: false,
+		},
+		{
+			field: `user_id`,
+			headerName: `ID пользователя`,
+			sortable: true,
+			editable: false,
+			hideable: false,
+		},
+		{
+			field: `client_id`,
+			headerName: `ID клиента`,
+			sortable: true,
+			editable: false,
+			hideable: false,
+		},
+		{
+			field: `secret`,
+			headerName: `Внутренний ключ`,
+			sortable: false,
+			editable: false,
+			hideable: false,
+		},
+		{
+			field: `login`,
+			headerName: `Логин`,
+			sortable: true,
+			editable: false,
+			hideable: false,
+		},
+		{
+			field: `password`,
+			headerName: `Пароль`,
+			sortable: false,
+			editable: false,
+			hideable: false,
+		},
+		{
+			field: `instruction`,
+			headerName: `Инструкция`,
+			sortable: false,
+			editable: false,
+			hideable: false,
+		},
 		{
 			field: `creation_date`,
 			headerName: `Дата создания`,
@@ -138,7 +181,7 @@ const LoginCodePage = () => {
 	})
 	return (
 		<div className='login'>
-			<div className='login__container'>
+			<div className='table__container'>
 				<div className='search__container'>{filters}</div>
 
 				<div className='login-list'>
