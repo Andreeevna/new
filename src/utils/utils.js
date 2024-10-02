@@ -12,87 +12,6 @@ const columnsCodeLogins = [
 	{ field: `FOREIGN_KEY_client_id`, headerName: `Внешний ключ ID клиента` },
 ]
 
-export const rowsSmsLogins = [
-	{
-		id: 1,
-		user_id: 22,
-		client_id: 32,
-		login: 'test@getEmail.com',
-		password: '12ps',
-		instruction:
-			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
-		creation_date: '02.11.2021 11:30',
-		last_used: '03.10.2024 09:46',
-		FOREIGN_KEY_user_id: 'user',
-		FOREIGN_KEY_client_id: 'client',
-	},
-	{
-		id: 2,
-		user_id: 12,
-		client_id: 52,
-		login: 'new@getEmail.com',
-		password: '123ps',
-		instruction:
-			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
-		creation_date: '03.01.2021 01:30',
-		last_used: '03.10.2024 09:46',
-		FOREIGN_KEY_user_id: 'user',
-		FOREIGN_KEY_client_id: 'client',
-	},
-	{
-		id: 3,
-		user_id: 87,
-		client_id: 532,
-		login: 'lana@getEmail.com',
-		password: 's12ps',
-		instruction:
-			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
-		creation_date: '05.01.2021 01:30',
-		last_used: '07.10.2024 09:46',
-		FOREIGN_KEY_user_id: 'user',
-		FOREIGN_KEY_client_id: 'client',
-	},
-	{
-		id: 4,
-		user_id: 33,
-		client_id: 332,
-		login: 'Min@getEmail.com',
-		password: 'kkk1',
-		instruction:
-			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
-		creation_date: '04.04.2021 01:30',
-		last_used: '07.12.2024 09:46',
-		FOREIGN_KEY_user_id: 'user',
-		FOREIGN_KEY_client_id: 'client',
-	},
-	{
-		id: 5,
-		user_id: 23,
-		client_id: 432,
-		login: 'Alex@getEmail.com',
-		password: 'alex343',
-		instruction:
-			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
-		creation_date: '11.04.2023 03:30',
-		last_used: '02.12.2024 03:46',
-		FOREIGN_KEY_user_id: 'user',
-		FOREIGN_KEY_client_id: 'client',
-	},
-	{
-		id: 6,
-		user_id: 53,
-		client_id: 100,
-		login: 'Ale3x@getEmail.com',
-		password: 'alex343',
-		instruction:
-			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
-		creation_date: '11.03.2023 03:30',
-		last_used: '03.03.2024 05:46',
-		FOREIGN_KEY_user_id: 'user',
-		FOREIGN_KEY_client_id: 'client',
-	},
-]
-
 const columnsPushLogins = [
 	{ field: `id`, headerName: `ID` },
 	{ field: `user_id`, headerName: `ID пользователя` },
@@ -418,5 +337,189 @@ export const rowsClients = [
 		name: 'Vlad',
 		max_accounts: 3,
 		creation_date: '28.12.2020 01:22',
+	},
+]
+
+// LOGIN
+
+export const rowsSmsLogins = [
+	{
+		id: 1,
+		user_id: 22,
+		client_id: 32,
+		login: 'test@getEmail.com',
+		password: '12ps',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '02.11.2021 11:30',
+		last_used: '03.10.2024 09:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
+	},
+	{
+		id: 2,
+		user_id: 12,
+		client_id: 52,
+		login: 'new@getEmail.com',
+		password: '123ps',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '03.01.2021 01:30',
+		last_used: '03.10.2024 09:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
+	},
+	{
+		id: 3,
+		user_id: 87,
+		client_id: 532,
+		login: 'lana@getEmail.com',
+		password: 's12ps',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '05.01.2021 01:30',
+		last_used: '07.10.2024 09:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
+	},
+	{
+		id: 4,
+		user_id: 33,
+		client_id: 332,
+		login: 'Min@getEmail.com',
+		password: 'kkk1',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '04.04.2021 01:30',
+		last_used: '07.12.2024 09:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
+	},
+	{
+		id: 5,
+		user_id: 23,
+		client_id: 432,
+		login: 'Alex@getEmail.com',
+		password: 'alex343',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '11.04.2023 03:30',
+		last_used: '02.12.2024 03:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
+	},
+	{
+		id: 6,
+		user_id: 53,
+		client_id: 100,
+		login: 'Ale3x@getEmail.com',
+		password: 'alex343',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '11.03.2023 03:30',
+		last_used: '03.03.2024 05:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
+	},
+]
+
+export const rowsCodeLogins = [
+	{
+		id: 1,
+		user_id: 22,
+		client_id: 32,
+		secret: 'HS256',
+		login: 'test@getEmail.com',
+		password: '12ps',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '02.11.2021 11:30',
+		last_used: '03.10.2024 09:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
+	},
+	{
+		id: 2,
+		user_id: 12,
+		client_id: 52,
+		secret: 'HS2561111',
+		login: 'new@getEmail.com',
+		password: '123ps',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '03.01.2021 01:30',
+		last_used: '03.10.2024 09:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
+	},
+	{
+		id: 3,
+		user_id: 87,
+		client_id: 532,
+		secret: 'HS256333',
+		login: 'lana@getEmail.com',
+		password: 's12ps',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '05.01.2021 01:30',
+		last_used: '07.10.2024 09:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
+	},
+	{
+		id: 4,
+		user_id: 33,
+		client_id: 332,
+		secret: 'HS3256',
+		login: 'Min@getEmail.com',
+		password: 'kkk1',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '04.04.2021 01:30',
+		last_used: '07.12.2024 09:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
+	},
+	{
+		id: 5,
+		user_id: 23,
+		client_id: 432,
+		secret: 'HS25698',
+		login: 'Alex@getEmail.com',
+		password: 'alex343',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '11.04.2023 03:30',
+		last_used: '02.12.2024 03:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
+	},
+	{
+		id: 6,
+		user_id: 53,
+		client_id: 100,
+		secret: 'HS2562398',
+		login: 'Ale3x@getEmail.com',
+		password: 'alex343',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '11.03.2023 03:30',
+		last_used: '01.03.2001 05:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
+	},
+	{
+		id: 7,
+		user_id: 253,
+		client_id: 20,
+		secret: 'HS2',
+		login: 'Ale22223x@getEmail.com',
+		password: 'al2323ex343',
+		instruction:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quo corrupti repellat nobis saepe ipsam nisi quibusdam delectus quia? Consectetur tempora numquam cumque architecto minus consequatur exercitationem distinctio aliquam voluptates.',
+		creation_date: '11.03.2023 03:30',
+		last_used: '03.01.2001 05:46',
+		FOREIGN_KEY_user_id: 'user',
+		FOREIGN_KEY_client_id: 'client',
 	},
 ]

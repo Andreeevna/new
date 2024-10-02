@@ -172,7 +172,7 @@ const LoginSmsPage = () => {
 		})
 	}, [filterValues, rows])
 
-	// PAGENATION
+	// PAGINATION
 	const PAGE_SIZE = 5
 
 	const [paginationModel, setPaginationModel] = React.useState({

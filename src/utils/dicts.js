@@ -44,3 +44,17 @@ export const smsLoginsDict = [
 	{ field: `FOREIGN_KEY_user_id`, headerName: `Внешний ключ ID пользователя` },
 	{ field: `FOREIGN_KEY_client_id`, headerName: `Внешний ключ ID клиента` },
 ]
+
+export const CodeLoginsDict = [
+	{ field: `id`, headerName: `ID` },
+	{ field: `user_id`, headerName: `ID пользователя` },
+	{ field: `client_id`, headerName: `ID клиента` },
+	{ field: `secret`, headerName: `Внутренний ключ` },
+	{ field: `login`, headerName: `Логин` },
+	{ field: `password`, headerName: `Пароль` },
+	{ field: `instruction`, headerName: `Инструкция` },
+	{ field: `creation_date`, headerName: `Дата создания` },
+	{ field: `last_used`, headerName: `Дата последнего использования` },
+	{ field: `FOREIGN_KEY_user_id`, headerName: `Внешний ключ ID пользователя` },
+	{ field: `FOREIGN_KEY_client_id`, headerName: `Внешний ключ ID клиента` },
+]
