@@ -115,7 +115,7 @@ const LoginCodePage = () => {
 			renderCell: params => {
 				return (
 					<div className='action-group'>
-						<Link to={`/edit/${params.row.id}/loginsms`}>
+						<Link to={`/edit/${params.row.id}/logincode`}>
 							<button className='productListEdit'>Изменить</button>
 						</Link>
 						<DeleteOutline

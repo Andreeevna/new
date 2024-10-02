@@ -1,6 +1,11 @@
 import React, { useMemo, useState } from 'react'
 
-import { clientsDict, smsLoginsDict, usersDict } from '../../utils/dicts'
+import {
+	clientsDict,
+	codeLoginsDict,
+	smsLoginsDict,
+	usersDict,
+} from '../../utils/dicts'
 import './EditComponent.css'
 
 const EditComponent = ({ item, chapter }) => {
@@ -26,6 +31,10 @@ const EditComponent = ({ item, chapter }) => {
 
 		if (chapter === 'loginsms') {
 			return findvalue(key, smsLoginsDict)
+		}
+
+		if (chapter === 'logincode') {
+			return findvalue(key, codeLoginsDict)
 		}
 	}
 
