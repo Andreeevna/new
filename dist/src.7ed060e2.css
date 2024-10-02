@@ -188,7 +188,7 @@ F1F1F1 */
 }
 
 .edit {
-	width: 500px;
+	width: 100%;
 	/* background-color: antiquewhite; */
 }
 
@@ -218,10 +218,18 @@ F1F1F1 */
 	overflow-x: hidden;
 }
 
+.edit-item__input {
+	outline: none;
+	opacity: 0.8;
+	width: 100%;
+	color: inherit;
+	font-size: 14px;
+}
+
 /* btn */
 
 .edit-send {
-	margin-bottom: 10px;
+	margin-top: 20px;
 	display: flex;
 	justify-content: flex-end;
 }
@@ -244,6 +252,8 @@ F1F1F1 */
 }
 
 .edit-page__title {
+	margin-top: 10px;
+	margin-bottom: 30px;
 	text-align: center;
 	font-weight: 500;
 	letter-spacing: 1px;
@@ -281,13 +291,14 @@ F1F1F1 */
 .popup_active {
 	position: absolute;
 	width: 650px;
-	height: 350px;
-	top: calc(50% - 210px);
-	left: calc(50% - 300px);
-	border-radius: 30px;
+	max-height: 350px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 10px;
 	background-color: rgb(255, 255, 255);
 	cursor: default;
-	padding: 40px 20px;
+	padding: 20px 20px;
 }
 
 .popup__content {

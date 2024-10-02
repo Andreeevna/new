@@ -3,6 +3,8 @@
 }
 
 .edit-page__title {
+	margin-top: 10px;
+	margin-bottom: 30px;
 	text-align: center;
 	font-weight: 500;
 	letter-spacing: 1px;

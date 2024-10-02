@@ -11,13 +11,14 @@
 .popup_active {
 	position: absolute;
 	width: 650px;
-	height: 350px;
-	top: calc(50% - 210px);
-	left: calc(50% - 300px);
-	border-radius: 30px;
+	max-height: 350px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 10px;
 	background-color: rgb(255, 255, 255);
 	cursor: default;
-	padding: 40px 20px;
+	padding: 20px 20px;
 }
 
 .popup__content {

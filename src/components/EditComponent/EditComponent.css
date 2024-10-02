@@ -1,5 +1,5 @@
 .edit {
-	width: 500px;
+	width: 100%;
 	/* background-color: antiquewhite; */
 }
 
@@ -29,10 +29,18 @@
 	overflow-x: hidden;
 }
 
+.edit-item__input {
+	outline: none;
+	opacity: 0.8;
+	width: 100%;
+	color: inherit;
+	font-size: 14px;
+}
+
 /* btn */
 
 .edit-send {
-	margin-bottom: 10px;
+	margin-top: 20px;
 	display: flex;
 	justify-content: flex-end;
 }

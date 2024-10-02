@@ -78,6 +78,7 @@ const EditComponent = ({ item, chapter }) => {
 						</span>
 					) : (
 						<input
+							className='edit-item__input'
 							type='text'
 							value={newvalue[key] || ''}
 							onChange={e =>
