@@ -1,4 +1,11 @@
-import { rows_users, rowsClients, rowsCodeLogins, rowsSmsLogins } from './utils'
+import {
+	rows_users,
+	rowsCallLogins,
+	rowsClients,
+	rowsCodeLogins,
+	rowsPushLogins,
+	rowsSmsLogins,
+} from './utils'
 
 export const getProductById = (itemId, chapter) => {
 	if (chapter === 'users') {
@@ -26,6 +33,22 @@ export const getProductById = (itemId, chapter) => {
 
 	if (chapter === 'logincode') {
 		return rowsCodeLogins.find(row => {
+			if (row.id === Number(itemId)) {
+				return row
+			}
+		})
+	}
+
+	if (chapter === 'logincall') {
+		return rowsCallLogins.find(row => {
+			if (row.id === Number(itemId)) {
+				return row
+			}
+		})
+	}
+
+	if (chapter === 'loginpush') {
+		return rowsPushLogins.find(row => {
 			if (row.id === Number(itemId)) {
 				return row
 			}

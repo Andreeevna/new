@@ -38,6 +38,7 @@ const LoginCodePage = () => {
 		{
 			field: `user_id`,
 			headerName: `ID пользователя`,
+			width: 140,
 			sortable: true,
 			editable: false,
 			hideable: false,

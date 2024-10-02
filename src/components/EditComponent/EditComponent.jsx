@@ -1,8 +1,10 @@
 import React, { useMemo, useState } from 'react'
 
 import {
+	callLoginsDict,
 	clientsDict,
 	codeLoginsDict,
+	pushLoginsDict,
 	smsLoginsDict,
 	usersDict,
 } from '../../utils/dicts'
@@ -35,6 +37,12 @@ const EditComponent = ({ item, chapter }) => {
 
 		if (chapter === 'logincode') {
 			return findvalue(key, codeLoginsDict)
+		}
+		if (chapter === 'logincall') {
+			return findvalue(key, callLoginsDict)
+		}
+		if (chapter === 'loginpush') {
+			return findvalue(key, pushLoginsDict)
 		}
 	}
 

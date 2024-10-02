@@ -30,7 +30,7 @@ const LoginSmsPage = () => {
 			field: `id`,
 			headerName: `ID`,
 			width: 70,
-			sortable: false,
+			sortable: true,
 			editable: false,
 			hideable: false,
 		},
@@ -38,6 +38,8 @@ const LoginSmsPage = () => {
 		{
 			field: `user_id`,
 			headerName: `ID пользователя`,
+			width: 140,
+
 			sortable: true,
 			editable: false,
 			hideable: false,
@@ -52,8 +54,7 @@ const LoginSmsPage = () => {
 		{
 			field: `login`,
 			headerName: `Логин`,
-			width: 80,
-
+			// width: 100,
 			sortable: true,
 			editable: false,
 			hideable: false,
@@ -61,7 +62,7 @@ const LoginSmsPage = () => {
 		{
 			field: `password`,
 			headerName: `Пароль`,
-			width: 80,
+			// width: 100,
 			sortable: true,
 			editable: false,
 			hideable: false,
@@ -92,7 +93,7 @@ const LoginSmsPage = () => {
 		{
 			field: `FOREIGN_KEY_user_id`,
 			headerName: `Внешний ключ ID пользователя`,
-			width: 140,
+			width: 130,
 			sortable: false,
 			editable: false,
 			hideable: false,
@@ -100,7 +101,7 @@ const LoginSmsPage = () => {
 		{
 			field: `FOREIGN_KEY_client_id`,
 			headerName: `Внешний ключ ID клиента`,
-			width: 140,
+			width: 130,
 			sortable: false,
 			editable: false,
 			hideable: false,
