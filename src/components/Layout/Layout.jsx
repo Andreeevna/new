@@ -7,6 +7,7 @@ import './Layout.css'
 const Layout = ({ children }) => {
 	return (
 		<>
+			<div id='modals'></div>
 			<div className='container-layout'>
 				<Sidebar />
 				<Outlet />
