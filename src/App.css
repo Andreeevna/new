@@ -1,0 +1,93 @@
+* {
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+body {
+	margin: 0;
+	font-weight: 400;
+	font-size: 16px;
+	color: #343434;
+	letter-spacing: 0.9px;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.container {
+	max-width: 1640px;
+	margin: 0 auto;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+/* search */
+
+.search__container {
+	margin-bottom: 50px;
+	padding-left: 20px;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 40px;
+}
+
+.search-item {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.search__input {
+	padding: 0 25px 0 15px;
+	height: 30px;
+	width: 300px;
+	font-size: 14px;
+	letter-spacing: 1px;
+	outline: none;
+	border: none;
+	border: 1px solid #0e1a79;
+	border-radius: 4px;
+}
+
+.search__input::placeholder {
+	font-size: 14px;
+	letter-spacing: 1px;
+	font-weight: inherit;
+}
+
+.search__btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 30px;
+	color: #fff;
+	background-color: #0e1a79;
+	border: none;
+	font-size: 14px;
+	letter-spacing: 0.9px;
+	border-radius: 6px;
+}
+
+/* MUI */
+
+.MuiDataGrid-footerContainer {
+	justify-content: center !important;
+}
+
+.MuiDataGrid-selectedRowCount {
+	display: none !important;
+}
+
+/* #0832DE */
+
+/* #7D7D7D  text
+
+F1F1F1 */
