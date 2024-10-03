@@ -129,7 +129,7 @@ F1F1F1 */
 	padding: 6px 5px 6px 7px;
 	width: 180px;
 	border-radius: 6px;
-	transition: all 0.8s ease-in-out;
+	transition: all 0.2s ease-in-out;
 }
 
 .sidebar-list__link:hover {
@@ -182,7 +182,7 @@ F1F1F1 */
 }
 
 .edit-item {
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 	display: flex;
 	align-items: center;
 	gap: 20px;
@@ -208,11 +208,12 @@ F1F1F1 */
 }
 
 .edit-item__input {
-	outline: none;
-	opacity: 0.8;
 	width: 100%;
-	color: inherit;
+	/* color: inherit; */
 	font-size: 14px;
+	border: none;
+	outline: none;
+	color: #0832de;
 }
 
 /* btn */
@@ -261,7 +262,7 @@ F1F1F1 */
 .popup_active {
 	position: absolute;
 	width: 650px;
-	max-height: 350px;
+	min-height: 350px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);

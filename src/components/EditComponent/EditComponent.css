@@ -4,7 +4,7 @@
 }
 
 .edit-item {
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 	display: flex;
 	align-items: center;
 	gap: 20px;
@@ -30,11 +30,12 @@
 }
 
 .edit-item__input {
-	outline: none;
-	opacity: 0.8;
 	width: 100%;
-	color: inherit;
+	/* color: inherit; */
 	font-size: 14px;
+	border: none;
+	outline: none;
+	color: #0832de;
 }
 
 /* btn */

@@ -30,11 +30,9 @@ const EditComponent = ({ item, chapter }) => {
 		if (chapter === 'clients') {
 			return findvalue(key, clientsDict)
 		}
-
 		if (chapter === 'loginsms') {
 			return findvalue(key, smsLoginsDict)
 		}
-
 		if (chapter === 'logincode') {
 			return findvalue(key, codeLoginsDict)
 		}

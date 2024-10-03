@@ -26,7 +26,7 @@
 	padding: 6px 5px 6px 7px;
 	width: 180px;
 	border-radius: 6px;
-	transition: all 0.8s ease-in-out;
+	transition: all 0.2s ease-in-out;
 }
 
 .sidebar-list__link:hover {

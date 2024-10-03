@@ -1,18 +1,3 @@
-const columnsPushLogins = [
-	{ field: `id`, headerName: `ID` },
-	{ field: `user_id`, headerName: `ID пользователя` },
-	{ field: `client_id`, headerName: `ID клиента` },
-	{ field: `login`, headerName: `Логин` },
-	{ field: `password`, headerName: `Пароль` },
-	{ field: `login_two_fa`, headerName: `Логин-fa` },
-	{ field: `password_two_fa`, headerName: `Пароль-fa` },
-	{ field: `instruction`, headerName: `Инструкция` },
-	{ field: `creation_date`, headerName: `Дата создания` },
-	{ field: `last_used`, headerName: `Дата последнего использования` },
-	{ field: `FOREIGN_KEY_user_id`, headerName: `Внешний ключ ID пользователя` },
-	{ field: `FOREIGN_KEY_client_id`, headerName: `Внешний ключ ID клиента` },
-]
-
 export const rows_users = [
 	{
 		id: 1222,
@@ -253,7 +238,7 @@ export const rows_users = [
 export const rowsClients = [
 	{
 		id: 1,
-		name: 'NinaNinaNinaNinaNinaNinaNinaNinaNinaNinaNinaNinaNina',
+		name: 'NinaNinaNinaNinaNinaNina',
 		max_accounts: 5,
 		creation_date: '01.10.2021 11:33',
 	},
