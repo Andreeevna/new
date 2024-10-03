@@ -5,7 +5,7 @@ import { DataGrid } from '@mui/x-data-grid'
 
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
 
-import { Link } from 'react-router-dom'
+import usePopup from '../../hooks/usePopup'
 import { rowsSmsLogins } from '../../utils/utils'
 import './LoginSmsPage.css'
 
@@ -19,12 +19,16 @@ const filterNames = {
 }
 const LoginSmsPage = () => {
 	const [rows, setRows] = useState(rowsSmsLogins)
+	const [filterValues, setFilterValues] = useState({})
+
+	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
 		setRows(rows.filter(item => item.id !== id))
 		console.log(id)
 	}
+
 	const columnsSmsLogins = [
 		{
 			field: `id`,
@@ -116,9 +120,19 @@ const LoginSmsPage = () => {
 			renderCell: params => {
 				return (
 					<div className='action-group'>
-						<Link to={`/edit/${params.row.id}/loginsms`}>
-							<button className='productListEdit'>Изменить</button>
-						</Link>
+						<div className=''>
+							<button
+								className='productListEdit'
+								onClick={e => {
+									togglePopup(e, params.row.id, 'loginsms')
+								}}
+							>
+								Изменить
+							</button>
+							{params.row.id === parameter && showPopup
+								? renderPopUp(null, params.row.id, 'loginsms')
+								: null}
+						</div>
 						<DeleteOutline
 							className='productListDelete'
 							onClick={e => handleDelete(e, params.row.id)}
@@ -128,9 +142,6 @@ const LoginSmsPage = () => {
 			},
 		},
 	]
-
-	const [filterValues, setFilterValues] = useState({})
-	console.log(filterValues)
 
 	function onUpdateFilteredValue(key, value) {
 		filterValues[key] = value.trim().toLowerCase()

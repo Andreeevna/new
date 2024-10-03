@@ -7,7 +7,8 @@ import { CustomPagination } from '../../components/CustomPagination/CustomPagina
 
 import { rowsPushLogins } from '../../utils/utils'
 
-import { Link } from 'react-router-dom'
+import usePopup from '../../hooks/usePopup'
+
 import './LoginPushPage.css'
 
 const filterNames = {
@@ -21,6 +22,9 @@ const filterNames = {
 
 const LoginPushPage = () => {
 	const [rows, setRows] = useState(rowsPushLogins)
+	const [filterValues, setFilterValues] = useState({})
+
+	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
@@ -87,9 +91,19 @@ const LoginPushPage = () => {
 			renderCell: params => {
 				return (
 					<div className='action-group'>
-						<Link to={`/edit/${params.row.id}/loginpush`}>
-							<button className='productListEdit'>Изменить</button>
-						</Link>
+						<div className=''>
+							<button
+								className='productListEdit'
+								onClick={e => {
+									togglePopup(e, params.row.id, 'loginpush')
+								}}
+							>
+								Изменить
+							</button>
+							{params.row.id === parameter && showPopup
+								? renderPopUp(null, params.row.id, 'loginpush')
+								: null}
+						</div>
 						<DeleteOutline
 							className='productListDelete'
 							onClick={e => handleDelete(e, params.row.id)}
@@ -99,9 +113,6 @@ const LoginPushPage = () => {
 			},
 		},
 	]
-
-	const [filterValues, setFilterValues] = useState({})
-	console.log(filterValues)
 
 	function onUpdateFilteredValue(key, value) {
 		filterValues[key] = value.trim().toLowerCase()

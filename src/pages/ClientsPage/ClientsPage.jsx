@@ -4,9 +4,9 @@ import { DeleteOutline } from '@mui/icons-material'
 
 import { DataGrid } from '@mui/x-data-grid'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
-import PopUp from '../../components/PopUp/PopUp'
 import { rowsClients } from '../../utils/utils'
 
+import usePopup from '../../hooks/usePopup'
 import './ClientsPage.css'
 
 const filterNames = {
@@ -18,18 +18,7 @@ const ClientsPage = () => {
 	const [rows, setRows] = useState(rowsClients)
 	const [filterValues, setFilterValues] = useState({})
 
-	const [showPopup, setShowPopup] = useState(false)
-	const [par, setPar] = useState(null)
-
-	const renderPopUp = (e = null, id = null, chapter = '') => {
-		if (e) e.stopPropagation()
-
-		if (id && chapter) {
-			return (
-				<PopUp id={id} chapter={chapter} onClose={() => setShowPopup(false)} />
-			)
-		}
-	}
+	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const columnsClients = [
 		{
@@ -82,14 +71,12 @@ const ClientsPage = () => {
 							<button
 								className='productListEdit'
 								onClick={e => {
-									setShowPopup(true)
-									renderPopUp(e, params.row.id, 'clients')
-									setPar(params.row.id)
+									togglePopup(e, params.row.id, 'clients')
 								}}
 							>
 								Изменить
 							</button>
-							{params.row.id === par && showPopup
+							{params.row.id === parameter && showPopup
 								? renderPopUp(null, params.row.id, 'clients')
 								: null}
 						</div>

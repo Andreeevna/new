@@ -5,7 +5,7 @@ import { DataGrid } from '@mui/x-data-grid'
 
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
 
-import { Link } from 'react-router-dom'
+import usePopup from '../../hooks/usePopup'
 import { rowsCodeLogins } from '../../utils/utils'
 import './LoginCodePage.css'
 
@@ -20,6 +20,7 @@ const filterNames = {
 
 const LoginCodePage = () => {
 	const [rows, setRows] = useState(rowsCodeLogins)
+	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
@@ -116,9 +117,19 @@ const LoginCodePage = () => {
 			renderCell: params => {
 				return (
 					<div className='action-group'>
-						<Link to={`/edit/${params.row.id}/logincode`}>
-							<button className='productListEdit'>Изменить</button>
-						</Link>
+						<div className=''>
+							<button
+								className='productListEdit'
+								onClick={e => {
+									togglePopup(e, params.row.id, 'logincode')
+								}}
+							>
+								Изменить
+							</button>
+							{params.row.id === parameter && showPopup
+								? renderPopUp(null, params.row.id, 'logincode')
+								: null}
+						</div>
 						<DeleteOutline
 							className='productListDelete'
 							onClick={e => handleDelete(e, params.row.id)}

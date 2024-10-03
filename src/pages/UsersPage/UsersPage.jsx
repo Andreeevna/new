@@ -20,31 +20,13 @@ const filterNames = {
 
 export default function UsersPage() {
 	const [rows, setRows] = useState(rows_users)
-
-	// const [load, setLoad] = useState(false)
-
-	// React.useEffect(() => {
-	// 	setLoad(true)
-	// }, [])
+	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
 		setRows(rows.filter(item => item.id !== id))
 	}
-	// const [showPopup, setShowPopup] = useState(false)
-	// const [par, setPar] = useState(null)
 
-	// const renderPopUp = (e = null, id = null, chapter = '') => {
-	// 	if (e) e.stopPropagation()
-
-	// 	if (id && chapter) {
-	// 		return (
-	// 			<PopUp id={id} chapter={chapter} onClose={() => setShowPopup(false)} />
-	// 		)
-	// 	}
-	// }
-
-	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 	const columns = [
 		{
 			field: `id`,
