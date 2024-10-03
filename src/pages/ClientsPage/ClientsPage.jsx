@@ -20,6 +20,14 @@ const ClientsPage = () => {
 
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
+	const dayInMonthComparator = (v1, v2) => {
+		const n = new Date(v1).getTime()
+		const l = new Date(v2).getTime()
+		console.log(n, l)
+
+		return n - l
+	}
+
 	const columnsClients = [
 		{
 			field: `id`,
@@ -56,6 +64,7 @@ const ClientsPage = () => {
 			editable: false,
 			filterable: false,
 			hideable: false,
+			sortComparator: dayInMonthComparator,
 		},
 		{
 			field: 'action',
