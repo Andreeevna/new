@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
 
+import moment from 'moment'
 import {
 	callLoginsDict,
 	clientsDict,
@@ -72,16 +73,25 @@ const EditComponent = ({ item, chapter }) => {
 							className='edit-item__value'
 							onClick={e => handleEditClick(key)}
 						>
-							{newvalue[key]}
+							{/* {console.log()} */}
+							{key === 'creation_date'
+								? moment(newvalue[key]).format('DD.MM.YYYY HH:mm')
+								: newvalue[key]}
+							{/* {newvalue[key]} */}
 						</span>
 					) : (
 						<input
 							className='edit-item__input'
 							type='text'
-							value={newvalue[key] || ''}
-							onChange={e =>
+							value={newvalue[key]}
+							// value={
+							// 	key === 'creation_date'
+							// 		? moment(newvalue[key]).format('DD.MM.YYYY HH:mm')
+							// 		: newvalue[key] || ''
+							// }
+							onChange={e => {
 								setNewValue({ ...newvalue, [key]: e.target.value })
-							}
+							}}
 							onBlur={() => setIsEditing({ ...isEditing, [key]: false })}
 							autoFocus
 						/>

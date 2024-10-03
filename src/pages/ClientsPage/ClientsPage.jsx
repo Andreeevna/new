@@ -21,12 +21,31 @@ const ClientsPage = () => {
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const dayInMonthComparator = (v1, v2) => {
-		const n = new Date(v1).getTime()
-		const l = new Date(v2).getTime()
-		console.log(n, l)
+		// console.log(v1, v2)
+		const newDa = formatDateForSorting(v1)
+		const newVa = formatDateForSorting(v2)
+		const n = newDa.getTime()
+		const l = newVa.getTime()
 
 		return n - l
 	}
+
+	function formatDateForSorting(inputDate) {
+		const [day] = inputDate.split('.')[0].split('-')
+		const [month] = inputDate.split('.')[1].split('-')
+		const [year] = inputDate.split('.')[2].split(' ')
+
+		const [hours, minutes] = inputDate.split(' ').pop().split(':')
+		console.log(day, month, year)
+
+		console.log(hours, minutes)
+
+		const dateObject = new Date(year, month, day, hours, minutes)
+
+		return dateObject
+	}
+
+	// console.log(formatDateForSorting('24.10.2024 10:53'))
 
 	const columnsClients = [
 		{
@@ -65,6 +84,10 @@ const ClientsPage = () => {
 			filterable: false,
 			hideable: false,
 			sortComparator: dayInMonthComparator,
+			renderCell: params => {
+				// return moment(params.row.creation_date).format('DD.MM.YYYY HH:mm')
+				return params.row.creation_date
+			},
 		},
 		{
 			field: 'action',

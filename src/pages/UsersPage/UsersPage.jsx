@@ -27,6 +27,15 @@ export default function UsersPage() {
 		setRows(rows.filter(item => item.id !== id))
 	}
 
+	const dayInMonthComparator = (v1, v2) => {
+		console.log(v1, v2)
+		const n = new Date(v1).getTime()
+		const l = new Date(v2).getTime()
+		// console.log(n, l)
+
+		return n - l
+	}
+
 	const columns = [
 		{
 			field: `id`,
@@ -60,6 +69,11 @@ export default function UsersPage() {
 			editable: false,
 			filterable: false,
 			hideable: false,
+			sortComparator: dayInMonthComparator,
+			// renderCell: params => {
+			// 	console.log(params)
+			// 	return moment(params.row.creation_date).format('DD.MM.YYYY HH:mm')
+			// },
 		},
 		{
 			field: 'action',

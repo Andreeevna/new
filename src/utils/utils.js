@@ -235,6 +235,69 @@ export const rows_users = [
 	},
 ]
 
+// export const rowsClients = [
+// 	{
+// 		id: 1,
+// 		name: 'NinaNinaNinaNinaNinaNina',
+// 		max_accounts: 5,
+// 		creation_date: '2024-10-03T10:34:31.062Z',
+// 	},
+// 	{
+// 		id: 2,
+// 		name: 'Lana',
+// 		max_accounts: 3,
+// 		creation_date: '2024-03-10T10:34:31.062Z',
+// 	},
+// 	{
+// 		id: 3,
+// 		name: 'Dana',
+// 		max_accounts: 10,
+// 		creation_date: '2025-01-10T10:34:31.062Z',
+// 	},
+// 	{
+// 		id: 11,
+// 		name: 'Kate',
+// 		max_accounts: 32,
+// 		creation_date: '2025-01-10T10:34:31.062Z',
+// 	},
+// 	{
+// 		id: 101,
+// 		name: 'Katrin',
+// 		max_accounts: 20,
+// 		creation_date: '2021-08-10T10:34:31.062Z',
+// 	},
+// 	{
+// 		id: 22,
+// 		name: 'Alex',
+// 		max_accounts: 7,
+// 		creation_date: '2020-01-01T10:34:31.062Z',
+// 	},
+// 	{
+// 		id: 21,
+// 		name: 'Lex',
+// 		max_accounts: 7,
+// 		creation_date: '2021-02-12T10:34:31.062Z',
+// 	},
+// 	{
+// 		id: 98,
+// 		name: 'Luna',
+// 		max_accounts: 17,
+// 		creation_date: '2019-03-10T10:34:31.062Z',
+// 	},
+// 	{
+// 		id: 583,
+// 		name: 'Grand',
+// 		max_accounts: 97,
+// 		creation_date: '2005-09-10T10:34:31.062Z',
+// 	},
+// 	{
+// 		id: 202,
+// 		name: 'Vlad',
+// 		max_accounts: 3,
+// 		creation_date: '2015-01-10T10:34:31.062Z',
+// 	},
+// ]
+
 export const rowsClients = [
 	{
 		id: 1,
