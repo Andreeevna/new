@@ -8,7 +8,7 @@ import { useMemo, useState } from 'react'
 import { rows_users } from '../../utils/utils'
 // import { CustomPagination } from './Pagination'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
-import PopUp from '../../components/PopUp/PopUp'
+import usePopup from '../../hooks/usePopup'
 import './UsersPage.css'
 
 const filterNames = {
@@ -21,29 +21,30 @@ const filterNames = {
 export default function UsersPage() {
 	const [rows, setRows] = useState(rows_users)
 
-	const [load, setLoad] = useState(false)
+	// const [load, setLoad] = useState(false)
 
-	React.useEffect(() => {
-		setLoad(true)
-	}, [])
+	// React.useEffect(() => {
+	// 	setLoad(true)
+	// }, [])
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
 		setRows(rows.filter(item => item.id !== id))
 	}
-	const [showPopup, setShowPopup] = useState(false)
-	const [par, setPar] = useState(null)
+	// const [showPopup, setShowPopup] = useState(false)
+	// const [par, setPar] = useState(null)
 
-	const renderPopUp = (e = null, id = null, chapter = '') => {
-		if (e) e.stopPropagation()
+	// const renderPopUp = (e = null, id = null, chapter = '') => {
+	// 	if (e) e.stopPropagation()
 
-		if (id && chapter) {
-			return (
-				<PopUp id={id} chapter={chapter} onClose={() => setShowPopup(false)} />
-			)
-		}
-	}
+	// 	if (id && chapter) {
+	// 		return (
+	// 			<PopUp id={id} chapter={chapter} onClose={() => setShowPopup(false)} />
+	// 		)
+	// 	}
+	// }
 
+	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 	const columns = [
 		{
 			field: `id`,
@@ -89,22 +90,18 @@ export default function UsersPage() {
 				return (
 					<div className='action-group'>
 						<div className=''>
-							{/* <Link to={`/edit/${params.row.id}/users`}> */}
 							<button
 								className='productListEdit'
 								onClick={e => {
-									setShowPopup(true)
-									renderPopUp(e, params.row.id, 'users')
-									setPar(params.row.id)
+									togglePopup(e, params.row.id, 'users')
 								}}
 							>
 								Изменить
 							</button>
 
-							{params.row.id === par && showPopup
+							{params.row.id === parameter && showPopup
 								? renderPopUp(null, params.row.id, 'users')
 								: null}
-							{/* </Link> */}
 						</div>
 						<DeleteOutline
 							className='productListDelete'
