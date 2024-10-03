@@ -176,17 +176,6 @@ F1F1F1 */
 	display: flex;
 }
 
-.clients {
-	flex: 4;
-	height: 100vh;
-}
-
-.clients-list {
-	height: 100%;
-	width: 100%;
-	flex: 4;
-}
-
 .edit {
 	width: 100%;
 	/* background-color: antiquewhite; */
@@ -259,25 +248,6 @@ F1F1F1 */
 	letter-spacing: 1px;
 }
 
-.login {
-	flex: 4;
-	height: 100vh;
-}
-.login__container {
-	padding-top: 60px;
-	/* padding-bottom: 60px; */
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	max-width: 1230px;
-}
-
-.login-list {
-	height: 100%;
-	width: 100%;
-	flex: 4;
-}
-
 .popup {
 	/* display: none; */
 	background: rgba(0, 0, 0, 0.4);
@@ -344,6 +314,36 @@ F1F1F1 */
 	top: 5%;
 	right: 5%;
 	opacity: 0.4;
+}
+
+.clients {
+	flex: 4;
+	height: 100vh;
+}
+
+.clients-list {
+	height: 100%;
+	width: 100%;
+	flex: 4;
+}
+
+.login {
+	flex: 4;
+	height: 100vh;
+}
+.login__container {
+	padding-top: 60px;
+	/* padding-bottom: 60px; */
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	max-width: 1230px;
+}
+
+.login-list {
+	height: 100%;
+	width: 100%;
+	flex: 4;
 }
 
 .users {

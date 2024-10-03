@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import { DeleteOutline } from '@mui/icons-material'
 
 import { DataGrid } from '@mui/x-data-grid'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
+import PopUp from '../../components/PopUp/PopUp'
 import { rowsClients } from '../../utils/utils'
+
 import './ClientsPage.css'
 
 const filterNames = {
@@ -16,6 +17,19 @@ const filterNames = {
 const ClientsPage = () => {
 	const [rows, setRows] = useState(rowsClients)
 	const [filterValues, setFilterValues] = useState({})
+
+	const [showPopup, setShowPopup] = useState(false)
+	const [par, setPar] = useState(null)
+
+	const renderPopUp = (e = null, id = null, chapter = '') => {
+		if (e) e.stopPropagation()
+
+		if (id && chapter) {
+			return (
+				<PopUp id={id} chapter={chapter} onClose={() => setShowPopup(false)} />
+			)
+		}
+	}
 
 	const columnsClients = [
 		{
@@ -64,9 +78,21 @@ const ClientsPage = () => {
 			renderCell: params => {
 				return (
 					<div className='action-group'>
-						<Link to={`/edit/${params.row.id}/clients`}>
-							<button className='productListEdit'>Изменить</button>
-						</Link>
+						<div className=''>
+							<button
+								className='productListEdit'
+								onClick={e => {
+									setShowPopup(true)
+									renderPopUp(e, params.row.id, 'clients')
+									setPar(params.row.id)
+								}}
+							>
+								Изменить
+							</button>
+							{params.row.id === par && showPopup
+								? renderPopUp(null, params.row.id, 'clients')
+								: null}
+						</div>
 						<DeleteOutline
 							className='productListDelete'
 							onClick={e => handleDelete(e, params.row.id)}
