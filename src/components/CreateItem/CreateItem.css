@@ -41,5 +41,5 @@
 .create-item__input::placeholder {
 	font-size: 14px;
 	font-weight: 400;
-	opacity: 0.8;
+	opacity: 0.5;
 }

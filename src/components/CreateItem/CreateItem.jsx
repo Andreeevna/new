@@ -5,6 +5,13 @@ import './CreateItem.css'
 
 const CreateItem = ({ columns }) => {
 	const [formState, setFormState] = useState({})
+	console.log(formState)
+
+	const updateFormState = (key, value) => {
+		formState[key] = value
+		setFormState({ ...formState })
+		console.log(key, value)
+	}
 
 	const itemTODO = useMemo(() => {
 		return columns?.map(column => {
@@ -19,6 +26,7 @@ const CreateItem = ({ columns }) => {
 							type='text'
 							name={column?.field}
 							placeholder={'Введите необходимые данные..'}
+							onChange={e => updateFormState(column?.field, e.target.value)}
 						/>
 					) : null}
 				</div>

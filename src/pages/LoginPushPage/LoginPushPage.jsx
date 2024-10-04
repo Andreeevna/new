@@ -145,12 +145,11 @@ const LoginPushPage = () => {
 
 	const filteredRows = useMemo(() => {
 		return rows?.filter(row => {
-			return Object.entries(row).map(([key, value]) => {
-				if (!filterValues) {
+			return Object.entries(row).every(([key, value]) => {
+				if (!filterValues[key]) {
 					return true
 				}
-
-				return value?.toString().toLowerCase()?.includes(filterValues[key])
+				return value?.toString()?.toLowerCase()?.includes(filterValues[key])
 			})
 		})
 	}, [filterValues, rows])
