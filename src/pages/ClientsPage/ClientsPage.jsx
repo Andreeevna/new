@@ -136,7 +136,6 @@ const ClientsPage = () => {
 	}
 
 	const getCreatePopUp = () => {
-		console.log('ckick')
 		setShowCreatePopup(true)
 		renderCreatePopUp()
 	}
