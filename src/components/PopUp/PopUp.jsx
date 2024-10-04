@@ -2,10 +2,9 @@ import * as React from 'react'
 
 import { createPortal } from 'react-dom'
 
-import EditPage from '../../pages/EditPage/EditPage'
 import './PopUp.css'
 
-const PopUp = ({ id = null, chapter = '', onClose = null }) => {
+const PopUp = ({ id = null, chapter = '', onClose = null, children }) => {
 	const handleClick = e => {
 		const inModal = e.target.closest('[data-id=modal]')
 		if (inModal) return
@@ -15,7 +14,7 @@ const PopUp = ({ id = null, chapter = '', onClose = null }) => {
 	const modal = (
 		<div className={'popup'} onClick={handleClick}>
 			<div data-id='modal' className={'popup_active'}>
-				{id && chapter && <EditPage id={id} chapter={chapter} />}
+				{children}
 			</div>
 		</div>
 	)

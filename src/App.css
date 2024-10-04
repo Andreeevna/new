@@ -29,7 +29,7 @@ ul {
 }
 
 .table__container {
-	padding-top: 60px;
+	padding-top: 40px;
 	/* padding-bottom: 60px; */
 	display: flex;
 	flex-direction: column;
@@ -40,7 +40,7 @@ ul {
 /* search */
 
 .search__container {
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 	padding-left: 20px;
 	display: flex;
 	align-items: center;

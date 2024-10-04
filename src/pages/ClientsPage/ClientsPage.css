@@ -8,3 +8,8 @@
 	width: 100%;
 	flex: 4;
 }
+
+.clients__button-send {
+	margin-bottom: 20px;
+	padding-right: 20px;
+}

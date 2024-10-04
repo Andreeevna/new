@@ -6,6 +6,7 @@ import { DataGrid } from '@mui/x-data-grid'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
 import { rowsClients } from '../../utils/utils'
 
+import Button from '../../components/Button/Button'
 import usePopup from '../../hooks/usePopup'
 import './ClientsPage.css'
 
@@ -19,6 +20,8 @@ const ClientsPage = () => {
 	const [filterValues, setFilterValues] = useState({})
 
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
+
+	const [showCreatePopup, setShowCreatePopup] = useState(false)
 
 	const dayInMonthComparator = (v1, v2) => {
 		// console.log(v1, v2)
@@ -180,6 +183,9 @@ const ClientsPage = () => {
 		<div className='clients'>
 			<div className='table__container'>
 				<div className='search__container'>{filters}</div>
+				<div className='clients__button-send'>
+					<Button className={'button-send__end'} text='Создать' />
+				</div>
 
 				<div className='clients-list'>
 					<DataGrid

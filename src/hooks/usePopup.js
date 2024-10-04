@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PopUp from '../components/PopUp/PopUp'
+import EditPage from '../pages/EditPage/EditPage'
 
 const usePopup = (initialState = false) => {
 	const [showPopup, setShowPopup] = useState(initialState)
@@ -10,7 +11,9 @@ const usePopup = (initialState = false) => {
 
 		if (id && chapter) {
 			return (
-				<PopUp id={id} chapter={chapter} onClose={() => setShowPopup(false)} />
+				<PopUp id={id} chapter={chapter} onClose={() => setShowPopup(false)}>
+					{id && chapter && <EditPage id={id} chapter={chapter} />}
+				</PopUp>
 			)
 		}
 	}

@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react'
 
-import moment from 'moment'
 import {
 	callLoginsDict,
 	clientsDict,
@@ -9,6 +8,7 @@ import {
 	smsLoginsDict,
 	usersDict,
 } from '../../utils/dicts'
+import Button from '../Button/Button'
 import './EditComponent.css'
 
 const EditComponent = ({ item, chapter }) => {
@@ -73,22 +73,13 @@ const EditComponent = ({ item, chapter }) => {
 							className='edit-item__value'
 							onClick={e => handleEditClick(key)}
 						>
-							{/* {console.log()} */}
-							{key === 'creation_date'
-								? moment(newvalue[key]).format('DD.MM.YYYY HH:mm')
-								: newvalue[key]}
-							{/* {newvalue[key]} */}
+							{newvalue[key]}
 						</span>
 					) : (
 						<input
 							className='edit-item__input'
 							type='text'
 							value={newvalue[key]}
-							// value={
-							// 	key === 'creation_date'
-							// 		? moment(newvalue[key]).format('DD.MM.YYYY HH:mm')
-							// 		: newvalue[key] || ''
-							// }
 							onChange={e => {
 								setNewValue({ ...newvalue, [key]: e.target.value })
 							}}
@@ -104,9 +95,7 @@ const EditComponent = ({ item, chapter }) => {
 	return (
 		<div className='edit'>
 			{renderingItem}
-			<div className='edit-send'>
-				<button className='edit-send__btn'>Отправить</button>
-			</div>
+			<Button className={'button-send__end'} text={'Отправить'} />
 		</div>
 	)
 }

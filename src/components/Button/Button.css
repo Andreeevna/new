@@ -1,0 +1,25 @@
+.button-send {
+	margin-top: 20px;
+	display: flex;
+}
+
+.button-send__end {
+	justify-content: flex-end;
+}
+
+.button-send__center {
+	justify-content: center;
+}
+
+.button-send__btn {
+	font-size: 14px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	width: 110px;
+	height: 25px;
+	text-align: center;
+	background-color: #ced6f8;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
