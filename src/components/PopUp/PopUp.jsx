@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom'
 
 import './PopUp.css'
 
-const PopUp = ({ id = null, chapter = '', onClose = null, children }) => {
+const PopUp = ({ onClose = null, children }) => {
 	const handleClick = e => {
 		const inModal = e.target.closest('[data-id=modal]')
 		if (inModal) return

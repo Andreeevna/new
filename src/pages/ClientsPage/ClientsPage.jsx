@@ -7,6 +7,8 @@ import { CustomPagination } from '../../components/CustomPagination/CustomPagina
 import { rowsClients } from '../../utils/utils'
 
 import Button from '../../components/Button/Button'
+import CreateItem from '../../components/CreateItem/CreateItem'
+import PopUp from '../../components/PopUp/PopUp'
 import usePopup from '../../hooks/usePopup'
 import './ClientsPage.css'
 
@@ -125,6 +127,20 @@ const ClientsPage = () => {
 		},
 	]
 
+	const renderCreatePopUp = () => {
+		return (
+			<PopUp onClose={() => setShowCreatePopup(false)}>
+				<CreateItem columns={columnsClients} />
+			</PopUp>
+		)
+	}
+
+	const getCreatePopUp = () => {
+		console.log('ckick')
+		setShowCreatePopup(true)
+		renderCreatePopUp()
+	}
+
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
 		setRows(rows.filter(item => item.id !== id))
@@ -184,7 +200,11 @@ const ClientsPage = () => {
 			<div className='table__container'>
 				<div className='search__container'>{filters}</div>
 				<div className='clients__button-send'>
-					<Button className={'button-send__end'} text='Создать' />
+					<Button
+						className={'button-send__end'}
+						text='Создать'
+						onClick={getCreatePopUp}
+					/>
 				</div>
 
 				<div className='clients-list'>
@@ -212,6 +232,7 @@ const ClientsPage = () => {
 					/>
 				</div>
 			</div>
+			{showCreatePopup && renderCreatePopUp()}
 		</div>
 	)
 }

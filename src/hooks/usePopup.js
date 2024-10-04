@@ -11,7 +11,7 @@ const usePopup = (initialState = false) => {
 
 		if (id && chapter) {
 			return (
-				<PopUp id={id} chapter={chapter} onClose={() => setShowPopup(false)}>
+				<PopUp onClose={() => setShowPopup(false)}>
 					{id && chapter && <EditPage id={id} chapter={chapter} />}
 				</PopUp>
 			)

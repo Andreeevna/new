@@ -202,6 +202,14 @@ F1F1F1 */
 	cursor: pointer;
 }
 
+.create-item__header {
+	display: block;
+	width: 250px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .popup {
 	/* display: none; */
 	background: rgba(0, 0, 0, 0.4);
