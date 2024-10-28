@@ -1,15 +1,19 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { getAPI } from '../../../api/getApi'
 
-export const getClients = createAsyncThunk('incom/getClients', async params => {
-	const { fileId, bxID } = params
-	try {
-		// const { data } = await fileAPI.getOneFileInfo(fileId, bxID)
-		return data
-	} catch (error) {
-		console.error('Ошибка при получении клиентов', error)
-		throw error.response.status
+export const getAdminClients = createAsyncThunk(
+	'incom/getClients',
+	async params => {
+		const { formState } = params
+		try {
+			const { data } = await getAPI.getClients(formState)
+			return data
+		} catch (error) {
+			console.error('Ошибка при получении клиентов', error)
+			throw error.response.status
+		}
 	}
-})
+)
 
 const initialState = {
 	data: null,
@@ -20,11 +24,11 @@ export const adminGetReducer = createSlice({
 	reducers: {},
 	extraReducers: builder => {
 		// getClients
-		builder.addCase(getClients.pending, state => {})
-		builder.addCase(getClients.fulfilled, (state, action) => {
-			console.log(action.getClients)
+		builder.addCase(getAdminClients.pending, state => {})
+		builder.addCase(getAdminClients.fulfilled, (state, action) => {
+			console.log(action.payload.response)
 		})
-		builder.addCase(getClients.rejected, state => {})
+		builder.addCase(getAdminClients.rejected, state => {})
 	},
 })
 
