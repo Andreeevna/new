@@ -80,7 +80,7 @@ export default function UsersPage() {
 			headerName: 'Действия',
 			width: 150,
 			sortable: false,
-			editable: false,
+			editable: true,
 			hideable: false,
 			renderCell: params => {
 				return (
@@ -184,7 +184,7 @@ export default function UsersPage() {
 							const selectedRowData = rows.filter(row =>
 								selectedIDs.has(row.id)
 							)
-							// console.log(selectedRowData)
+							console.log(selectedRowData)
 						}}
 					/>
 				</div>
