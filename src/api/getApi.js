@@ -8,4 +8,15 @@ export const getAPI = {
 			},
 		})
 	},
+	getUsers(formStateUsers) {
+		return instance.post(
+			`/admin/api/get/users`,
+			JSON.stringify(formStateUsers),
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
+		)
+	},
 }

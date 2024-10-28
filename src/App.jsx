@@ -10,7 +10,11 @@ import LoginCodePage from './pages/LoginCodePage/LoginCodePage'
 import LoginPushPage from './pages/LoginPushPage/LoginPushPage'
 import LoginSmsPage from './pages/LoginSmsPage/LoginSmsPage'
 import UsersPage from './pages/UsersPage/UsersPage'
-import { getAdminClients } from './redux/slices/adminGetSlice/adminGetReducer'
+
+import {
+	getAdminClients,
+	getAdminUsers,
+} from './redux/slices/adminGetSlice/adminGetReducer'
 
 function App() {
 	const dispatch = useDispatch()
@@ -22,8 +26,16 @@ function App() {
 		login_type: null,
 	}
 
+	const formStateUsers = {
+		bitrix_id: '225',
+		secret_key: 'Смородин Борис Борисович',
+		user_bitrix_id: '225',
+		username: null,
+	}
+
 	useEffect(() => {
 		dispatch(getAdminClients({ formState }))
+		dispatch(getAdminUsers({ formStateUsers }))
 	}, [])
 
 	const router = createBrowserRouter([

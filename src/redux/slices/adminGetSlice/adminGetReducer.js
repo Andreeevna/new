@@ -16,8 +16,23 @@ export const getAdminClients = createAsyncThunk(
 	}
 )
 
+export const getAdminUsers = createAsyncThunk(
+	'incom/getAdminUsers',
+	async params => {
+		const { formStateUsers } = params
+		try {
+			const { data } = await getAPI.getUsers(formStateUsers)
+			return data
+		} catch (error) {
+			console.error('Ошибка при получении пользователей', error)
+			throw error.response.status
+		}
+	}
+)
+
 const initialState = {
-	data: null,
+	clients: [],
+	users: [],
 	message: null,
 	isFetching: false,
 }
@@ -35,9 +50,24 @@ export const adminGetReducer = createSlice({
 			console.log(action.payload.response, 'clients')
 			state.isFetching = false
 			state.message = null
-			state.data = action.payload.response
+			state.clients = action.payload.response
 		})
 		builder.addCase(getAdminClients.rejected, state => {
+			state.message = ERROR
+		})
+
+		//getAdminUsers
+		builder.addCase(getAdminUsers.pending, state => {
+			state.isFetching = true
+			state.message = null
+		})
+		builder.addCase(getAdminUsers.fulfilled, (state, action) => {
+			console.log(action.payload.response, 'users')
+			state.isFetching = false
+			state.message = null
+			state.users = action.payload.response
+		})
+		builder.addCase(getAdminUsers.rejected, state => {
 			state.message = ERROR
 		})
 	},
