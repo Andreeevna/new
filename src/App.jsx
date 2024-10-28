@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
 import Layout from './components/Layout/Layout'
@@ -9,8 +10,22 @@ import LoginCodePage from './pages/LoginCodePage/LoginCodePage'
 import LoginPushPage from './pages/LoginPushPage/LoginPushPage'
 import LoginSmsPage from './pages/LoginSmsPage/LoginSmsPage'
 import UsersPage from './pages/UsersPage/UsersPage'
+import { getAdminClients } from './redux/slices/adminGetSlice/adminGetReducer'
 
 function App() {
+	const dispatch = useDispatch()
+
+	const formState = {
+		bitrix_id: '225',
+		secret_key: 'Смородин Борис Борисович',
+		name: null,
+		login_type: null,
+	}
+
+	useEffect(() => {
+		dispatch(getAdminClients({ formState }))
+	}, [])
+
 	const router = createBrowserRouter([
 		{
 			path: '/',

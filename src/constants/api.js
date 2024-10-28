@@ -1,2 +1,2 @@
-const ERROR = 'ERROR'
-const SUCCESS = 'SUCCESS'
+export const ERROR = 'ERROR'
+export const SUCCESS = 'SUCCESS'
