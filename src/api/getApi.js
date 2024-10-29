@@ -8,6 +8,7 @@ export const getAPI = {
 			},
 		})
 	},
+
 	getUsers(formStateUsers) {
 		return instance.post(
 			`/admin/api/get/users`,
@@ -19,6 +20,7 @@ export const getAPI = {
 			}
 		)
 	},
+
 	getLogins(formStateLogins) {
 		return instance.post(
 			`/admin/api/get/logins`,

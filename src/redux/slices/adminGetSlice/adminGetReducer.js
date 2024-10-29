@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAPI } from '../../../api/createApi'
 import { getAPI } from '../../../api/getApi'
 import { ERROR } from '../../../constants/api'
 
@@ -39,6 +40,20 @@ export const getAdminLogins = createAsyncThunk(
 			return data
 		} catch (error) {
 			console.error('Ошибка при получении логинов', error)
+			throw error.response.status
+		}
+	}
+)
+
+export const createAdminClient = createAsyncThunk(
+	'incom/createAdminClient',
+	async params => {
+		const { formStateCreate } = params
+		try {
+			const { data } = await createAPI.createClient(formStateCreate)
+			return data
+		} catch (error) {
+			console.error('Ошибка при создании клиента', error)
 			throw error.response.status
 		}
 	}
@@ -117,6 +132,19 @@ export const adminGetReducer = createSlice({
 			state.logins = action.payload.response
 		})
 		builder.addCase(getAdminLogins.rejected, state => {
+			state.message = ERROR
+		})
+
+		//createAdminClient
+		builder.addCase(createAdminClient.pending, state => {
+			state.isFetching = true
+			state.message = null
+		})
+		builder.addCase(createAdminClient.fulfilled, (state, action) => {
+			state.isFetching = false
+			state.message = null
+		})
+		builder.addCase(createAdminClient.rejected, state => {
 			state.message = ERROR
 		})
 

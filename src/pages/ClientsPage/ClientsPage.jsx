@@ -78,8 +78,8 @@ const ClientsPage = () => {
 		},
 		{
 			field: `max_accounts`,
-			headerName: `Максимальное количество аккаунтов`,
-			width: 300,
+			headerName: `Максимальное кол-во аккаунтов`,
+			width: 260,
 			sortable: false,
 			editable: false,
 			filterable: false,
