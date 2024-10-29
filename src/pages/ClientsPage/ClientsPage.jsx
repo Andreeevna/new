@@ -6,6 +6,7 @@ import { DataGrid } from '@mui/x-data-grid'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
 import { rowsClients } from '../../utils/utils'
 
+import { useSelector } from 'react-redux'
 import Button from '../../components/Button/Button'
 import CreateItem from '../../components/CreateItem/CreateItem'
 import PopUp from '../../components/PopUp/PopUp'
@@ -18,6 +19,7 @@ const filterNames = {
 }
 
 const ClientsPage = () => {
+	const clientRow = useSelector(state => state.incom.clients)
 	const [rows, setRows] = useState(rowsClients)
 	const [filterValues, setFilterValues] = useState({})
 
@@ -50,8 +52,6 @@ const ClientsPage = () => {
 		return dateObject
 	}
 
-	// console.log(formatDateForSorting('24.10.2024 10:53'))
-
 	const columnsClients = [
 		{
 			field: `id`,
@@ -65,7 +65,7 @@ const ClientsPage = () => {
 		{
 			field: `name`,
 			headerName: `Имя клиента`,
-			width: 150,
+			// width: 150,
 			sortable: true,
 			editable: false,
 			filterable: false,
@@ -83,7 +83,7 @@ const ClientsPage = () => {
 		{
 			field: `creation_date`,
 			headerName: `Дата создания`,
-			width: 200,
+			width: 170,
 			sortable: true,
 			editable: false,
 			filterable: false,
@@ -93,6 +93,24 @@ const ClientsPage = () => {
 				// return moment(params.row.creation_date).format('DD.MM.YYYY HH:mm')
 				return params.row.creation_date
 			},
+		},
+		{
+			field: `instruction`,
+			headerName: `Инструкция`,
+			// width: 300,
+			sortable: false,
+			editable: false,
+			filterable: false,
+			hideable: false,
+		},
+		{
+			field: `login_type_id`,
+			headerName: `Тип логина`,
+			// width: 300,
+			sortable: false,
+			editable: false,
+			filterable: false,
+			hideable: false,
 		},
 		{
 			field: 'action',
@@ -142,8 +160,8 @@ const ClientsPage = () => {
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
-		setRows(rows.filter(item => item.id !== id))
-		console.log(id)
+		// setRows(rows.filter(item => item.id !== id))
+		// console.log(id)
 	}
 
 	function onUpdateFilteredValue(key, value) {
@@ -153,11 +171,11 @@ const ClientsPage = () => {
 	}
 
 	const filters = useMemo(() => {
-		if (!rows.length) {
+		if (!clientRow.length) {
 			return []
 		}
 
-		const keys = Object.keys(rows[0])
+		const keys = Object.keys(clientRow[0])
 
 		return keys
 			.filter(key => filterNames[key])
@@ -173,10 +191,10 @@ const ClientsPage = () => {
 					</div>
 				)
 			})
-	}, [rows[0]])
+	}, [clientRow[0]])
 
 	const filteredRows = useMemo(() => {
-		return rows?.filter(row => {
+		return clientRow?.filter(row => {
 			return Object.entries(row).every(([key, value]) => {
 				if (!filterValues[key]) {
 					return true
@@ -185,7 +203,7 @@ const ClientsPage = () => {
 				return value?.toString()?.toLowerCase()?.includes(filterValues[key])
 			})
 		})
-	}, [filterValues, rows])
+	}, [filterValues, clientRow])
 
 	// PAGINATION
 	const PAGE_SIZE = 5
@@ -223,7 +241,7 @@ const ClientsPage = () => {
 						// disableSelectionOnClick
 						onRowSelectionModelChange={ids => {
 							const selectedIDs = new Set(ids)
-							const selectedRowData = rows.filter(row =>
+							const selectedRowData = clientRow.filter(row =>
 								selectedIDs.has(row.id)
 							)
 							// console.log(selectedRowData)

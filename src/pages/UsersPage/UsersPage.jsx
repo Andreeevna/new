@@ -5,8 +5,8 @@ import { DataGrid } from '@mui/x-data-grid'
 import * as React from 'react'
 
 import { useMemo, useState } from 'react'
-import { rows_users } from '../../utils/utils'
 // import { CustomPagination } from './Pagination'
+import { useSelector } from 'react-redux'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
 import usePopup from '../../hooks/usePopup'
 import './UsersPage.css'
@@ -19,12 +19,13 @@ const filterNames = {
 }
 
 export default function UsersPage() {
-	const [rows, setRows] = useState(rows_users)
+	const userRows = useSelector(state => state.incom.users)
+	// const [rows, setRows] = useState(rows_users)
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
-		setRows(rows.filter(item => item.id !== id))
+		// setRows(rows.filter(item => item.id !== id))
 	}
 
 	const dayInMonthComparator = (v1, v2) => {
@@ -118,11 +119,11 @@ export default function UsersPage() {
 	}
 
 	const filters = useMemo(() => {
-		if (!rows.length) {
+		if (!userRows.length) {
 			return []
 		}
 
-		const keys = Object.keys(rows[0])
+		const keys = Object.keys(userRows[0])
 
 		return keys
 			.filter(key => filterNames[key])
@@ -138,10 +139,10 @@ export default function UsersPage() {
 					</div>
 				)
 			})
-	}, [rows[0]])
+	}, [userRows[0]])
 
 	const filteredRows = useMemo(() => {
-		return rows?.filter(row => {
+		return userRows?.filter(row => {
 			return Object.entries(row).every(([key, value]) => {
 				if (!filterValues[key]) {
 					return true
@@ -149,7 +150,7 @@ export default function UsersPage() {
 				return value?.toString()?.toLowerCase()?.includes(filterValues[key])
 			})
 		})
-	}, [filterValues, rows])
+	}, [filterValues, userRows])
 
 	// PAGINATION
 	const PAGE_SIZE = 5
@@ -181,7 +182,7 @@ export default function UsersPage() {
 						// disableSelectionOnClick
 						onRowSelectionModelChange={ids => {
 							const selectedIDs = new Set(ids)
-							const selectedRowData = rows.filter(row =>
+							const selectedRowData = userRows.filter(row =>
 								selectedIDs.has(row.id)
 							)
 							console.log(selectedRowData)
