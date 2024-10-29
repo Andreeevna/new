@@ -142,7 +142,7 @@ export const adminGetReducer = createSlice({
 		builder.addCase(createAdminClient.fulfilled, (state, action) => {
 			state.isFetching = false
 			state.message = null
-			state.clients.unshift(action.payload.record)
+			state.clients.push(action.payload.record)
 		})
 		builder.addCase(createAdminClient.rejected, state => {
 			state.message = ERROR

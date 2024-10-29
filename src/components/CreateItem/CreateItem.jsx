@@ -16,15 +16,6 @@ const CreateItem = ({ columns }) => {
 		setFormState({ ...formState })
 	}
 
-	// 	{
-	// 		"bitrix_id": 0,
-	// 		"secret_key": "string",
-	// 		"name": "string",
-	// 		"max_accounts": 0,
-	// 		"login_type": 0,
-	// 		"instruction": "string"
-	// 	}
-
 	const formStateCreate = {
 		bitrix_id: 225,
 		secret_key: 'Смородин Борис Борисович',
@@ -49,6 +40,7 @@ const CreateItem = ({ columns }) => {
 							<input
 								className='create-item__input'
 								type='text'
+								value={formState[column?.field]}
 								name={column?.field}
 								placeholder={'Введите необходимые данные..'}
 								onChange={e => updateFormState(column?.field, e.target.value)}
@@ -57,10 +49,16 @@ const CreateItem = ({ columns }) => {
 					</div>
 				)
 			})
-	}, [columns])
+	}, [columns, formState])
 
 	const sendItemHandler = () => {
 		dispatch(createAdminClient({ formStateCreate }))
+
+		const data = Object.keys(formState).reduce((acc, key) => {
+			acc[key] = ''
+			return acc
+		}, {})
+		setFormState({ ...data })
 		console.log(formState)
 		console.log('create')
 	}
