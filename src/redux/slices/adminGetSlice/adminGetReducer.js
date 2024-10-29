@@ -44,6 +44,20 @@ export const getAdminLogins = createAsyncThunk(
 	}
 )
 
+export const deleteAdminClients = createAsyncThunk(
+	'incom/deleteAdminClients',
+	async params => {
+		const { formStateClient } = params
+		try {
+			const { data } = await getAPI.deleteClient(formStateClient)
+			return data
+		} catch (error) {
+			console.error('Ошибка при удалении клиента', error)
+			throw error.response.status
+		}
+	}
+)
+
 const initialState = {
 	clients: [],
 	users: [],
@@ -54,7 +68,12 @@ const initialState = {
 export const adminGetReducer = createSlice({
 	name: 'incom',
 	initialState,
-	reducers: {},
+	reducers: {
+		deleteLocalClient: (state, action) => {
+			console.log(action)
+			state.clients = state.clients.filter(item => item.id !== action.payload)
+		},
+	},
 	extraReducers: builder => {
 		// getClients
 		builder.addCase(getAdminClients.pending, state => {
@@ -100,9 +119,22 @@ export const adminGetReducer = createSlice({
 		builder.addCase(getAdminLogins.rejected, state => {
 			state.message = ERROR
 		})
+
+		//deleteAdminClients
+		builder.addCase(deleteAdminClients.pending, state => {
+			state.isFetching = true
+			state.message = null
+		})
+		builder.addCase(deleteAdminClients.fulfilled, (state, action) => {
+			state.isFetching = false
+			state.message = null
+		})
+		builder.addCase(deleteAdminClients.rejected, state => {
+			state.message = ERROR
+		})
 	},
 })
 
-export const {} = adminGetReducer.actions
+export const { deleteLocalClient } = adminGetReducer.actions
 
 export default adminGetReducer.reducer

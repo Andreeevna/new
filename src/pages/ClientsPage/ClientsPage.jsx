@@ -4,13 +4,13 @@ import { DeleteOutline } from '@mui/icons-material'
 
 import { DataGrid } from '@mui/x-data-grid'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
-import { rowsClients } from '../../utils/utils'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../components/Button/Button'
 import CreateItem from '../../components/CreateItem/CreateItem'
 import PopUp from '../../components/PopUp/PopUp'
 import usePopup from '../../hooks/usePopup'
+import { deleteLocalClient } from '../../redux/slices/adminGetSlice/adminGetReducer'
 import './ClientsPage.css'
 
 const filterNames = {
@@ -19,8 +19,10 @@ const filterNames = {
 }
 
 const ClientsPage = () => {
+	const dispatch = useDispatch()
+
 	const clientRow = useSelector(state => state.incom.clients)
-	const [rows, setRows] = useState(rowsClients)
+
 	const [filterValues, setFilterValues] = useState({})
 
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
@@ -160,8 +162,15 @@ const ClientsPage = () => {
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
-		// setRows(rows.filter(item => item.id !== id))
-		// console.log(id)
+		console.log(id)
+		const formStateClient = {
+			bitrix_id: '225',
+			secret_key: 'Смородин Борис Борисович',
+			delete_id: id,
+		}
+
+		dispatch(deleteLocalClient(id))
+		dispatch(deleteAdminClients(formStateClient))
 	}
 
 	function onUpdateFilteredValue(key, value) {
