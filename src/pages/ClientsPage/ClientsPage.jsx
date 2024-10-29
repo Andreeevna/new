@@ -224,6 +224,7 @@ const ClientsPage = () => {
 		pageSize: PAGE_SIZE,
 		page: 0,
 	})
+
 	return (
 		<div className='clients'>
 			<div className='table__container'>
