@@ -85,7 +85,6 @@ export const adminGetReducer = createSlice({
 	initialState,
 	reducers: {
 		deleteLocalClient: (state, action) => {
-			console.log(action)
 			state.clients = state.clients.filter(item => item.id !== action.payload)
 		},
 	},
@@ -143,6 +142,7 @@ export const adminGetReducer = createSlice({
 		builder.addCase(createAdminClient.fulfilled, (state, action) => {
 			state.isFetching = false
 			state.message = null
+			state.clients.unshift(action.payload.record)
 		})
 		builder.addCase(createAdminClient.rejected, state => {
 			state.message = ERROR
