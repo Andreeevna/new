@@ -10,7 +10,10 @@ import Button from '../../components/Button/Button'
 import CreateItem from '../../components/CreateItem/CreateItem'
 import PopUp from '../../components/PopUp/PopUp'
 import usePopup from '../../hooks/usePopup'
-import { deleteLocalClient } from '../../redux/slices/adminGetSlice/adminGetReducer'
+import {
+	deleteAdminClients,
+	deleteLocalClient,
+} from '../../redux/slices/adminGetSlice/adminGetReducer'
 import './ClientsPage.css'
 
 const filterNames = {
@@ -170,7 +173,7 @@ const ClientsPage = () => {
 		}
 
 		dispatch(deleteLocalClient(id))
-		dispatch(deleteAdminClients(formStateClient))
+		dispatch(deleteAdminClients({ formStateClient }))
 	}
 
 	function onUpdateFilteredValue(key, value) {
