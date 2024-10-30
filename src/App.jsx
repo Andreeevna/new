@@ -10,10 +10,8 @@ import LoginCodePage from './pages/LoginCodePage/LoginCodePage'
 import LoginPushPage from './pages/LoginPushPage/LoginPushPage'
 import LoginSmsPage from './pages/LoginSmsPage/LoginSmsPage'
 import UsersPage from './pages/UsersPage/UsersPage'
-import {
-	getAdminClients,
-	getAdminLogins,
-} from './redux/slices/adminClientsSlice/adminClientsSlice'
+import { getAdminClients } from './redux/slices/adminClientsSlice/adminClientsSlice'
+import { getAdminLogins } from './redux/slices/adminLoginSlice/adminLoginSlice'
 import { getAdminUsers } from './redux/slices/adminUsersSlice/adminUsersSlice'
 
 function App() {

@@ -17,20 +17,6 @@ export const getAdminClients = createAsyncThunk(
 	}
 )
 
-export const getAdminLogins = createAsyncThunk(
-	'clients/getAdminLogins',
-	async params => {
-		const { formStateLogins } = params
-		try {
-			const { data } = await getAPI.getLogins(formStateLogins)
-			return data
-		} catch (error) {
-			console.error('Ошибка при получении логинов', error)
-			throw error.response.status
-		}
-	}
-)
-
 export const createAdminClient = createAsyncThunk(
 	'clients/createAdminClient',
 	async params => {
@@ -61,7 +47,6 @@ export const deleteAdminClients = createAsyncThunk(
 
 const initialState = {
 	clients: [],
-	logins: [],
 	message: null,
 	isFetching: false,
 }
@@ -86,21 +71,6 @@ export const adminClientsReducer = createSlice({
 			state.clients = action.payload.response
 		})
 		builder.addCase(getAdminClients.rejected, state => {
-			state.message = ERROR
-		})
-
-		//getAdminLogins
-		builder.addCase(getAdminLogins.pending, state => {
-			state.isFetching = true
-			state.message = null
-		})
-		builder.addCase(getAdminLogins.fulfilled, (state, action) => {
-			console.log(action.payload.response, 'logins')
-			state.isFetching = false
-			state.message = null
-			state.logins = action.payload.response
-		})
-		builder.addCase(getAdminLogins.rejected, state => {
 			state.message = ERROR
 		})
 
