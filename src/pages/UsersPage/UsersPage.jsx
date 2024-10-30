@@ -7,7 +7,10 @@ import * as React from 'react'
 import { useMemo, useState } from 'react'
 // import { CustomPagination } from './Pagination'
 import { useSelector } from 'react-redux'
+import Button from '../../components/Button/Button'
+import CreateItem from '../../components/CreateItem/CreateItem'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
+import PopUp from '../../components/PopUp/PopUp'
 import usePopup from '../../hooks/usePopup'
 import './UsersPage.css'
 
@@ -20,19 +23,18 @@ const filterNames = {
 
 export default function UsersPage() {
 	const userRows = useSelector(state => state.incom.users)
-	// const [rows, setRows] = useState(rows_users)
+
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
+
+	const [showCreatePopup, setShowCreatePopup] = useState(false)
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
-		// setRows(rows.filter(item => item.id !== id))
 	}
 
 	const dayInMonthComparator = (v1, v2) => {
-		console.log(v1, v2)
 		const n = new Date(v1).getTime()
 		const l = new Date(v2).getTime()
-		// console.log(n, l)
 
 		return n - l
 	}
@@ -110,6 +112,22 @@ export default function UsersPage() {
 		},
 	]
 
+	const renderCreatePopUp = () => {
+		return (
+			<PopUp onClose={() => setShowCreatePopup(false)}>
+				<CreateItem
+					columns={columns}
+					IGNORED_FIELD={['id', 'creation_date', 'action']}
+				/>
+			</PopUp>
+		)
+	}
+
+	const getCreatePopUp = () => {
+		setShowCreatePopup(true)
+		renderCreatePopUp()
+	}
+
 	const [filterValues, setFilterValues] = useState({})
 
 	function onUpdateFilteredValue(key, value) {
@@ -164,6 +182,13 @@ export default function UsersPage() {
 		<div className='users'>
 			<div className='table__container'>
 				<div className='search__container'>{filters}</div>
+				<div className='clients__button-send'>
+					<Button
+						className={'button-send__end'}
+						text='Создать'
+						onClick={getCreatePopUp}
+					/>
+				</div>
 
 				<div className='users-list'>
 					<DataGrid
@@ -190,6 +215,7 @@ export default function UsersPage() {
 					/>
 				</div>
 			</div>
+			{showCreatePopup && renderCreatePopUp()}
 		</div>
 	)
 }

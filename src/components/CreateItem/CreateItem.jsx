@@ -5,9 +5,7 @@ import { createAdminClient } from '../../redux/slices/adminGetSlice/adminGetRedu
 import Button from '../Button/Button'
 import './CreateItem.css'
 
-const IGNORED_FIELD = ['id', 'creation_date', 'action']
-
-const CreateItem = ({ columns }) => {
+const CreateItem = ({ columns, IGNORED_FIELD }) => {
 	const dispatch = useDispatch()
 	const [formState, setFormState] = useState({})
 

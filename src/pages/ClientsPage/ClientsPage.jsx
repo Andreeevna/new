@@ -33,7 +33,6 @@ const ClientsPage = () => {
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
 
 	const dayInMonthComparator = (v1, v2) => {
-		// console.log(v1, v2)
 		const newDa = formatDateForSorting(v1)
 		const newVa = formatDateForSorting(v2)
 		const n = newDa.getTime()
@@ -70,7 +69,7 @@ const ClientsPage = () => {
 		{
 			field: `name`,
 			headerName: `Имя клиента`,
-			// width: 150,
+			width: 150,
 			sortable: true,
 			editable: false,
 			filterable: false,
@@ -102,7 +101,7 @@ const ClientsPage = () => {
 		{
 			field: `instruction`,
 			headerName: `Инструкция`,
-			// width: 300,
+			width: 300,
 			sortable: false,
 			editable: false,
 			filterable: false,
@@ -111,7 +110,7 @@ const ClientsPage = () => {
 		{
 			field: `login_type_id`,
 			headerName: `Тип логина`,
-			// width: 300,
+			width: 300,
 			sortable: false,
 			editable: false,
 			filterable: false,
@@ -153,7 +152,10 @@ const ClientsPage = () => {
 	const renderCreatePopUp = () => {
 		return (
 			<PopUp onClose={() => setShowCreatePopup(false)}>
-				<CreateItem columns={columnsClients} />
+				<CreateItem
+					columns={columnsClients}
+					IGNORED_FIELD={['id', 'creation_date', 'action']}
+				/>
 			</PopUp>
 		)
 	}
