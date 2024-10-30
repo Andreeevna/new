@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { createAPI } from '../../../api/createApi'
+import { deleteAPI } from '../../../api/deleteApi'
 import { getAPI } from '../../../api/getApi'
 import { ERROR } from '../../../constants/api'
 
@@ -31,15 +32,15 @@ export const createAdminUser = createAsyncThunk(
 	}
 )
 
-export const deleteAdminClients = createAsyncThunk(
-	'users/deleteAdminClients',
+export const deleteAdminUser = createAsyncThunk(
+	'users/deleteAdminUser',
 	async params => {
-		const { formStateClient } = params
+		const { formStateUser } = params
 		try {
-			const { data } = await getAPI.deleteClient(formStateClient)
+			const { data } = await deleteAPI.deleteUser(formStateUser)
 			return data
 		} catch (error) {
-			console.error('Ошибка при удалении клиента', error)
+			console.error('Ошибка при удалении пользователя', error)
 			throw error.response.status
 		}
 	}
@@ -85,6 +86,19 @@ export const adminUsersReducer = createSlice({
 			state.users.push(action.payload.record)
 		})
 		builder.addCase(createAdminUser.rejected, state => {
+			state.message = ERROR
+		})
+
+		//deleteAdminUser
+		builder.addCase(deleteAdminUser.pending, state => {
+			state.isFetching = true
+			state.message = null
+		})
+		builder.addCase(deleteAdminUser.fulfilled, (state, action) => {
+			state.isFetching = false
+			state.message = null
+		})
+		builder.addCase(deleteAdminUser.rejected, state => {
 			state.message = ERROR
 		})
 	},

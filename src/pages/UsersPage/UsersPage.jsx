@@ -12,7 +12,10 @@ import CreateItem from '../../components/CreateItem/CreateItem'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
 import PopUp from '../../components/PopUp/PopUp'
 import usePopup from '../../hooks/usePopup'
-import { createAdminUser } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
+import {
+	createAdminUser,
+	deleteAdminUser,
+} from '../../redux/slices/adminUsersSlice/adminUsersSlice'
 import './UsersPage.css'
 
 const filterNames = {
@@ -33,6 +36,12 @@ export default function UsersPage() {
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
+		const formStateUser = {
+			bitrix_id: '225',
+			secret_key: 'Смородин Борис Борисович',
+			delete_id: id,
+		}
+		dispatch(deleteAdminUser({ formStateUser }))
 	}
 
 	const dayInMonthComparator = (v1, v2) => {
