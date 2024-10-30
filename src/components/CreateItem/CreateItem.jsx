@@ -1,29 +1,16 @@
 import React, { useMemo, useState } from 'react'
 
-import { useDispatch } from 'react-redux'
-import { createAdminClient } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import Button from '../Button/Button'
 import './CreateItem.css'
 
-const CreateItem = ({ columns, IGNORED_FIELD }) => {
-	const dispatch = useDispatch()
+const CreateItem = ({ columns, IGNORED_FIELD, onItemCreated }) => {
 	const [formState, setFormState] = useState({})
+	console.log(formState)
 
 	const updateFormState = (key, value) => {
 		formState[key] = value
 		setFormState({ ...formState })
 	}
-
-	const formStateCreate = {
-		bitrix_id: 225,
-		secret_key: 'Смородин Борис Борисович',
-		name: formState.name,
-		max_accounts: +formState?.max_accounts,
-		login_type: +formState?.login_type_id,
-		instruction: formState?.instruction,
-	}
-
-	console.log(formStateCreate)
 
 	const itemTODO = useMemo(() => {
 		return columns
@@ -50,8 +37,7 @@ const CreateItem = ({ columns, IGNORED_FIELD }) => {
 	}, [columns, formState])
 
 	const sendItemHandler = () => {
-		dispatch(createAdminClient({ formStateCreate }))
-
+		onItemCreated(formState)
 		const data = Object.keys(formState).reduce((acc, key) => {
 			acc[key] = ''
 			return acc

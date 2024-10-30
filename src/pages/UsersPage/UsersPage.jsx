@@ -6,12 +6,13 @@ import * as React from 'react'
 
 import { useMemo, useState } from 'react'
 // import { CustomPagination } from './Pagination'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../components/Button/Button'
 import CreateItem from '../../components/CreateItem/CreateItem'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
 import PopUp from '../../components/PopUp/PopUp'
 import usePopup from '../../hooks/usePopup'
+import { createAdminUser } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
 import './UsersPage.css'
 
 const filterNames = {
@@ -22,11 +23,13 @@ const filterNames = {
 }
 
 export default function UsersPage() {
-	const userRows = useSelector(state => state.users.users)
-
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
+
+	const dispatch = useDispatch()
+
+	const userRows = useSelector(state => state.users.users)
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
@@ -112,12 +115,24 @@ export default function UsersPage() {
 		},
 	]
 
+	const onItemCreated = React.useCallback(formState => {
+		const formStateCreate = {
+			bitrix_id: 225,
+			secret_key: 'Смородин Борис Борисович',
+			user_bitrix_id: formState.bitrix_id,
+			username: formState.username,
+		}
+
+		dispatch(createAdminUser({ formStateCreate }))
+	}, [])
+
 	const renderCreatePopUp = () => {
 		return (
 			<PopUp onClose={() => setShowCreatePopup(false)}>
 				<CreateItem
 					columns={columns}
 					IGNORED_FIELD={['id', 'creation_date', 'action']}
+					onItemCreated={onItemCreated}
 				/>
 			</PopUp>
 		)

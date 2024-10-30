@@ -28,7 +28,7 @@ const LoginPage = () => {
 			}
 		})
 	})
-	console.log(rows)
+	// console.log(rows)
 
 	// const [rows, setRows] = useState(rowsSmsLogins)
 	const [filterValues, setFilterValues] = useState({})

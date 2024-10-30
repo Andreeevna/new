@@ -17,15 +17,15 @@ export const getAdminUsers = createAsyncThunk(
 	}
 )
 
-export const createAdminClient = createAsyncThunk(
-	'users/createAdminClient',
+export const createAdminUser = createAsyncThunk(
+	'users/createAdminUser',
 	async params => {
 		const { formStateCreate } = params
 		try {
-			const { data } = await createAPI.createClient(formStateCreate)
+			const { data } = await createAPI.createUser(formStateCreate)
 			return data
 		} catch (error) {
-			console.error('Ошибка при создании клиента', error)
+			console.error('Ошибка при создании пользователя', error)
 			throw error.response.status
 		}
 	}
@@ -71,6 +71,20 @@ export const adminUsersReducer = createSlice({
 			state.users = action.payload.response
 		})
 		builder.addCase(getAdminUsers.rejected, state => {
+			state.message = ERROR
+		})
+
+		//createAdminUser
+		builder.addCase(createAdminUser.pending, state => {
+			state.isFetching = true
+			state.message = null
+		})
+		builder.addCase(createAdminUser.fulfilled, (state, action) => {
+			state.isFetching = false
+			state.message = null
+			state.users.push(action.payload.record)
+		})
+		builder.addCase(createAdminUser.rejected, state => {
 			state.message = ERROR
 		})
 	},

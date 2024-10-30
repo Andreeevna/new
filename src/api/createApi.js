@@ -12,4 +12,15 @@ export const createAPI = {
 			}
 		)
 	},
+	createUser(formStateCreate) {
+		return instance.post(
+			`/admin/api/create/user`,
+			JSON.stringify(formStateCreate),
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
+		)
+	},
 }

@@ -11,6 +11,7 @@ import CreateItem from '../../components/CreateItem/CreateItem'
 import PopUp from '../../components/PopUp/PopUp'
 import usePopup from '../../hooks/usePopup'
 import {
+	createAdminClient,
 	deleteAdminClients,
 	deleteLocalClient,
 } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
@@ -149,12 +150,26 @@ const ClientsPage = () => {
 		},
 	]
 
+	const onItemCreated = React.useCallback(formState => {
+		const formStateCreate = {
+			bitrix_id: 225,
+			secret_key: 'Смородин Борис Борисович',
+			name: formState.name,
+			max_accounts: +formState?.max_accounts,
+			login_type: +formState?.login_type_id,
+			instruction: formState?.instruction,
+		}
+
+		dispatch(createAdminClient({ formStateCreate }))
+	}, [])
+
 	const renderCreatePopUp = () => {
 		return (
 			<PopUp onClose={() => setShowCreatePopup(false)}>
 				<CreateItem
 					columns={columnsClients}
 					IGNORED_FIELD={['id', 'creation_date', 'action']}
+					onItemCreated={onItemCreated}
 				/>
 			</PopUp>
 		)
