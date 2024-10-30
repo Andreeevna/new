@@ -5,9 +5,6 @@ import './App.css'
 import Layout from './components/Layout/Layout'
 import ClientsPage from './pages/ClientsPage/ClientsPage'
 import EditPage from './pages/EditPage/EditPage'
-import LoginCallPage from './pages/LoginCallPage/LoginCallPage'
-import LoginCodePage from './pages/LoginCodePage/LoginCodePage'
-import LoginPushPage from './pages/LoginPushPage/LoginPushPage'
 import LoginSmsPage from './pages/LoginSmsPage/LoginSmsPage'
 import UsersPage from './pages/UsersPage/UsersPage'
 import { getAdminClients } from './redux/slices/adminClientsSlice/adminClientsSlice'
@@ -64,20 +61,8 @@ function App() {
 					element: <EditPage />,
 				},
 				{
-					path: '/login/sms',
+					path: '/logins',
 					element: <LoginSmsPage />,
-				},
-				{
-					path: '/login/code',
-					element: <LoginCodePage />,
-				},
-				{
-					path: '/login/call',
-					element: <LoginCallPage />,
-				},
-				{
-					path: '/login/push',
-					element: <LoginPushPage />,
 				},
 			],
 		},
