@@ -56,7 +56,7 @@ export const adminUsersReducer = createSlice({
 	initialState,
 	reducers: {
 		deleteLocalUser: (state, action) => {
-			// state.clients = state.clients.filter(item => item.id !== action.payload)
+			state.users = state.users.filter(item => item.id !== action.payload)
 		},
 	},
 	extraReducers: builder => {
@@ -104,6 +104,6 @@ export const adminUsersReducer = createSlice({
 	},
 })
 
-export const {} = adminUsersReducer.actions
+export const { deleteLocalUser } = adminUsersReducer.actions
 
 export default adminUsersReducer.reducer
