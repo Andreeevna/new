@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { createAPI } from '../../../api/createApi'
+import { deleteAPI } from '../../../api/deleteApi'
 import { getAPI } from '../../../api/getApi'
 import { ERROR } from '../../../constants/api'
 
@@ -36,7 +37,7 @@ export const deleteAdminClients = createAsyncThunk(
 	async params => {
 		const { formStateClient } = params
 		try {
-			const { data } = await getAPI.deleteClient(formStateClient)
+			const { data } = await deleteAPI.deleteClient(formStateClient)
 			return data
 		} catch (error) {
 			console.error('Ошибка при удалении клиента', error)
