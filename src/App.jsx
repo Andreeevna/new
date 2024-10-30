@@ -5,7 +5,7 @@ import './App.css'
 import Layout from './components/Layout/Layout'
 import ClientsPage from './pages/ClientsPage/ClientsPage'
 import EditPage from './pages/EditPage/EditPage'
-import LoginSmsPage from './pages/LoginSmsPage/LoginSmsPage'
+import LoginPage from './pages/LoginPage/LoginPage'
 import UsersPage from './pages/UsersPage/UsersPage'
 import { getAdminClients } from './redux/slices/adminClientsSlice/adminClientsSlice'
 import { getAdminLogins } from './redux/slices/adminLoginSlice/adminLoginSlice'
@@ -62,7 +62,7 @@ function App() {
 				},
 				{
 					path: '/logins',
-					element: <LoginSmsPage />,
+					element: <LoginPage />,
 				},
 			],
 		},

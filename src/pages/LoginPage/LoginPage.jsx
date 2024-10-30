@@ -7,7 +7,8 @@ import { CustomPagination } from '../../components/CustomPagination/CustomPagina
 
 import usePopup from '../../hooks/usePopup'
 import { rowsSmsLogins } from '../../utils/utils'
-import './LoginSmsPage.css'
+
+import './LoginPage.css'
 
 const filterNames = {
 	id: 'Поиск по ID',
@@ -17,7 +18,7 @@ const filterNames = {
 	creation_date: 'Поиск по дате создания',
 	last_used: 'Поиск по дате использования',
 }
-const LoginSmsPage = () => {
+const LoginPage = () => {
 	const [rows, setRows] = useState(rowsSmsLogins)
 	const [filterValues, setFilterValues] = useState({})
 	console.log(filterValues)
@@ -228,4 +229,4 @@ const LoginSmsPage = () => {
 	)
 }
 
-export default LoginSmsPage
+export default LoginPage
