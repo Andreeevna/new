@@ -13,7 +13,7 @@ import usePopup from '../../hooks/usePopup'
 import {
 	deleteAdminClients,
 	deleteLocalClient,
-} from '../../redux/slices/adminGetSlice/adminGetReducer'
+} from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import './ClientsPage.css'
 
 const filterNames = {
@@ -24,7 +24,7 @@ const filterNames = {
 const ClientsPage = () => {
 	const dispatch = useDispatch()
 
-	const clientRow = useSelector(state => state.incom.clients)
+	const clientRow = useSelector(state => state.clients.clients)
 
 	const [filterValues, setFilterValues] = useState({})
 

@@ -22,7 +22,7 @@ const filterNames = {
 }
 
 export default function UsersPage() {
-	const userRows = useSelector(state => state.incom.users)
+	const userRows = useSelector(state => state.users.users)
 
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 

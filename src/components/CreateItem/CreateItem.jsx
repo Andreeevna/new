@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 
 import { useDispatch } from 'react-redux'
-import { createAdminClient } from '../../redux/slices/adminGetSlice/adminGetReducer'
+import { createAdminClient } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import Button from '../Button/Button'
 import './CreateItem.css'
 

@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import adminGetReducer from '../slices/adminGetSlice/adminGetReducer'
+import adminClientsReducer from '../slices/adminClientsSlice/adminClientsSlice'
+import adminUsersReducer from '../slices/adminUsersSlice/adminUsersSlice'
 
 export const store = configureStore({
 	reducer: {
-		incom: adminGetReducer,
+		clients: adminClientsReducer,
+		users: adminUsersReducer,
 	},
 })
