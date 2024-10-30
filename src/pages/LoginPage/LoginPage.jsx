@@ -6,8 +6,8 @@ import { DataGrid } from '@mui/x-data-grid'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
 
 import usePopup from '../../hooks/usePopup'
-import { rowsSmsLogins } from '../../utils/utils'
 
+import { useSelector } from 'react-redux'
 import './LoginPage.css'
 
 const filterNames = {
@@ -19,7 +19,18 @@ const filterNames = {
 	last_used: 'Поиск по дате использования',
 }
 const LoginPage = () => {
-	const [rows, setRows] = useState(rowsSmsLogins)
+	const loginRow = useSelector(state => state.logins.logins)
+	const rows = []
+	const new12 = loginRow?.map(item => {
+		return Object.entries(item).filter(([key, value]) => {
+			if (key === 'login') {
+				rows.push(value)
+			}
+		})
+	})
+	console.log(rows)
+
+	// const [rows, setRows] = useState(rowsSmsLogins)
 	const [filterValues, setFilterValues] = useState({})
 	console.log(filterValues)
 
@@ -27,11 +38,11 @@ const LoginPage = () => {
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
-		setRows(rows.filter(item => item.id !== id))
-		console.log(id)
+		// setRows(rows.filter(item => item.id !== id))
+		// console.log(id)
 	}
 
-	const columnsSmsLogins = [
+	const columnsLogins = [
 		{
 			field: `id`,
 			headerName: `ID`,
@@ -42,17 +53,16 @@ const LoginPage = () => {
 		},
 
 		{
-			field: `user_id`,
-			headerName: `ID пользователя`,
+			field: `login_type_id`,
+			headerName: `Тип логина`,
 			width: 140,
-
 			sortable: true,
 			editable: false,
 			hideable: false,
 		},
 		{
-			field: `client_id`,
-			headerName: `ID клиента`,
+			field: `secret`,
+			headerName: `Секретный ключ`,
 			sortable: true,
 			editable: false,
 			hideable: false,
@@ -74,8 +84,15 @@ const LoginPage = () => {
 			hideable: false,
 		},
 		{
-			field: `instruction`,
-			headerName: `Инструкция`,
+			field: `login_two_fa`,
+			headerName: `Клиентский логин`,
+			sortable: false,
+			editable: false,
+			hideable: false,
+		},
+		{
+			field: `password_two_fa`,
+			headerName: `Клиентский пароль`,
 			sortable: false,
 			editable: false,
 			hideable: false,
@@ -93,22 +110,6 @@ const LoginPage = () => {
 			headerName: `Дата последнего использования`,
 			width: 120,
 			sortable: true,
-			editable: false,
-			hideable: false,
-		},
-		{
-			field: `FOREIGN_KEY_user_id`,
-			headerName: `Внешний ключ ID пользователя`,
-			width: 130,
-			sortable: false,
-			editable: false,
-			hideable: false,
-		},
-		{
-			field: `FOREIGN_KEY_client_id`,
-			headerName: `Внешний ключ ID клиента`,
-			width: 130,
-			sortable: false,
 			editable: false,
 			hideable: false,
 		},
@@ -199,7 +200,7 @@ const LoginPage = () => {
 
 				<div className='login-list'>
 					<DataGrid
-						columns={columnsSmsLogins}
+						columns={columnsLogins}
 						rows={filteredRows}
 						// columnVisibilityModel={{
 						// 	id: false,
