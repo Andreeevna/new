@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react'
 
-import { DeleteOutline } from '@mui/icons-material'
 import { DataGrid } from '@mui/x-data-grid'
 
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
@@ -28,7 +27,7 @@ const LoginPage = () => {
 			}
 		})
 	})
-	// console.log(rows)
+	console.log(rows)
 
 	// const [rows, setRows] = useState(rowsSmsLogins)
 	const [filterValues, setFilterValues] = useState({})
@@ -112,6 +111,9 @@ const LoginPage = () => {
 			sortable: true,
 			editable: false,
 			hideable: false,
+			renderCell: params => {
+				console.log(params)
+			},
 		},
 		{
 			field: 'action',
@@ -121,6 +123,7 @@ const LoginPage = () => {
 			editable: false,
 			hideable: false,
 			renderCell: params => {
+				// console.log(params)
 				return (
 					<div className='action-group'>
 						<div className=''>
@@ -153,7 +156,7 @@ const LoginPage = () => {
 	}
 
 	const filters = useMemo(() => {
-		if (!rows.length) {
+		if (!loginRow.length) {
 			return []
 		}
 

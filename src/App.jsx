@@ -24,7 +24,7 @@ function App() {
 	const formStateUsers = {
 		bitrix_id: '225',
 		secret_key: 'Смородин Борис Борисович',
-		user_bitrix_id: '225',
+		user_bitrix_id: null,
 		username: null,
 	}
 
