@@ -69,9 +69,9 @@ export const adminUsersReducer = createSlice({
 	name: 'users',
 	initialState,
 	reducers: {
-		deleteLocalUser: (state, action) => {
-			state.users = state.users.filter(item => item.id !== action.payload)
-		},
+		// deleteLocalUser: (state, action) => {
+		// 	state.users = state.users.filter(item => item.id !== action.payload)
+		// },
 	},
 	extraReducers: builder => {
 		//getAdminUsers
@@ -109,6 +109,10 @@ export const adminUsersReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(deleteAdminUser.fulfilled, (state, action) => {
+			state.users = state.users.filter(
+				item => item.id !== action.payload.record.id
+			)
+
 			state.isFetching = false
 			state.message = null
 		})
@@ -137,6 +141,6 @@ export const adminUsersReducer = createSlice({
 	},
 })
 
-export const { deleteLocalUser } = adminUsersReducer.actions
+export const {} = adminUsersReducer.actions
 
 export default adminUsersReducer.reducer

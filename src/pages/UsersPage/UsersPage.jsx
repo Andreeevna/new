@@ -16,7 +16,6 @@ import {
 	createAdminUser,
 	deleteAdminUser,
 	deleteAdminUsers,
-	deleteLocalUser,
 } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
 import './UsersPage.css'
 
@@ -44,7 +43,7 @@ export default function UsersPage() {
 			delete_id: id,
 		}
 		dispatch(deleteAdminUser({ formStateUser }))
-		dispatch(deleteLocalUser(id))
+		// dispatch(deleteLocalUser(id))
 	}
 
 	const dayInMonthComparator = (v1, v2) => {
