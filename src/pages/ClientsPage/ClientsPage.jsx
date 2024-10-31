@@ -12,8 +12,7 @@ import PopUp from '../../components/PopUp/PopUp'
 import usePopup from '../../hooks/usePopup'
 import {
 	createAdminClient,
-	deleteAdminClients,
-	deleteLocalClient,
+	deleteAdminClient,
 } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import './ClientsPage.css'
 
@@ -189,8 +188,8 @@ const ClientsPage = () => {
 			delete_id: id,
 		}
 
-		dispatch(deleteLocalClient(id))
-		dispatch(deleteAdminClients({ formStateClient }))
+		// dispatch(deleteLocalClient(id))
+		dispatch(deleteAdminClient({ formStateClient }))
 	}
 
 	function onUpdateFilteredValue(key, value) {

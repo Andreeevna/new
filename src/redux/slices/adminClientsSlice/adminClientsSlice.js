@@ -32,8 +32,8 @@ export const createAdminClient = createAsyncThunk(
 	}
 )
 
-export const deleteAdminClients = createAsyncThunk(
-	'clients/deleteAdminClients',
+export const deleteAdminClient = createAsyncThunk(
+	'clients/deleteAdminClient',
 	async params => {
 		const { formStateClient } = params
 		try {
@@ -55,9 +55,9 @@ export const adminClientsReducer = createSlice({
 	name: 'clients',
 	initialState,
 	reducers: {
-		deleteLocalClient: (state, action) => {
-			state.clients = state.clients.filter(item => item.id !== action.payload)
-		},
+		// deleteLocalClient: (state, action) => {
+		// 	state.clients = state.clients.filter(item => item.id !== action.payload)
+		// },
 	},
 	extraReducers: builder => {
 		// getClients
@@ -89,21 +89,25 @@ export const adminClientsReducer = createSlice({
 			state.message = ERROR
 		})
 
-		//deleteAdminClients
-		builder.addCase(deleteAdminClients.pending, state => {
+		//deleteAdminClient
+		builder.addCase(deleteAdminClient.pending, state => {
 			state.isFetching = true
 			state.message = null
 		})
-		builder.addCase(deleteAdminClients.fulfilled, (state, action) => {
+		builder.addCase(deleteAdminClient.fulfilled, (state, action) => {
+			state.clients = state.clients.filter(
+				item => item.id !== action.payload.record.id
+			)
+
 			state.isFetching = false
 			state.message = null
 		})
-		builder.addCase(deleteAdminClients.rejected, state => {
+		builder.addCase(deleteAdminClient.rejected, state => {
 			state.message = ERROR
 		})
 	},
 })
 
-export const { deleteLocalClient } = adminClientsReducer.actions
+export const {} = adminClientsReducer.actions
 
 export default adminClientsReducer.reducer
