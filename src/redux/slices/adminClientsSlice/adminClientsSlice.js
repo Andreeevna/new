@@ -46,6 +46,20 @@ export const deleteAdminClient = createAsyncThunk(
 	}
 )
 
+export const deleteAdminClients = createAsyncThunk(
+	'clients/deleteAdminClients',
+	async params => {
+		const { formStateClients } = params
+		try {
+			const { data } = await deleteAPI.deleteClients(formStateClients)
+			return data
+		} catch (error) {
+			console.error('Ошибка при удалении клиентов', error)
+			throw error.response.status
+		}
+	}
+)
+
 const initialState = {
 	clients: [],
 	message: null,
@@ -103,6 +117,24 @@ export const adminClientsReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(deleteAdminClient.rejected, state => {
+			state.message = ERROR
+		})
+
+		//deleteAdminClients
+		builder.addCase(deleteAdminClients.pending, state => {
+			state.isFetching = true
+			state.message = null
+		})
+		builder.addCase(deleteAdminClients.fulfilled, (state, action) => {
+			state.clients = state.clients.filter(row => {
+				return !action.payload.record.some(rowResp => {
+					return rowResp.id === row.id
+				})
+			})
+			state.isFetching = false
+			state.message = null
+		})
+		builder.addCase(deleteAdminClients.rejected, state => {
 			state.message = ERROR
 		})
 	},

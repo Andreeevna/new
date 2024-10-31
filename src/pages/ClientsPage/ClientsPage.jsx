@@ -13,6 +13,7 @@ import usePopup from '../../hooks/usePopup'
 import {
 	createAdminClient,
 	deleteAdminClient,
+	deleteAdminClients,
 } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import './ClientsPage.css'
 
@@ -188,7 +189,6 @@ const ClientsPage = () => {
 			delete_id: id,
 		}
 
-		// dispatch(deleteLocalClient(id))
 		dispatch(deleteAdminClient({ formStateClient }))
 	}
 
@@ -241,6 +241,26 @@ const ClientsPage = () => {
 		page: 0,
 	})
 
+	// DELETE CLIENTS
+
+	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
+	console.log(sizeSelectesRows)
+
+	const getIdsSelectedRows = selectedRowData => {
+		return selectedRowData.map(item => {
+			return item.id
+		})
+	}
+
+	const onDeletedUsers = () => {
+		const formStateClients = {
+			bitrix_id: 225,
+			secret_key: 'Смородин Борис Борисович',
+			delete_ids: sizeSelectesRows,
+		}
+		dispatch(deleteAdminClients({ formStateClients }))
+	}
+
 	return (
 		<div className='clients'>
 			<div className='table__container'>
@@ -251,6 +271,13 @@ const ClientsPage = () => {
 						text='Создать'
 						onClick={getCreatePopUp}
 					/>
+					{sizeSelectesRows.length > 0 ? (
+						<Button
+							className={'button-send__end'}
+							text='Удалить элементы'
+							onClick={onDeletedUsers}
+						/>
+					) : null}
 				</div>
 
 				<div className='clients-list'>
@@ -274,6 +301,8 @@ const ClientsPage = () => {
 								selectedIDs.has(row.id)
 							)
 							// console.log(selectedRowData)
+							const idsSelected = getIdsSelectedRows(selectedRowData)
+							setSizeSelectesRows(idsSelected)
 						}}
 					/>
 				</div>

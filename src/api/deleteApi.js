@@ -35,4 +35,15 @@ export const deleteAPI = {
 			}
 		)
 	},
+	deleteClients(formStateClients) {
+		return instance.post(
+			`/admin/api/delete/clients`,
+			JSON.stringify(formStateClients),
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
+		)
+	},
 }
