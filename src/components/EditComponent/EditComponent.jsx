@@ -12,6 +12,7 @@ import Button from '../Button/Button'
 import './EditComponent.css'
 
 const EditComponent = ({ item, chapter }) => {
+	console.log(item)
 	const [isEditing, setIsEditing] = useState({})
 
 	const filedNameCollection = Object.entries(item)

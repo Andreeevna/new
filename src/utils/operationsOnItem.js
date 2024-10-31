@@ -1,54 +1,27 @@
-import {
-	rows_users,
-	rowsCallLogins,
-	rowsClients,
-	rowsCodeLogins,
-	rowsPushLogins,
-	rowsSmsLogins,
-} from './utils'
+import { useSelector } from 'react-redux'
 
 export const getProductById = (itemId, chapter) => {
+	const userRows = useSelector(state => state.users.users)
+	const clientRows = useSelector(state => state.clients.clients)
+	const loginRows = useSelector(state => state.logins.logins)
+
 	if (chapter === 'users') {
-		return rows_users.find(row => {
+		return userRows?.find(row => {
 			if (row.id === Number(itemId)) {
 				return row
 			}
 		})
 	}
 	if (chapter === 'clients') {
-		return rowsClients.find(row => {
+		return clientRows?.find(row => {
 			if (row.id === Number(itemId)) {
 				return row
 			}
 		})
 	}
 
-	if (chapter === 'loginsms') {
-		return rowsSmsLogins.find(row => {
-			if (row.id === Number(itemId)) {
-				return row
-			}
-		})
-	}
-
-	if (chapter === 'logincode') {
-		return rowsCodeLogins.find(row => {
-			if (row.id === Number(itemId)) {
-				return row
-			}
-		})
-	}
-
-	if (chapter === 'logincall') {
-		return rowsCallLogins.find(row => {
-			if (row.id === Number(itemId)) {
-				return row
-			}
-		})
-	}
-
-	if (chapter === 'loginpush') {
-		return rowsPushLogins.find(row => {
+	if (chapter === 'login') {
+		return loginRows?.find(row => {
 			if (row.id === Number(itemId)) {
 				return row
 			}
