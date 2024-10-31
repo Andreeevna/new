@@ -6,7 +6,7 @@ import { CustomPagination } from '../../components/CustomPagination/CustomPagina
 
 import usePopup from '../../hooks/usePopup'
 
-import { useSelector } from 'react-redux'
+import { DeleteOutline } from '@mui/icons-material'
 import './LoginPage.css'
 
 const filterNames = {
@@ -18,27 +18,96 @@ const filterNames = {
 	last_used: 'Поиск по дате использования',
 }
 const LoginPage = () => {
-	const loginRow = useSelector(state => state.logins.logins)
-	const rows = []
-	const new12 = loginRow?.map(item => {
-		return Object.entries(item).filter(([key, value]) => {
-			if (key === 'login') {
-				rows.push(value)
-			}
-		})
-	})
-	console.log(rows)
+	const loginRow = [
+		{
+			login: {
+				id: 17,
+				login_type_id: 1,
+				secret: null,
+				login: 'string',
+				password: 'string1',
+				login_two_fa: null,
+				password_two_fa: null,
+				creation_date: '30-10-2024 17:56:41',
+				last_used: '30-10-2024 17:56:41',
+			},
+			client: {
+				id: 1,
+				name: 'NinaNinaNinaNinaNinaNina',
+				max_accounts: 5,
+				creation_date: '01.10.2021 11:33',
+			},
+			user: {
+				id: 1222,
+				bitrix_id: '24',
+				username: 'lana',
+				creation_date: '24.10.2024 10:53',
+			},
+		},
+		{
+			login: {
+				id: 35,
+				login_type_id: 1,
+				secret: null,
+				login: 'string',
+				password: 'string1',
+				login_two_fa: null,
+				password_two_fa: null,
+				creation_date: '30-10-2024 17:56:41',
+				last_used: '30-10-2024 17:56:41',
+			},
+			client: {
+				id: 1,
+				name: 'NinaNinaNinaNinaNinaNina',
+				max_accounts: 5,
+				creation_date: '01.10.2021 11:33',
+			},
+			user: {
+				id: 1222,
+				bitrix_id: '24',
+				username: 'lana',
+				creation_date: '24.10.2024 10:53',
+			},
+		},
+		{
+			login: {
+				id: 0,
+				login_type_id: 1,
+				secret: null,
+				login: 'string',
+				password: 'string1',
+				login_two_fa: null,
+				password_two_fa: null,
+				creation_date: '30-10-2024 17:56:41',
+				last_used: '30-10-2024 17:56:41',
+			},
+			client: {
+				id: 1,
+				name: 'NinaNinaNinaNinaNinaNina',
+				max_accounts: 5,
+				creation_date: '01.10.2021 11:33',
+			},
+			user: {
+				id: 1222,
+				bitrix_id: '24',
+				username: 'lana',
+				creation_date: '24.10.2024 10:53',
+			},
+		},
+	]
 
-	// const [rows, setRows] = useState(rowsSmsLogins)
+	const rows = useMemo(() => {
+		return loginRow.map((item, index) => {
+			return { ...item.login, index }
+		})
+	}, [loginRow])
+
 	const [filterValues, setFilterValues] = useState({})
-	console.log(filterValues)
 
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
-		// setRows(rows.filter(item => item.id !== id))
-		// console.log(id)
 	}
 
 	const columnsLogins = [
@@ -112,7 +181,7 @@ const LoginPage = () => {
 			editable: false,
 			hideable: false,
 			renderCell: params => {
-				console.log(params)
+				// console.log(params)
 			},
 		},
 		{
@@ -141,7 +210,10 @@ const LoginPage = () => {
 						</div>
 						<DeleteOutline
 							className='productListDelete'
-							onClick={e => handleDelete(e, params.row.id)}
+							onClick={e => {
+								handleDelete(e, params.row.id)
+								// console.log(loginRow[params.row.index])
+							}}
 						/>
 					</div>
 				)
