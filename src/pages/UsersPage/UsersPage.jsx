@@ -204,6 +204,9 @@ export default function UsersPage() {
 		page: 0,
 	})
 
+	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
+	console.log(sizeSelectesRows)
+
 	const getIdsSelectedRows = selectedRowData => {
 		return selectedRowData.map(item => {
 			return item.id
@@ -220,6 +223,13 @@ export default function UsersPage() {
 						text='Создать'
 						onClick={getCreatePopUp}
 					/>
+					{sizeSelectesRows.length > 0 ? (
+						<Button
+							className={'button-send__end'}
+							text='Удалить элементы'
+							// onClick={getCreatePopUp}
+						/>
+					) : null}
 				</div>
 
 				<div className='users-list'>
@@ -242,8 +252,9 @@ export default function UsersPage() {
 							const selectedRowData = userRows.filter(row =>
 								selectedIDs.has(row.id)
 							)
-							console.log(selectedRowData)
-							console.log(getIdsSelectedRows(selectedRowData))
+							// console.log(selectedRowData)
+							const idsSelected = getIdsSelectedRows(selectedRowData)
+							setSizeSelectesRows(idsSelected)
 						}}
 					/>
 				</div>

@@ -10,6 +10,9 @@
 }
 
 .clients__button-send {
-	margin-bottom: 20px;
+	margin-bottom: 25px;
 	padding-right: 20px;
+	display: flex;
+	justify-content: right;
+	gap: 20px;
 }
