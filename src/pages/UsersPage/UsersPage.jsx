@@ -15,6 +15,7 @@ import usePopup from '../../hooks/usePopup'
 import {
 	createAdminUser,
 	deleteAdminUser,
+	deleteAdminUsers,
 	deleteLocalUser,
 } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
 import './UsersPage.css'
@@ -87,10 +88,6 @@ export default function UsersPage() {
 			filterable: false,
 			hideable: false,
 			sortComparator: dayInMonthComparator,
-			// renderCell: params => {
-			// 	console.log(params)
-			// 	return moment(params.row.creation_date).format('DD.MM.YYYY HH:mm')
-			// },
 		},
 		{
 			field: 'action',
@@ -213,6 +210,15 @@ export default function UsersPage() {
 		})
 	}
 
+	const onDeletedUsers = () => {
+		const formStateUsers = {
+			bitrix_id: 225,
+			secret_key: 'Смородин Борис Борисович',
+			delete_ids: sizeSelectesRows,
+		}
+		dispatch(deleteAdminUsers({ formStateUsers }))
+	}
+
 	return (
 		<div className='users'>
 			<div className='table__container'>
@@ -227,7 +233,7 @@ export default function UsersPage() {
 						<Button
 							className={'button-send__end'}
 							text='Удалить элементы'
-							// onClick={getCreatePopUp}
+							onClick={onDeletedUsers}
 						/>
 					) : null}
 				</div>

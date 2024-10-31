@@ -46,6 +46,20 @@ export const deleteAdminUser = createAsyncThunk(
 	}
 )
 
+export const deleteAdminUsers = createAsyncThunk(
+	'users/deleteAdminUsers',
+	async params => {
+		const { formStateUsers } = params
+		try {
+			const { data } = await deleteAPI.deleteUsers(formStateUsers)
+			return data
+		} catch (error) {
+			console.error('Ошибка при удалении пользователей', error)
+			throw error.response.status
+		}
+	}
+)
+
 const initialState = {
 	users: [],
 	message: null,
@@ -99,6 +113,19 @@ export const adminUsersReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(deleteAdminUser.rejected, state => {
+			state.message = ERROR
+		})
+
+		//deleteAdminUsers
+		builder.addCase(deleteAdminUsers.pending, state => {
+			state.isFetching = true
+			state.message = null
+		})
+		builder.addCase(deleteAdminUsers.fulfilled, (state, action) => {
+			state.isFetching = false
+			state.message = null
+		})
+		builder.addCase(deleteAdminUsers.rejected, state => {
 			state.message = ERROR
 		})
 	},
