@@ -122,6 +122,12 @@ export const adminUsersReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(deleteAdminUsers.fulfilled, (state, action) => {
+			console.log(action.payload.record)
+			state.users = state.users.filter(row => {
+				return !action.payload.record.some(rowResp => {
+					return rowResp.id === row.id
+				})
+			})
 			state.isFetching = false
 			state.message = null
 		})
