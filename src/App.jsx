@@ -31,7 +31,7 @@ function App() {
 	const formStateLogins = {
 		bitrix_id: '225',
 		secret_key: 'Смородин Борис Борисович',
-		login_type: 0,
+		login_type: null,
 		users_list: null,
 		clients_list: null,
 	}

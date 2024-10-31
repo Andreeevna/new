@@ -204,6 +204,12 @@ export default function UsersPage() {
 		page: 0,
 	})
 
+	const getIdsSelectedRows = selectedRowData => {
+		return selectedRowData.map(item => {
+			return item.id
+		})
+	}
+
 	return (
 		<div className='users'>
 			<div className='table__container'>
@@ -237,6 +243,7 @@ export default function UsersPage() {
 								selectedIDs.has(row.id)
 							)
 							console.log(selectedRowData)
+							console.log(getIdsSelectedRows(selectedRowData))
 						}}
 					/>
 				</div>
