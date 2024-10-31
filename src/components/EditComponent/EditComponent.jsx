@@ -1,18 +1,10 @@
 import React, { useMemo, useState } from 'react'
 
-import {
-	callLoginsDict,
-	clientsDict,
-	codeLoginsDict,
-	pushLoginsDict,
-	smsLoginsDict,
-	usersDict,
-} from '../../utils/dicts'
+import { clientsDict, LoginDict, usersDict } from '../../utils/dicts'
 import Button from '../Button/Button'
 import './EditComponent.css'
 
 const EditComponent = ({ item, chapter }) => {
-	console.log(item)
 	const [isEditing, setIsEditing] = useState({})
 
 	const filedNameCollection = Object.entries(item)
@@ -32,17 +24,8 @@ const EditComponent = ({ item, chapter }) => {
 		if (chapter === 'clients') {
 			return findvalue(key, clientsDict)
 		}
-		if (chapter === 'loginsms') {
-			return findvalue(key, smsLoginsDict)
-		}
-		if (chapter === 'logincode') {
-			return findvalue(key, codeLoginsDict)
-		}
-		if (chapter === 'logincall') {
-			return findvalue(key, callLoginsDict)
-		}
-		if (chapter === 'loginpush') {
-			return findvalue(key, pushLoginsDict)
+		if (chapter === 'login') {
+			return findvalue(key, LoginDict)
 		}
 	}
 

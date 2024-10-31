@@ -24,25 +24,45 @@ export const usersDict = [
 export const clientsDict = [
 	{ field: `id`, headerName: `ID` },
 	{ field: `name`, headerName: `Имя клиента` },
-	{ field: `max_accounts`, headerName: `Максимальное количество аккаунтов` },
+	{ field: `max_accounts`, headerName: `Максимальное кол-во аккаунтов` },
 	{ field: `creation_date`, headerName: `Дата создания` },
+	{
+		field: `instruction`,
+		headerName: `Инструкция`,
+	},
+	{
+		field: `login_type_id`,
+		headerName: `Тип логина`,
+	},
 	{
 		field: 'action',
 		headerName: 'Действия',
 	},
 ]
 
-export const smsLoginsDict = [
+export const LoginDict = [
 	{ field: `id`, headerName: `ID` },
-	{ field: `user_id`, headerName: `ID пользователя` },
-	{ field: `client_id`, headerName: `ID клиента` },
+	{
+		field: `login_type_id`,
+		headerName: `Тип логина`,
+	},
+	{
+		field: `secret`,
+		headerName: `Секретный ключ`,
+	},
 	{ field: `login`, headerName: `Логин` },
 	{ field: `password`, headerName: `Пароль` },
-	{ field: `instruction`, headerName: `Инструкция` },
+	{
+		field: `login_two_fa`,
+		headerName: `Клиентский логин`,
+	},
+	{
+		field: `password_two_fa`,
+		headerName: `Клиентский пароль`,
+	},
 	{ field: `creation_date`, headerName: `Дата создания` },
 	{ field: `last_used`, headerName: `Дата последнего использования` },
-	{ field: `FOREIGN_KEY_user_id`, headerName: `Внешний ключ ID пользователя` },
-	{ field: `FOREIGN_KEY_client_id`, headerName: `Внешний ключ ID клиента` },
+	{ field: 'action', headerName: 'Действия' },
 ]
 
 export const codeLoginsDict = [
