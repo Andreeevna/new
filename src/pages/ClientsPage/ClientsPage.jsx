@@ -95,7 +95,6 @@ const ClientsPage = () => {
 			hideable: false,
 			sortComparator: dayInMonthComparator,
 			renderCell: params => {
-				// return moment(params.row.creation_date).format('DD.MM.YYYY HH:mm')
 				return params.row.creation_date
 			},
 		},

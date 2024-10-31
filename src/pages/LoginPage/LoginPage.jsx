@@ -11,8 +11,6 @@ import './LoginPage.css'
 
 const filterNames = {
 	id: 'Поиск по ID',
-	user_id: 'Поиск по ID пользователя',
-	client_id: 'Поиск по ID клиента',
 	login: 'Поиск по логину',
 	creation_date: 'Поиск по дате создания',
 	last_used: 'Поиск по дате использования',
@@ -180,9 +178,6 @@ const LoginPage = () => {
 			sortable: true,
 			editable: false,
 			hideable: false,
-			renderCell: params => {
-				// console.log(params)
-			},
 		},
 		{
 			field: 'action',
@@ -192,7 +187,6 @@ const LoginPage = () => {
 			editable: false,
 			hideable: false,
 			renderCell: params => {
-				// console.log(params)
 				return (
 					<div className='action-group'>
 						<div className=''>
@@ -296,7 +290,6 @@ const LoginPage = () => {
 							const selectedRowData = rows.filter(row =>
 								selectedIDs.has(row.id)
 							)
-							// console.log(selectedRowData)
 						}}
 					/>
 				</div>

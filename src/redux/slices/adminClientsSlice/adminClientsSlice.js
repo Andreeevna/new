@@ -68,11 +68,7 @@ const initialState = {
 export const adminClientsReducer = createSlice({
 	name: 'clients',
 	initialState,
-	reducers: {
-		// deleteLocalClient: (state, action) => {
-		// 	state.clients = state.clients.filter(item => item.id !== action.payload)
-		// },
-	},
+	reducers: {},
 	extraReducers: builder => {
 		// getClients
 		builder.addCase(getAdminClients.pending, state => {
