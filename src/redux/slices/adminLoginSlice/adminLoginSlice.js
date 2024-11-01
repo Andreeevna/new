@@ -90,20 +90,6 @@ export const adminLoginsReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(deteleAdminLogin.fulfilled, (state, action) => {
-			// 	{
-			// 		"message": "Deleted",
-			// 		"record": {
-			// 				"id": 2,
-			// 				"login_type_id": 1,
-			// 				"secret": null,
-			// 				"login": "german_test_sms_2",
-			// 				"password": "testpass",
-			// 				"login_two_fa": null,
-			// 				"password_two_fa": null,
-			// 				"creation_date": "18-10-2024 13:55:21",
-			// 				"last_used": "18-10-2024 13:55:21"
-			// 		}
-			// }
 			state.logins = state.logins.filter(row => {
 				return row.login.id !== action.payload.record.id
 			})

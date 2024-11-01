@@ -207,8 +207,8 @@ const LoginPage = () => {
 			login_2fa: formState.login_two_fa,
 			password_2fa: formState.password_two_fa,
 			secret: formState.secret,
-			client_id: '',
-			user_id: '',
+			client_id: +formState.client_id,
+			user_id: +formState.user_id,
 		}
 
 		dispatch(createAdminLogin({ formStateCreateLogin }))
