@@ -7,6 +7,7 @@ import { CustomPagination } from '../../components/CustomPagination/CustomPagina
 import usePopup from '../../hooks/usePopup'
 
 import { DeleteOutline } from '@mui/icons-material'
+import { useSelector } from 'react-redux'
 import './LoginPage.css'
 
 const filterNames = {
@@ -16,86 +17,10 @@ const filterNames = {
 	last_used: 'Поиск по дате использования',
 }
 const LoginPage = () => {
-	const loginRow = [
-		{
-			login: {
-				id: 17,
-				login_type_id: 1,
-				secret: null,
-				login: 'string',
-				password: 'string1',
-				login_two_fa: null,
-				password_two_fa: null,
-				creation_date: '30-10-2024 17:56:41',
-				last_used: '30-10-2024 17:56:41',
-			},
-			client: {
-				id: 1,
-				name: 'NinaNinaNinaNinaNinaNina',
-				max_accounts: 5,
-				creation_date: '01.10.2021 11:33',
-			},
-			user: {
-				id: 1222,
-				bitrix_id: '24',
-				username: 'lana',
-				creation_date: '24.10.2024 10:53',
-			},
-		},
-		{
-			login: {
-				id: 35,
-				login_type_id: 1,
-				secret: null,
-				login: 'string',
-				password: 'string1',
-				login_two_fa: null,
-				password_two_fa: null,
-				creation_date: '30-10-2024 17:56:41',
-				last_used: '30-10-2024 17:56:41',
-			},
-			client: {
-				id: 1,
-				name: 'NinaNinaNinaNinaNinaNina',
-				max_accounts: 5,
-				creation_date: '01.10.2021 11:33',
-			},
-			user: {
-				id: 1222,
-				bitrix_id: '24',
-				username: 'lana',
-				creation_date: '24.10.2024 10:53',
-			},
-		},
-		{
-			login: {
-				id: 0,
-				login_type_id: 1,
-				secret: null,
-				login: 'string',
-				password: 'string1',
-				login_two_fa: null,
-				password_two_fa: null,
-				creation_date: '30-10-2024 17:56:41',
-				last_used: '30-10-2024 17:56:41',
-			},
-			client: {
-				id: 1,
-				name: 'NinaNinaNinaNinaNinaNina',
-				max_accounts: 5,
-				creation_date: '01.10.2021 11:33',
-			},
-			user: {
-				id: 1222,
-				bitrix_id: '24',
-				username: 'lana',
-				creation_date: '24.10.2024 10:53',
-			},
-		},
-	]
+	const loginRow = useSelector(state => state.logins.logins)
 
 	const rows = useMemo(() => {
-		return loginRow.map((item, index) => {
+		return loginRow?.map((item, index) => {
 			return { ...item.login, index }
 		})
 	}, [loginRow])
@@ -193,13 +118,13 @@ const LoginPage = () => {
 							<button
 								className='productListEdit'
 								onClick={e => {
-									togglePopup(e, params.row.id, 'loginsms')
+									togglePopup(e, params.row.id, 'login')
 								}}
 							>
 								Изменить
 							</button>
 							{params.row.id === parameter && showPopup
-								? renderPopUp(null, params.row.id, 'loginsms')
+								? renderPopUp(null, params.row.id, 'login')
 								: null}
 						</div>
 						<DeleteOutline

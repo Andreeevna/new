@@ -106,3 +106,81 @@ export const pushLoginsDict = [
 	{ field: `FOREIGN_KEY_user_id`, headerName: `Внешний ключ ID пользователя` },
 	{ field: `FOREIGN_KEY_client_id`, headerName: `Внешний ключ ID клиента` },
 ]
+
+const loginRow = [
+	{
+		login: {
+			id: 17,
+			login_type_id: 1,
+			secret: null,
+			login: 'string',
+			password: 'string1',
+			login_two_fa: null,
+			password_two_fa: null,
+			creation_date: '30-10-2024 17:56:41',
+			last_used: '30-10-2024 17:56:41',
+		},
+		client: {
+			id: 1,
+			name: 'NinaNinaNinaNinaNinaNina',
+			max_accounts: 5,
+			creation_date: '01.10.2021 11:33',
+		},
+		user: {
+			id: 1222,
+			bitrix_id: '24',
+			username: 'lana',
+			creation_date: '24.10.2024 10:53',
+		},
+	},
+	{
+		login: {
+			id: 35,
+			login_type_id: 1,
+			secret: null,
+			login: 'string',
+			password: 'string1',
+			login_two_fa: null,
+			password_two_fa: null,
+			creation_date: '30-10-2024 17:56:41',
+			last_used: '30-10-2024 17:56:41',
+		},
+		client: {
+			id: 1,
+			name: 'NinaNinaNinaNinaNinaNina',
+			max_accounts: 5,
+			creation_date: '01.10.2021 11:33',
+		},
+		user: {
+			id: 1222,
+			bitrix_id: '24',
+			username: 'lana',
+			creation_date: '24.10.2024 10:53',
+		},
+	},
+	{
+		login: {
+			id: 0,
+			login_type_id: 1,
+			secret: null,
+			login: 'string',
+			password: 'string1',
+			login_two_fa: null,
+			password_two_fa: null,
+			creation_date: '30-10-2024 17:56:41',
+			last_used: '30-10-2024 17:56:41',
+		},
+		client: {
+			id: 1,
+			name: 'NinaNinaNinaNinaNinaNina',
+			max_accounts: 5,
+			creation_date: '01.10.2021 11:33',
+		},
+		user: {
+			id: 1222,
+			bitrix_id: '24',
+			username: 'lana',
+			creation_date: '24.10.2024 10:53',
+		},
+	},
+]
