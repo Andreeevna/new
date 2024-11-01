@@ -12,10 +12,23 @@ export const createAPI = {
 			}
 		)
 	},
+
 	createUser(formStateCreate) {
 		return instance.post(
 			`/admin/api/create/user`,
 			JSON.stringify(formStateCreate),
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
+		)
+	},
+
+	createLogin(formStateCreateLogin) {
+		return instance.post(
+			`/admin/api/create/login/combined`,
+			JSON.stringify(formStateCreateLogin),
 			{
 				headers: {
 					'Content-Type': 'application/json',

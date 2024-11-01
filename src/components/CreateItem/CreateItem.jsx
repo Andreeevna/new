@@ -13,7 +13,9 @@ const CreateItem = ({ columns, IGNORED_FIELD, onItemCreated }) => {
 
 	const itemTODO = useMemo(() => {
 		return columns
-			?.filter(column => !IGNORED_FIELD.includes(column.field))
+			?.filter(column => {
+				return !IGNORED_FIELD.includes(column.field)
+			})
 			.map(column => {
 				return (
 					<div key={column?.field} className='create-item__item'>

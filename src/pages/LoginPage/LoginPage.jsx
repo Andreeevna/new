@@ -7,10 +7,14 @@ import { CustomPagination } from '../../components/CustomPagination/CustomPagina
 import usePopup from '../../hooks/usePopup'
 
 import { DeleteOutline } from '@mui/icons-material'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../components/Button/Button'
 import CreateItem from '../../components/CreateItem/CreateItem'
 import PopUp from '../../components/PopUp/PopUp'
+import {
+	createAdminLogin,
+	deteleAdminLogin,
+} from '../../redux/slices/adminLoginSlice/adminLoginSlice'
 import './LoginPage.css'
 
 const filterNames = {
@@ -21,6 +25,8 @@ const filterNames = {
 }
 const LoginPage = () => {
 	const [filterValues, setFilterValues] = useState({})
+
+	const dispatch = useDispatch()
 
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
@@ -35,7 +41,14 @@ const LoginPage = () => {
 	}, [loginRow])
 
 	const handleDelete = (e, id) => {
+		const formStateDeleteLogin = {
+			bitrix_id: 225,
+			secret_key: 'Смородин Борис Борисович',
+			delete_id: id,
+		}
 		e.stopPropagation()
+		console.log(id)
+		dispatch(deteleAdminLogin({ formStateDeleteLogin }))
 	}
 
 	const columnsLogins = [
@@ -189,34 +202,27 @@ const LoginPage = () => {
 		const formStateCreateLogin = {
 			bitrix_id: 225,
 			secret_key: 'Смородин Борис Борисович',
-			login: '',
-			password: '',
-			login_2fa: '',
-			password_2fa: '',
-			secret: '',
+			login: formState.login,
+			password: formState.password,
+			login_2fa: formState.login_two_fa,
+			password_2fa: formState.password_two_fa,
+			secret: formState.secret,
 			client_id: '',
 			user_id: '',
 		}
 
-		// dispatch(createAdminUser({ formStateCreateLogin }))
+		dispatch(createAdminLogin({ formStateCreateLogin }))
 	}, [])
 
-	// {
-	// 	"bitrix_id": 0,
-	// 	"secret_key": "string",
-	// 	"login": "string",
-	// 	"password": "string",
-	// 	"login_2fa": "string",
-	// 	"password_2fa": "string",
-	// 	"secret": "string",
-	// 	"client_id": 0,
-	// 	"user_id": 0
-	// }
 	const renderCreatePopUp = () => {
 		return (
 			<PopUp onClose={() => setShowCreatePopup(false)}>
 				<CreateItem
-					columns={columnsLogins}
+					columns={[
+						...columnsLogins,
+						{ field: 'client_id', headerName: 'Id Клиента' },
+						{ field: 'user_id', headerName: 'Id Пользователя' },
+					]}
 					IGNORED_FIELD={[
 						'id',
 						`login_type_id`,

@@ -12,6 +12,7 @@ export const deleteAPI = {
 			}
 		)
 	},
+
 	deleteUsers(formStateUsers) {
 		return instance.post(
 			`/admin/api/delete/users`,
@@ -35,10 +36,23 @@ export const deleteAPI = {
 			}
 		)
 	},
+
 	deleteClients(formStateClients) {
 		return instance.post(
 			`/admin/api/delete/clients`,
 			JSON.stringify(formStateClients),
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
+		)
+	},
+
+	deleteLogin(formStateDeleteLogin) {
+		return instance.post(
+			`/admin/api/delete/login`,
+			JSON.stringify(formStateDeleteLogin),
 			{
 				headers: {
 					'Content-Type': 'application/json',
