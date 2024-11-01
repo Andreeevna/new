@@ -8,6 +8,9 @@ import usePopup from '../../hooks/usePopup'
 
 import { DeleteOutline } from '@mui/icons-material'
 import { useSelector } from 'react-redux'
+import Button from '../../components/Button/Button'
+import CreateItem from '../../components/CreateItem/CreateItem'
+import PopUp from '../../components/PopUp/PopUp'
 import './LoginPage.css'
 
 const filterNames = {
@@ -17,6 +20,12 @@ const filterNames = {
 	last_used: 'Поиск по дате использования',
 }
 const LoginPage = () => {
+	const [filterValues, setFilterValues] = useState({})
+
+	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
+
+	const [showCreatePopup, setShowCreatePopup] = useState(false)
+
 	const loginRow = useSelector(state => state.logins.logins)
 
 	const rows = useMemo(() => {
@@ -24,10 +33,6 @@ const LoginPage = () => {
 			return { ...item.login, index }
 		})
 	}, [loginRow])
-
-	const [filterValues, setFilterValues] = useState({})
-
-	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
@@ -180,6 +185,56 @@ const LoginPage = () => {
 		})
 	}, [filterValues, rows])
 
+	const onItemCreated = React.useCallback(formState => {
+		const formStateCreateLogin = {
+			bitrix_id: 225,
+			secret_key: 'Смородин Борис Борисович',
+			login: '',
+			password: '',
+			login_2fa: '',
+			password_2fa: '',
+			secret: '',
+			client_id: '',
+			user_id: '',
+		}
+
+		// dispatch(createAdminUser({ formStateCreateLogin }))
+	}, [])
+
+	// {
+	// 	"bitrix_id": 0,
+	// 	"secret_key": "string",
+	// 	"login": "string",
+	// 	"password": "string",
+	// 	"login_2fa": "string",
+	// 	"password_2fa": "string",
+	// 	"secret": "string",
+	// 	"client_id": 0,
+	// 	"user_id": 0
+	// }
+	const renderCreatePopUp = () => {
+		return (
+			<PopUp onClose={() => setShowCreatePopup(false)}>
+				<CreateItem
+					columns={columnsLogins}
+					IGNORED_FIELD={[
+						'id',
+						`login_type_id`,
+						'creation_date',
+						`last_used`,
+						'action',
+					]}
+					onItemCreated={onItemCreated}
+				/>
+			</PopUp>
+		)
+	}
+
+	const getCreatePopUp = () => {
+		setShowCreatePopup(true)
+		renderCreatePopUp()
+	}
+
 	// PAGINATION
 	const PAGE_SIZE = 5
 
@@ -187,10 +242,43 @@ const LoginPage = () => {
 		pageSize: PAGE_SIZE,
 		page: 0,
 	})
+
+	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
+	console.log(sizeSelectesRows)
+
+	const getIdsSelectedRows = selectedRowData => {
+		return selectedRowData.map(item => {
+			return item.id
+		})
+	}
+
+	const onDeletedLogins = () => {
+		const formStateLogins = {
+			bitrix_id: 225,
+			secret_key: 'Смородин Борис Борисович',
+			delete_ids: sizeSelectesRows,
+		}
+		// dispatch(deleteAdminLogins({ formStateLogins }))
+	}
+
 	return (
 		<div className='login'>
 			<div className='table__container'>
 				<div className='search__container'>{filters}</div>
+				<div className='clients__button-send'>
+					<Button
+						className={'button-send__end'}
+						text='Создать'
+						onClick={getCreatePopUp}
+					/>
+					{sizeSelectesRows.length > 0 ? (
+						<Button
+							className={'button-send__end'}
+							text='Удалить элементы'
+							onClick={onDeletedLogins}
+						/>
+					) : null}
+				</div>
 
 				<div className='login-list'>
 					<DataGrid
@@ -215,10 +303,13 @@ const LoginPage = () => {
 							const selectedRowData = rows.filter(row =>
 								selectedIDs.has(row.id)
 							)
+							const idsSelected = getIdsSelectedRows(selectedRowData)
+							setSizeSelectesRows(idsSelected)
 						}}
 					/>
 				</div>
 			</div>
+			{showCreatePopup && renderCreatePopUp()}
 		</div>
 	)
 }
