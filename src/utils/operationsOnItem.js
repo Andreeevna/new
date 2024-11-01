@@ -22,7 +22,7 @@ export const getProductById = (itemId, chapter) => {
 
 	if (chapter === 'login') {
 		return loginRows?.find(row => {
-			if (row.id === Number(itemId)) {
+			if (row.login.id === Number(itemId)) {
 				return row
 			}
 		})

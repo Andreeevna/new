@@ -6,8 +6,9 @@ import './EditComponent.css'
 
 const EditComponent = ({ item, chapter }) => {
 	const [isEditing, setIsEditing] = useState({})
+	console.log(item, chapter)
 
-	const filedNameCollection = Object.entries(item)
+	const filedNameCollection = Object.entries(item.login)
 
 	const findvalue = (key, dict) => {
 		return dict
@@ -40,7 +41,7 @@ const EditComponent = ({ item, chapter }) => {
 		setIsEditing({ ...isEditing, [key]: true })
 	}
 
-	const [newvalue, setNewValue] = useState({ ...item })
+	const [newvalue, setNewValue] = useState({ ...item.login })
 	console.log(newvalue)
 
 	const renderingItem = useMemo(() => {
