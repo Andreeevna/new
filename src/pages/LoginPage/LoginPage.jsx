@@ -14,6 +14,7 @@ import PopUp from '../../components/PopUp/PopUp'
 import {
 	createAdminLogin,
 	deteleAdminLogin,
+	deteleAdminLogins,
 } from '../../redux/slices/adminLoginSlice/adminLoginSlice'
 import './LoginPage.css'
 
@@ -259,12 +260,12 @@ const LoginPage = () => {
 	}
 
 	const onDeletedLogins = () => {
-		const formStateLogins = {
+		const formStateDeleteLogins = {
 			bitrix_id: 225,
 			secret_key: 'Смородин Борис Борисович',
 			delete_ids: sizeSelectesRows,
 		}
-		// dispatch(deleteAdminLogins({ formStateLogins }))
+		dispatch(deteleAdminLogins({ formStateDeleteLogins }))
 	}
 
 	return (

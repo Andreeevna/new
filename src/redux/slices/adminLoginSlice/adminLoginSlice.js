@@ -46,6 +46,20 @@ export const deteleAdminLogin = createAsyncThunk(
 	}
 )
 
+export const deteleAdminLogins = createAsyncThunk(
+	'logins/deteleAdminLogins',
+	async params => {
+		const { formStateDeleteLogins } = params
+		try {
+			const { data } = await deleteAPI.deleteLogins(formStateDeleteLogins)
+			return data
+		} catch (error) {
+			console.error('Ошибка при удалении логинов', error)
+			throw error.response.status
+		}
+	}
+)
+
 const initialState = {
 	logins: [],
 	message: null,
@@ -97,6 +111,19 @@ export const adminLoginsReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(deteleAdminLogin.rejected, state => {
+			state.message = ERROR
+		})
+
+		//deteleAdminLogins
+		builder.addCase(deteleAdminLogins.pending, state => {
+			state.isFetching = true
+			state.message = null
+		})
+		builder.addCase(deteleAdminLogins.fulfilled, (state, action) => {
+			state.isFetching = false
+			state.message = null
+		})
+		builder.addCase(deteleAdminLogins.rejected, state => {
 			state.message = ERROR
 		})
 	},

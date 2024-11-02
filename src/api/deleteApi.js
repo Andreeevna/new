@@ -60,4 +60,16 @@ export const deleteAPI = {
 			}
 		)
 	},
+
+	deleteLogins(formStateDeleteLogins) {
+		return instance.post(
+			`/admin/api/delete/logins`,
+			JSON.stringify(formStateDeleteLogins),
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
+		)
+	},
 }
