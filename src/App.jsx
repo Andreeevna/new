@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react'
+import { Toaster } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+
 import './App.css'
+
 import Layout from './components/Layout/Layout'
 import ClientsPage from './pages/ClientsPage/ClientsPage'
 import EditPage from './pages/EditPage/EditPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import UsersPage from './pages/UsersPage/UsersPage'
+
 import { getAdminClients } from './redux/slices/adminClientsSlice/adminClientsSlice'
 import { getAdminLogins } from './redux/slices/adminLoginSlice/adminLoginSlice'
 import { getAdminUsers } from './redux/slices/adminUsersSlice/adminUsersSlice'
@@ -67,7 +71,21 @@ function App() {
 			],
 		},
 	])
-	return <RouterProvider router={router} />
+	return (
+		<>
+			<RouterProvider router={router} />
+			<Toaster
+				position='top-right'
+				reverseOrder={false}
+				toastOptions={{
+					className: '',
+					style: {
+						marginBottom: '5px',
+					},
+				}}
+			/>
+		</>
+	)
 }
 
 export default App

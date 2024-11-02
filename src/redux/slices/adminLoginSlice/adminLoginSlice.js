@@ -27,7 +27,7 @@ export const createAdminLogin = createAsyncThunk(
 			return data
 		} catch (error) {
 			console.error('Ошибка при создании логина', error)
-			throw error.response.status
+			// throw error.response.status
 		}
 	}
 )
