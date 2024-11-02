@@ -251,7 +251,6 @@ const LoginPage = () => {
 	})
 
 	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
-	console.log(sizeSelectesRows)
 
 	const getIdsSelectedRows = selectedRowData => {
 		return selectedRowData.map(item => {

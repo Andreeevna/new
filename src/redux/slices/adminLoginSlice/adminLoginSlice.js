@@ -120,6 +120,11 @@ export const adminLoginsReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(deteleAdminLogins.fulfilled, (state, action) => {
+			state.logins = state.logins.filter(row => {
+				return !action.payload.record.some(rowResp => {
+					return row.login.id === rowResp.id
+				})
+			})
 			state.isFetching = false
 			state.message = null
 		})
