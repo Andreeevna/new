@@ -124,6 +124,13 @@ export const adminClientsReducer = createSlice({
 		builder.addCase(updateAdminClient.fulfilled, (state, action) => {
 			state.isFetching = false
 			state.message = null
+			state.clients = state.clients.map(item => {
+				if (item.id === action.payload.records?.updated[0].id) {
+					return (item = { ...action.payload.records?.updated[0] })
+				} else {
+					return item
+				}
+			})
 		})
 		builder.addCase(updateAdminClient.rejected, state => {
 			state.message = ERROR

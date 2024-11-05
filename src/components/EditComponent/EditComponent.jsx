@@ -10,7 +10,7 @@ import './EditComponent.css'
 const EditComponent = ({ item, chapter }) => {
 	const dispatch = useDispatch()
 
-	const { setShowPopup } = usePopup()
+	const { togglePopup } = usePopup()
 
 	const [isEditing, setIsEditing] = useState({})
 	// console.log(item, chapter)
@@ -90,8 +90,6 @@ const EditComponent = ({ item, chapter }) => {
 		}
 
 		dispatch(updateAdminClient({ formStateUpdate }))
-
-		setShowPopup(false)
 	}
 
 	const renderingItem = useMemo(() => {
