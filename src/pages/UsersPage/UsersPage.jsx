@@ -11,6 +11,7 @@ import Button from '../../components/Button/Button'
 import CreateItem from '../../components/CreateItem/CreateItem'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
 import PopUp from '../../components/PopUp/PopUp'
+import WarningDelete from '../../components/WarningDelete/WarningDelete'
 import usePopup from '../../hooks/usePopup'
 import {
 	createAdminUser,
@@ -30,20 +31,14 @@ export default function UsersPage() {
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
+	const [showWarningPopup, setShowWarningPopup] = useState(false)
+
+	const [parametersRow, setParametersRow] = useState({})
+	console.log(parametersRow)
 
 	const dispatch = useDispatch()
 
 	const userRows = useSelector(state => state.users.users)
-
-	const handleDelete = (e, id) => {
-		e.stopPropagation()
-		const formStateUser = {
-			bitrix_id: '225',
-			secret_key: 'Смородин Борис Борисович',
-			delete_id: id,
-		}
-		dispatch(deleteAdminUser({ formStateUser }))
-	}
 
 	const dayInMonthComparator = (v1, v2) => {
 		const n = new Date(v1).getTime()
@@ -113,7 +108,21 @@ export default function UsersPage() {
 						</div>
 						<DeleteOutline
 							className='productListDelete'
-							onClick={e => handleDelete(e, params.row.id)}
+							onClick={e => {
+								onHandleWarning()
+
+								setParametersRow(prevState => ({
+									...prevState,
+									e,
+									params: {
+										...prevState.params,
+										row: {
+											...prevState.row,
+											id: params.id,
+										},
+									},
+								}))
+							}}
 						/>
 					</div>
 				)
@@ -191,6 +200,42 @@ export default function UsersPage() {
 		})
 	}, [filterValues, userRows])
 
+	//WARNING DELETE
+
+	const handleDelete = (e, id) => {
+		e.stopPropagation()
+		const formStateUser = {
+			bitrix_id: '225',
+			secret_key: 'Смородин Борис Борисович',
+			delete_id: id,
+		}
+		dispatch(deleteAdminUser({ formStateUser }))
+	}
+
+	const warningPopup = () => {
+		return (
+			<PopUp
+				onClose={() => {
+					setShowWarningPopup(false)
+				}}
+			>
+				<WarningDelete
+					title={'Вы действительно хотите удалить элемент?'}
+					confirmText={'Удалить'}
+					cancelText={'Отменить'}
+					onConfirm={handleDelete}
+					onCancel={setShowWarningPopup}
+					parametersRow={parametersRow}
+					setParametersRow={setParametersRow}
+				/>
+			</PopUp>
+		)
+	}
+
+	const onHandleWarning = () => {
+		setShowWarningPopup(true)
+	}
+
 	// PAGINATION
 	const PAGE_SIZE = 5
 
@@ -198,6 +243,8 @@ export default function UsersPage() {
 		pageSize: PAGE_SIZE,
 		page: 0,
 	})
+
+	// DELETE CLIENTS
 
 	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
 	console.log(sizeSelectesRows)
@@ -264,6 +311,7 @@ export default function UsersPage() {
 				</div>
 			</div>
 			{showCreatePopup && renderCreatePopUp()}
+			{showWarningPopup && warningPopup()}
 		</div>
 	)
 }

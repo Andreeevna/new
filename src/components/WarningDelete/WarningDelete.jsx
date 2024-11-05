@@ -19,9 +19,10 @@ const WarningDelete = ({
 				<Button
 					classNameBtn='warning-delete__agree'
 					text={confirmText}
-					onClick={() =>
+					onClick={() => {
 						onConfirm(parametersRow.e, parametersRow.params.row.id)
-					}
+						onCancel(false)
+					}}
 				/>
 				<Button
 					classNameBtn='warning-delete__cancellation'

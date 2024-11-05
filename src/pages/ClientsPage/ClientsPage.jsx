@@ -195,6 +195,8 @@ const ClientsPage = () => {
 		renderCreatePopUp()
 	}
 
+	//WARNING DELETE
+
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
 		// console.log(id)
@@ -291,7 +293,7 @@ const ClientsPage = () => {
 		})
 	}
 
-	const onDeletedUsers = () => {
+	const onDeleteClients = () => {
 		const formStateClients = {
 			bitrix_id: 225,
 			secret_key: 'Смородин Борис Борисович',
@@ -314,7 +316,7 @@ const ClientsPage = () => {
 						<Button
 							className={'button-send__end'}
 							text='Удалить элементы'
-							onClick={onDeletedUsers}
+							onClick={onDeleteClients}
 						/>
 					) : null}
 				</div>

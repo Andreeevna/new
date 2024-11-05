@@ -83,7 +83,7 @@ const EditComponent = ({ item, chapter }) => {
 					id: newvalue.id,
 					name: newvalue.name,
 					max_accounts: newvalue.max_accounts,
-					login_type: newvalue.login_type_id,
+					login_type: +newvalue.login_type_id,
 					instruction: newvalue.instruction,
 				},
 			],
