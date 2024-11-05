@@ -3,24 +3,33 @@ import React from 'react'
 import Button from '../Button/Button'
 import './WarningDelete.css'
 
-const WarningDelete = ({ handleDelete, parametersRow, onCancel }) => {
+const WarningDelete = ({
+	title,
+	confirmText,
+	cancelText,
+	onConfirm,
+	onCancel,
+	parametersRow,
+	setParametersRow,
+}) => {
 	return (
 		<div className='warning-delete__container'>
-			<p className='warning-delete__title'>
-				Вы действительно хотите удалить элемент?
-			</p>
+			<p className='warning-delete__title'>{title}</p>
 			<div className='warning-delete__buttons'>
 				<Button
 					classNameBtn='warning-delete__agree'
-					text={'Удалить'}
+					text={confirmText}
 					onClick={() =>
-						handleDelete(parametersRow.e, parametersRow.params.row.id)
+						onConfirm(parametersRow.e, parametersRow.params.row.id)
 					}
 				/>
 				<Button
 					classNameBtn='warning-delete__cancellation'
-					text={'Отменить'}
-					onClick={() => onCancel(false)}
+					text={cancelText}
+					onClick={() => {
+						onCancel(false)
+						setParametersRow({})
+					}}
 				/>
 			</div>
 		</div>

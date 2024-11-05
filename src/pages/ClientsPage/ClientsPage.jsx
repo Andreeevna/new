@@ -215,9 +215,13 @@ const ClientsPage = () => {
 				}}
 			>
 				<WarningDelete
-					handleDelete={handleDelete}
-					parametersRow={parametersRow}
+					title={'Вы действительно хотите удалить элемент?'}
+					confirmText={'Удалить'}
+					cancelText={'Отменить'}
+					onConfirm={handleDelete}
 					onCancel={setShowWarningPopup}
+					parametersRow={parametersRow}
+					setParametersRow={setParametersRow}
 				/>
 			</PopUp>
 		)
