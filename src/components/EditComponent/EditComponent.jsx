@@ -6,9 +6,11 @@ import './EditComponent.css'
 
 const EditComponent = ({ item, chapter }) => {
 	const [isEditing, setIsEditing] = useState({})
-	console.log(item, chapter)
+	// console.log(item, chapter)
 
-	const filedNameCollection = Object.entries(item.login)
+	const filedNameCollection = Object.entries(
+		chapter === 'login' ? item.login : item
+	)
 
 	const findvalue = (key, dict) => {
 		return dict
@@ -41,8 +43,24 @@ const EditComponent = ({ item, chapter }) => {
 		setIsEditing({ ...isEditing, [key]: true })
 	}
 
-	const [newvalue, setNewValue] = useState({ ...item.login })
+	const [newvalue, setNewValue] = useState(
+		chapter === 'login' ? { ...item.login } : { ...item }
+	)
 	console.log(newvalue)
+
+	// {
+	// 	"bitrix_id": 225,
+	// 	"secret_key": "Смородин Борис Борисович",
+	// 	"client_info": [
+	// 		{
+	// 			"id": 21,
+	// 			"name": "Григорий",
+	// 			"max_accounts": 23,
+	// 			"login_type": 3,
+	// 			"instruction": "string"
+	// 		}
+	// 	]
+	// }
 
 	const renderingItem = useMemo(() => {
 		return filedNameCollection.map(([key, value], index) => {

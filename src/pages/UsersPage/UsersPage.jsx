@@ -200,7 +200,7 @@ export default function UsersPage() {
 	})
 
 	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
-	console.log(sizeSelectesRows)
+	// console.log(sizeSelectesRows)
 
 	const getIdsSelectedRows = selectedRowData => {
 		return selectedRowData.map(item => {
