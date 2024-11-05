@@ -181,7 +181,7 @@ const ClientsPage = () => {
 
 	const handleDelete = (e, id) => {
 		e.stopPropagation()
-		console.log(id)
+		// console.log(id)
 		const formStateClient = {
 			bitrix_id: '225',
 			secret_key: 'Смородин Борис Борисович',

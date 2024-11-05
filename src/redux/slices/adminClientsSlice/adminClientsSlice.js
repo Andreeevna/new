@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { createAPI } from '../../../api/createApi'
 import { deleteAPI } from '../../../api/deleteApi'
 import { getAPI } from '../../../api/getApi'
+import { updateApi } from '../../../api/updateApi'
 import { ERROR } from '../../../constants/api'
 
 export const getAdminClients = createAsyncThunk(
@@ -27,6 +28,22 @@ export const createAdminClient = createAsyncThunk(
 			return data
 		} catch (error) {
 			console.error('Ошибка при создании клиента', error)
+			throw error.response.status
+		}
+	}
+)
+
+export const updateAdminClient = createAsyncThunk(
+	'clients/updateAdminClient',
+	async params => {
+		const { formStateUpdate } = params
+		console.log(formStateUpdate)
+
+		try {
+			const { data } = await updateApi.updateClients(formStateUpdate)
+			return data
+		} catch (error) {
+			console.error('Ошибка при создании изменении клиента', error)
 			throw error.response.status
 		}
 	}
@@ -96,6 +113,19 @@ export const adminClientsReducer = createSlice({
 			state.clients.push(action.payload.record)
 		})
 		builder.addCase(createAdminClient.rejected, state => {
+			state.message = ERROR
+		})
+
+		//updateAdminClient
+		builder.addCase(updateAdminClient.pending, state => {
+			state.isFetching = true
+			state.message = null
+		})
+		builder.addCase(updateAdminClient.fulfilled, (state, action) => {
+			state.isFetching = false
+			state.message = null
+		})
+		builder.addCase(updateAdminClient.rejected, state => {
 			state.message = ERROR
 		})
 

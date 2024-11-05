@@ -1,15 +1,25 @@
 import React, { useMemo, useState } from 'react'
 
+import { useDispatch } from 'react-redux'
+import usePopup from '../../hooks/usePopup'
+import { updateAdminClient } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import { clientsDict, LoginDict, usersDict } from '../../utils/dicts'
 import Button from '../Button/Button'
 import './EditComponent.css'
 
 const EditComponent = ({ item, chapter }) => {
+	const dispatch = useDispatch()
+
+	const { setShowPopup } = usePopup()
+
 	const [isEditing, setIsEditing] = useState({})
 	// console.log(item, chapter)
 
+	const itemNeededFields = { ...item }
+	delete itemNeededFields.creation_date
+
 	const filedNameCollection = Object.entries(
-		chapter === 'login' ? item.login : item
+		chapter === 'login' ? itemNeededFields.login : itemNeededFields
 	)
 
 	const findvalue = (key, dict) => {
@@ -44,7 +54,9 @@ const EditComponent = ({ item, chapter }) => {
 	}
 
 	const [newvalue, setNewValue] = useState(
-		chapter === 'login' ? { ...item.login } : { ...item }
+		chapter === 'login'
+			? { ...itemNeededFields.login }
+			: { ...itemNeededFields }
 	)
 	console.log(newvalue)
 
@@ -61,6 +73,26 @@ const EditComponent = ({ item, chapter }) => {
 	// 		}
 	// 	]
 	// }
+
+	const onHandleUpdate = () => {
+		const formStateUpdate = {
+			bitrix_id: 225,
+			secret_key: 'Смородин Борис Борисович',
+			client_info: [
+				{
+					id: newvalue.id,
+					name: newvalue.name,
+					max_accounts: newvalue.max_accounts,
+					login_type: newvalue.login_type_id,
+					instruction: newvalue.instruction,
+				},
+			],
+		}
+
+		dispatch(updateAdminClient({ formStateUpdate }))
+
+		setShowPopup(false)
+	}
 
 	const renderingItem = useMemo(() => {
 		return filedNameCollection.map(([key, value], index) => {
@@ -98,7 +130,11 @@ const EditComponent = ({ item, chapter }) => {
 	return (
 		<div className='edit'>
 			{renderingItem}
-			<Button className={'button-send__end'} text={'Отправить'} />
+			<Button
+				className={'button-send__end'}
+				text={'Отправить'}
+				onClick={onHandleUpdate}
+			/>
 		</div>
 	)
 }

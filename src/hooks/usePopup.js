@@ -24,7 +24,7 @@ const usePopup = (initialState = false) => {
 		setParameter(id)
 	}
 
-	return { showPopup, parameter, renderPopUp, togglePopup }
+	return { showPopup, parameter, renderPopUp, togglePopup, setShowPopup }
 }
 
 export default usePopup
