@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../components/Button/Button'
 import CreateItem from '../../components/CreateItem/CreateItem'
 import PopUp from '../../components/PopUp/PopUp'
+import WarningDelete from '../../components/WarningDelete/WarningDelete'
 import {
 	createAdminLogin,
 	deteleAdminLogin,
@@ -32,6 +33,10 @@ const LoginPage = () => {
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
+	const [showWarningPopup, setShowWarningPopup] = useState(false)
+
+	const [parametersRow, setParametersRow] = useState({})
+	console.log(parametersRow)
 
 	const loginRow = useSelector(state => state.logins.logins)
 
@@ -40,17 +45,6 @@ const LoginPage = () => {
 			return { ...item.login, index }
 		})
 	}, [loginRow])
-
-	const handleDelete = (e, id) => {
-		const formStateDeleteLogin = {
-			bitrix_id: 225,
-			secret_key: 'Смородин Борис Борисович',
-			delete_id: id,
-		}
-		e.stopPropagation()
-		console.log(id)
-		dispatch(deteleAdminLogin({ formStateDeleteLogin }))
-	}
 
 	const columnsLogins = [
 		{
@@ -149,8 +143,19 @@ const LoginPage = () => {
 						<DeleteOutline
 							className='productListDelete'
 							onClick={e => {
-								handleDelete(e, params.row.id)
-								// console.log(loginRow[params.row.index])
+								onHandleWarning()
+
+								setParametersRow(prevState => ({
+									...prevState,
+									e,
+									params: {
+										...prevState.params,
+										row: {
+											...prevState.row,
+											id: params.id,
+										},
+									},
+								}))
 							}}
 						/>
 					</div>
@@ -158,6 +163,41 @@ const LoginPage = () => {
 			},
 		},
 	]
+
+	const handleDelete = (e, id) => {
+		const formStateDeleteLogin = {
+			bitrix_id: 225,
+			secret_key: 'Смородин Борис Борисович',
+			delete_id: id,
+		}
+		e.stopPropagation()
+		console.log(id)
+		dispatch(deteleAdminLogin({ formStateDeleteLogin }))
+	}
+
+	const warningPopup = () => {
+		return (
+			<PopUp
+				onClose={() => {
+					setShowWarningPopup(false)
+				}}
+			>
+				<WarningDelete
+					title={'Вы действительно хотите удалить элемент?'}
+					confirmText={'Удалить'}
+					cancelText={'Отменить'}
+					onConfirm={handleDelete}
+					onCancel={setShowWarningPopup}
+					parametersRow={parametersRow}
+					setParametersRow={setParametersRow}
+				/>
+			</PopUp>
+		)
+	}
+
+	const onHandleWarning = () => {
+		setShowWarningPopup(true)
+	}
 
 	function onUpdateFilteredValue(key, value) {
 		filterValues[key] = value.trim().toLowerCase()
@@ -316,6 +356,7 @@ const LoginPage = () => {
 				</div>
 			</div>
 			{showCreatePopup && renderCreatePopUp()}
+			{showWarningPopup && warningPopup()}
 		</div>
 	)
 }

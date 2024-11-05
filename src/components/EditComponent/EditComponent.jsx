@@ -80,9 +80,9 @@ const EditComponent = ({ item, chapter }) => {
 			secret_key: 'Смородин Борис Борисович',
 			client_info: [
 				{
-					id: newvalue.id,
+					id: +newvalue.id,
 					name: newvalue.name,
-					max_accounts: newvalue.max_accounts,
+					max_accounts: +newvalue.max_accounts,
 					login_type: +newvalue.login_type_id,
 					instruction: newvalue.instruction,
 				},
