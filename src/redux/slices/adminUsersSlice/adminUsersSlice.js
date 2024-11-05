@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { createAPI } from '../../../api/createApi'
 import { deleteAPI } from '../../../api/deleteApi'
 import { getAPI } from '../../../api/getApi'
+import { updateApi } from '../../../api/updateApi'
 import { ERROR } from '../../../constants/api'
 
 export const getAdminUsers = createAsyncThunk(
@@ -27,6 +28,20 @@ export const createAdminUser = createAsyncThunk(
 			return data
 		} catch (error) {
 			console.error('Ошибка при создании пользователя', error)
+			throw error.response.status
+		}
+	}
+)
+
+export const updateAdminUser = createAsyncThunk(
+	'users/updateAdminUser',
+	async params => {
+		const { formStateUpdate } = params
+		try {
+			const { data } = await updateApi.updateUsers(formStateUpdate)
+			return data
+		} catch (error) {
+			console.error('Ошибка при изменении пользователя', error)
 			throw error.response.status
 		}
 	}
@@ -96,6 +111,19 @@ export const adminUsersReducer = createSlice({
 			state.users.push(action.payload.record)
 		})
 		builder.addCase(createAdminUser.rejected, state => {
+			state.message = ERROR
+		})
+
+		//updateAdminUser
+		builder.addCase(updateAdminUser.pending, state => {
+			state.isFetching = true
+			state.message = null
+		})
+		builder.addCase(updateAdminUser.fulfilled, (state, action) => {
+			state.isFetching = false
+			state.message = null
+		})
+		builder.addCase(updateAdminUser.rejected, state => {
 			state.message = ERROR
 		})
 

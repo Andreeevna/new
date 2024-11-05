@@ -12,4 +12,15 @@ export const updateApi = {
 			}
 		)
 	},
+	updateUsers(formStateUpdate) {
+		return instance.post(
+			`/admin/api/update/users`,
+			JSON.stringify(formStateUpdate),
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
+		)
+	},
 }

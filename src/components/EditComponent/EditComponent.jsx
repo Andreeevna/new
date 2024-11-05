@@ -3,6 +3,7 @@ import React, { useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import usePopup from '../../hooks/usePopup'
 import { updateAdminClient } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
+import { updateAdminUser } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
 import { clientsDict, LoginDict, usersDict } from '../../utils/dicts'
 import Button from '../Button/Button'
 import './EditComponent.css'
@@ -60,36 +61,41 @@ const EditComponent = ({ item, chapter }) => {
 	)
 	console.log(newvalue)
 
-	// {
-	// 	"bitrix_id": 225,
-	// 	"secret_key": "Смородин Борис Борисович",
-	// 	"client_info": [
-	// 		{
-	// 			"id": 21,
-	// 			"name": "Григорий",
-	// 			"max_accounts": 23,
-	// 			"login_type": 3,
-	// 			"instruction": "string"
-	// 		}
-	// 	]
-	// }
-
 	const onHandleUpdate = () => {
-		const formStateUpdate = {
-			bitrix_id: 225,
-			secret_key: 'Смородин Борис Борисович',
-			client_info: [
-				{
-					id: +newvalue.id,
-					name: newvalue.name,
-					max_accounts: +newvalue.max_accounts,
-					login_type: +newvalue.login_type_id,
-					instruction: newvalue.instruction,
-				},
-			],
-		}
+		if (chapter === 'clients') {
+			const formStateUpdate = {
+				bitrix_id: 225,
+				secret_key: 'Смородин Борис Борисович',
+				client_info: [
+					{
+						id: +newvalue.id,
+						name: newvalue.name,
+						max_accounts: +newvalue.max_accounts,
+						login_type: +newvalue.login_type_id,
+						instruction: newvalue.instruction,
+					},
+				],
+			}
 
-		dispatch(updateAdminClient({ formStateUpdate }))
+			dispatch(updateAdminClient({ formStateUpdate }))
+		}
+		if (chapter === 'users') {
+			const formStateUpdate = {
+				bitrix_id: 225,
+				secret_key: 'Смородин Борис Борисович',
+				user_info: [
+					{
+						id: +newvalue.id,
+						bitrix_id: +newvalue.name,
+						username: newvalue.username,
+					},
+				],
+			}
+
+			dispatch(updateAdminUser({ formStateUpdate }))
+			console.log(item.id)
+		}
+		togglePopup(null, item.id, '', false)
 	}
 
 	const renderingItem = useMemo(() => {

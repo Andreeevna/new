@@ -87,7 +87,7 @@ export default function UsersPage() {
 			headerName: 'Действия',
 			width: 150,
 			sortable: false,
-			editable: true,
+			editable: false,
 			hideable: false,
 			renderCell: params => {
 				return (
