@@ -318,6 +318,33 @@ F1F1F1 */
 	opacity: 0.4;
 }
 
+.warning-delete__container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	height: 150px;
+}
+
+.warning-delete__title {
+	text-align: center;
+	font-size: 26px;
+}
+
+.warning-delete__buttons {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+}
+
+.warning-delete__agree {
+	background-color: #9fd68f;
+}
+
+.warning-delete__cancellation {
+	background-color: #91919170;
+}
+
 .edit {
 	width: 100%;
 	/* background-color: antiquewhite; */

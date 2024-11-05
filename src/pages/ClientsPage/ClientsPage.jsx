@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../components/Button/Button'
 import CreateItem from '../../components/CreateItem/CreateItem'
 import PopUp from '../../components/PopUp/PopUp'
+import WarningDelete from '../../components/WarningDelete/WarningDelete'
 import usePopup from '../../hooks/usePopup'
 import {
 	createAdminClient,
@@ -32,6 +33,10 @@ const ClientsPage = () => {
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
 
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
+	const [showWarningPopup, setShowWarningPopup] = useState(false)
+
+	const [parametersRow, setParametersRow] = useState({})
+	console.log(parametersRow)
 
 	const dayInMonthComparator = (v1, v2) => {
 		const newDa = formatDateForSorting(v1)
@@ -48,9 +53,6 @@ const ClientsPage = () => {
 		const [year] = inputDate.split('.')[2].split(' ')
 
 		const [hours, minutes] = inputDate.split(' ').pop().split(':')
-		console.log(day, month, year)
-
-		console.log(hours, minutes)
 
 		const dateObject = new Date(year, month, day, hours, minutes)
 
@@ -141,7 +143,21 @@ const ClientsPage = () => {
 						</div>
 						<DeleteOutline
 							className='productListDelete'
-							onClick={e => handleDelete(e, params.row.id)}
+							onClick={e => {
+								onHandleWarning()
+
+								setParametersRow(prevState => ({
+									...prevState,
+									e,
+									params: {
+										...prevState.params,
+										row: {
+											...prevState.row,
+											id: params.id,
+										},
+									},
+								}))
+							}}
 						/>
 					</div>
 				)
@@ -189,6 +205,26 @@ const ClientsPage = () => {
 		}
 
 		dispatch(deleteAdminClient({ formStateClient }))
+	}
+
+	const warningPopup = () => {
+		return (
+			<PopUp
+				onClose={() => {
+					setShowWarningPopup(false)
+				}}
+			>
+				<WarningDelete
+					handleDelete={handleDelete}
+					parametersRow={parametersRow}
+					onCancel={setShowWarningPopup}
+				/>
+			</PopUp>
+		)
+	}
+
+	const onHandleWarning = () => {
+		setShowWarningPopup(true)
 	}
 
 	function onUpdateFilteredValue(key, value) {
@@ -307,6 +343,7 @@ const ClientsPage = () => {
 				</div>
 			</div>
 			{showCreatePopup && renderCreatePopUp()}
+			{showWarningPopup && warningPopup()}
 		</div>
 	)
 }

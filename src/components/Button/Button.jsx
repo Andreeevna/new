@@ -3,11 +3,17 @@ import React from 'react'
 import clsx from 'clsx'
 import './Button.css'
 
-const Button = ({ className, text = '', onClick = null, disabled }) => {
+const Button = ({
+	className,
+	classNameBtn,
+	text = '',
+	onClick = null,
+	disabled,
+}) => {
 	return (
 		<div className={clsx('button-send', className)}>
 			<button
-				className='button-send__btn'
+				className={clsx('button-send__btn', classNameBtn)}
 				onClick={onClick}
 				disabled={disabled}
 			>
