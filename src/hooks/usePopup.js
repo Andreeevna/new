@@ -13,15 +13,20 @@ const usePopup = (initialState = false) => {
 
 		if (id && chapter) {
 			return (
-				<PopUp onClose={() => setShowPopup(false)} showPopup={showPopup}>
-					{id && chapter && <EditPage id={id} chapter={chapter} />}
+				<PopUp onClose={() => setShowPopup(false)}>
+					{id && chapter && (
+						<EditPage
+							id={id}
+							chapter={chapter}
+							onClose={() => setShowPopup(false)}
+						/>
+					)}
 				</PopUp>
 			)
 		}
 	}
 
 	const togglePopup = (e, id, chapter, close = true) => {
-		console.log(close)
 		// setShowPopup(true)
 		setShowPopup(close)
 		setTimeout(() => {

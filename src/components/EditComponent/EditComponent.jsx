@@ -8,7 +8,7 @@ import { clientsDict, LoginDict, usersDict } from '../../utils/dicts'
 import Button from '../Button/Button'
 import './EditComponent.css'
 
-const EditComponent = ({ item, chapter }) => {
+const EditComponent = ({ item, chapter, onClose }) => {
 	const dispatch = useDispatch()
 
 	const { togglePopup } = usePopup()
@@ -93,9 +93,8 @@ const EditComponent = ({ item, chapter }) => {
 			}
 
 			dispatch(updateAdminUser({ formStateUpdate }))
-			console.log(item.id)
 		}
-		togglePopup(null, item.id, '', false)
+		onClose()
 	}
 
 	const renderingItem = useMemo(() => {
