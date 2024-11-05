@@ -244,7 +244,7 @@ export default function UsersPage() {
 		page: 0,
 	})
 
-	// DELETE CLIENTS
+	// DELETE USERS
 
 	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
 	console.log(sizeSelectesRows)
@@ -269,12 +269,14 @@ export default function UsersPage() {
 			<div className='table__container'>
 				<div className='search__container'>{filters}</div>
 				<div className='clients__button-send'>
+					{' '}
+					{/* <Button className={'button-send__end'} text='Снять' onClick={onset} /> */}
 					<Button
 						className={'button-send__end'}
 						text='Создать'
 						onClick={getCreatePopUp}
 					/>
-					{sizeSelectesRows.length > 0 ? (
+					{sizeSelectesRows.length > 1 ? (
 						<Button
 							className={'button-send__end'}
 							text='Удалить элементы'
