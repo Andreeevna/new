@@ -15,7 +15,6 @@ import WarningDelete from '../../components/WarningDelete/WarningDelete'
 import usePopup from '../../hooks/usePopup'
 import {
 	createAdminUser,
-	deleteAdminUser,
 	deleteAdminUsers,
 } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
 import './UsersPage.css'
@@ -32,6 +31,7 @@ export default function UsersPage() {
 
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
 	const [showWarningPopup, setShowWarningPopup] = useState(false)
+	const [showWarningPopupAll, setShowWarningPopupAll] = useState(false)
 
 	const [parametersRow, setParametersRow] = useState({})
 	console.log(parametersRow)
@@ -200,19 +200,46 @@ export default function UsersPage() {
 		})
 	}, [filterValues, userRows])
 
-	//WARNING DELETE
+	// DELETE USERS
 
-	const handleDelete = (e, id) => {
-		e.stopPropagation()
-		const formStateUser = {
-			bitrix_id: '225',
-			secret_key: 'Смородин Борис Борисович',
-			delete_id: id,
-		}
-		dispatch(deleteAdminUser({ formStateUser }))
+	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
+	console.log(sizeSelectesRows)
+
+	const getIdsSelectedRows = selectedRowData => {
+		return selectedRowData.map(item => {
+			return item.id
+		})
 	}
 
-	const warningPopup = () => {
+	// const onDeletedUsers = () => {
+	// 	const formStateUsers = {
+	// 		bitrix_id: 225,
+	// 		secret_key: 'Смородин Борис Борисович',
+	// 		delete_ids: sizeSelectesRows,
+	// 	}
+	// 	dispatch(deleteAdminUsers({ formStateUsers }))
+	// }
+
+	//WARNING DELETE
+
+	const handleDelete = (e, ids) => {
+		if (e) e.stopPropagation()
+		const formStateUsers = {
+			bitrix_id: '225',
+			secret_key: 'Смородин Борис Борисович',
+			delete_ids: ids,
+		}
+		dispatch(deleteAdminUsers({ formStateUsers }))
+	}
+
+	const warningPopup = ({
+		handleDelete,
+		title,
+		ids,
+		e,
+		setShowWarningPopup,
+		setParametersRow,
+	}) => {
 		return (
 			<PopUp
 				onClose={() => {
@@ -220,17 +247,19 @@ export default function UsersPage() {
 				}}
 			>
 				<WarningDelete
-					title={'Вы действительно хотите удалить элемент?'}
+					title={title}
 					confirmText={'Удалить'}
 					cancelText={'Отменить'}
 					onConfirm={handleDelete}
 					onCancel={setShowWarningPopup}
-					parametersRow={parametersRow}
+					ids={ids}
 					setParametersRow={setParametersRow}
+					e={e}
 				/>
 			</PopUp>
 		)
 	}
+	// parametersRow.params.row.id
 
 	const onHandleWarning = () => {
 		setShowWarningPopup(true)
@@ -243,26 +272,6 @@ export default function UsersPage() {
 		pageSize: PAGE_SIZE,
 		page: 0,
 	})
-
-	// DELETE USERS
-
-	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
-	console.log(sizeSelectesRows)
-
-	const getIdsSelectedRows = selectedRowData => {
-		return selectedRowData.map(item => {
-			return item.id
-		})
-	}
-
-	const onDeletedUsers = () => {
-		const formStateUsers = {
-			bitrix_id: 225,
-			secret_key: 'Смородин Борис Борисович',
-			delete_ids: sizeSelectesRows,
-		}
-		dispatch(deleteAdminUsers({ formStateUsers }))
-	}
 
 	return (
 		<div className='users'>
@@ -280,7 +289,7 @@ export default function UsersPage() {
 						<Button
 							className={'button-send__end'}
 							text='Удалить элементы'
-							onClick={onDeletedUsers}
+							onClick={() => setShowWarningPopupAll(true)}
 						/>
 					) : null}
 				</div>
@@ -313,7 +322,24 @@ export default function UsersPage() {
 				</div>
 			</div>
 			{showCreatePopup && renderCreatePopUp()}
-			{showWarningPopup && warningPopup()}
+			{showWarningPopup &&
+				warningPopup({
+					handleDelete,
+					title: 'Вы действительно хотите удалить элемент?',
+					ids: [parametersRow.params.row.id],
+					e: parametersRow.e,
+					setShowWarningPopup: setShowWarningPopup,
+					setParametersRow: () => setParametersRow({}),
+				})}
+
+			{showWarningPopupAll &&
+				warningPopup({
+					handleDelete,
+					title: 'Вы действительно хотите удалить элементы?',
+					ids: sizeSelectesRows,
+					setShowWarningPopup: setShowWarningPopupAll,
+					setParametersRow: () => setSizeSelectesRows([]),
+				})}
 		</div>
 	)
 }

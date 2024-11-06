@@ -36,7 +36,7 @@ const ClientsPage = () => {
 	const [showWarningPopup, setShowWarningPopup] = useState(false)
 
 	const [parametersRow, setParametersRow] = useState({})
-	console.log(parametersRow)
+	// console.log(parametersRow)
 
 	const dayInMonthComparator = (v1, v2) => {
 		const newDa = formatDateForSorting(v1)
@@ -285,7 +285,7 @@ const ClientsPage = () => {
 	// DELETE CLIENTS
 
 	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
-	console.log(sizeSelectesRows)
+	// console.log(sizeSelectesRows)
 
 	const getIdsSelectedRows = selectedRowData => {
 		return selectedRowData.map(item => {

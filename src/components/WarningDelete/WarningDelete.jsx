@@ -9,8 +9,9 @@ const WarningDelete = ({
 	cancelText,
 	onConfirm,
 	onCancel,
-	parametersRow,
+	ids,
 	setParametersRow,
+	e,
 }) => {
 	return (
 		<div className='warning-delete__container'>
@@ -20,7 +21,7 @@ const WarningDelete = ({
 					classNameBtn='warning-delete__agree'
 					text={confirmText}
 					onClick={() => {
-						onConfirm(parametersRow.e, parametersRow.params.row.id)
+						onConfirm(e, ids)
 						onCancel(false)
 					}}
 				/>
@@ -29,7 +30,7 @@ const WarningDelete = ({
 					text={cancelText}
 					onClick={() => {
 						onCancel(false)
-						setParametersRow({})
+						setParametersRow()
 					}}
 				/>
 			</div>
