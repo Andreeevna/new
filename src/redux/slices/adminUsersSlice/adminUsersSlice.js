@@ -91,6 +91,7 @@ export const deleteAdminUsers = createAsyncThunk(
 
 const initialState = {
 	users: [],
+	usersLogin: [],
 	message: null,
 	isFetching: false,
 }
@@ -183,6 +184,7 @@ export const adminUsersReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(getAdminLogin.fulfilled, (state, action) => {
+			state.usersLogin = action.payload?.response
 			state.isFetching = false
 			state.message = null
 		})

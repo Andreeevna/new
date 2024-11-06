@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../components/Button/Button'
 import CreateItem from '../../components/CreateItem/CreateItem'
 import { CustomPagination } from '../../components/CustomPagination/CustomPagination'
+import LoginsInfo from '../../components/LoginsInfo/LoginsInfo'
 import PopUp from '../../components/PopUp/PopUp'
 import WarningDelete from '../../components/WarningDelete/WarningDelete'
 import usePopup from '../../hooks/usePopup'
@@ -33,6 +34,8 @@ export default function UsersPage() {
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
 	const [showWarningPopup, setShowWarningPopup] = useState(false)
 	const [showWarningPopupAll, setShowWarningPopupAll] = useState(false)
+
+	const [showLoginInfo, setsSowLoginInfo] = useState(false)
 
 	const [parametersRow, setParametersRow] = useState({})
 	console.log(parametersRow)
@@ -97,6 +100,7 @@ export default function UsersPage() {
 							<button
 								className='action-group__login--btn'
 								onClick={e => {
+									setsSowLoginInfo(true)
 									getLoginId(e, params.row.id)
 								}}
 							>
@@ -289,6 +293,25 @@ export default function UsersPage() {
 		page: 0,
 	})
 
+	const userLogins = useSelector(state => state.users.usersLogin)
+
+	//LOGIN INFO
+	const loginInfoPopup = () => {
+		return (
+			<PopUp
+				onClose={() => {
+					setsSowLoginInfo(false)
+				}}
+				className='modal-logins-info'
+			>
+				<LoginsInfo
+					title={'Cведения о логинах пользователя'}
+					items={userLogins}
+				/>
+			</PopUp>
+		)
+	}
+
 	return (
 		<div className='users'>
 			<div className='table__container'>
@@ -356,6 +379,8 @@ export default function UsersPage() {
 					setShowWarningPopup: setShowWarningPopupAll,
 					setParametersRow: () => setSizeSelectesRows([]),
 				})}
+
+			{showLoginInfo && loginInfoPopup()}
 		</div>
 	)
 }

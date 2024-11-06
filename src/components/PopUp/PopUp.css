@@ -10,7 +10,6 @@
 
 .popup_active {
 	position: absolute;
-	width: 650px;
 	min-height: 250px;
 	top: 50%;
 	left: 50%;
@@ -19,6 +18,14 @@
 	background-color: rgb(255, 255, 255);
 	cursor: default;
 	padding: 20px 20px;
+}
+
+.modal-classic {
+	width: 650px;
+}
+
+.modal-logins-info {
+	min-width: 1000px;
 }
 
 .popup__content {

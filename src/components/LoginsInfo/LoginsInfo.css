@@ -1,0 +1,46 @@
+.logins-info__title {
+	margin-bottom: 30px;
+	text-align: center;
+	font-size: 26px;
+	font-weight: 600;
+}
+
+.styled-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+.styled-table td,
+.styled-table th {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+}
+
+.styled-table tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.styled-table th {
+	text-align: center;
+	background-color: #89c53f;
+	color: white;
+}
+
+.styled-table .ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 200px;
+}
+
+/* EMPTY */
+.logins-info__empty {
+	font-size: 26px;
+	font-weight: 600;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
