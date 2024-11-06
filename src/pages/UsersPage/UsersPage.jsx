@@ -16,6 +16,7 @@ import usePopup from '../../hooks/usePopup'
 import {
 	createAdminUser,
 	deleteAdminUsers,
+	getAdminLogin,
 } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
 import './UsersPage.css'
 
@@ -85,14 +86,24 @@ export default function UsersPage() {
 		{
 			field: 'action',
 			headerName: 'Действия',
-			width: 150,
+			width: 250,
 			sortable: false,
 			editable: false,
 			hideable: false,
 			renderCell: params => {
 				return (
 					<div className='action-group'>
-						<div className=''>
+						<div className='action-group__login'>
+							<button
+								className='action-group__login--btn'
+								onClick={e => {
+									getLoginId(e, params.row.id)
+								}}
+							>
+								Логин
+							</button>
+						</div>
+						<div>
 							<button
 								className='productListEdit'
 								onClick={e => {
@@ -101,7 +112,6 @@ export default function UsersPage() {
 							>
 								Изменить
 							</button>
-
 							{params.row.id === parameter && showPopup
 								? renderPopUp(null, params.row.id, 'users')
 								: null}
@@ -129,6 +139,21 @@ export default function UsersPage() {
 			},
 		},
 	]
+
+	const getLoginId = (e, id) => {
+		if (e) e.stopPropagation()
+
+		console.log(id)
+		const formStateLogins = {
+			bitrix_id: 225,
+			secret_key: 'Смородин Борис Борисович',
+			login_type: null,
+			users_list: [id],
+			clients_list: null,
+		}
+
+		dispatch(getAdminLogin({ formStateLogins }))
+	}
 
 	const onItemCreated = React.useCallback(formState => {
 		const formStateCreate = {

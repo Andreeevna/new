@@ -496,7 +496,7 @@ F1F1F1 */
 	background-color: #ced6f8;
 	color: inherit;
 	cursor: pointer;
-	margin-right: 20px;
+	/* margin-right: 20px; */
 	font-size: 12px;
 }
 
@@ -508,6 +508,14 @@ F1F1F1 */
 .action-group {
 	display: flex;
 	align-items: center;
+	gap: 20px;
+}
+
+.action-group__login--btn {
+	padding: 5px 10px;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
 }
 
 

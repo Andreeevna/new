@@ -32,4 +32,16 @@ export const getAPI = {
 			}
 		)
 	},
+
+	getLogin(formStateLogins) {
+		return instance.post(
+			`/admin/api/get/logins`,
+			JSON.stringify(formStateLogins),
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
+		)
+	},
 }

@@ -13,7 +13,6 @@ import WarningDelete from '../../components/WarningDelete/WarningDelete'
 import usePopup from '../../hooks/usePopup'
 import {
 	createAdminClient,
-	deleteAdminClient,
 	deleteAdminClients,
 } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import './ClientsPage.css'
@@ -34,9 +33,10 @@ const ClientsPage = () => {
 
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
 	const [showWarningPopup, setShowWarningPopup] = useState(false)
+	const [showWarningPopupAll, setShowWarningPopupAll] = useState(false)
 
 	const [parametersRow, setParametersRow] = useState({})
-	// console.log(parametersRow)
+	console.log(parametersRow)
 
 	const dayInMonthComparator = (v1, v2) => {
 		const newDa = formatDateForSorting(v1)
@@ -195,44 +195,6 @@ const ClientsPage = () => {
 		renderCreatePopUp()
 	}
 
-	//WARNING DELETE
-
-	const handleDelete = (e, id) => {
-		e.stopPropagation()
-		// console.log(id)
-		const formStateClient = {
-			bitrix_id: '225',
-			secret_key: 'Смородин Борис Борисович',
-			delete_id: id,
-		}
-
-		dispatch(deleteAdminClient({ formStateClient }))
-	}
-
-	const warningPopup = () => {
-		return (
-			<PopUp
-				onClose={() => {
-					setShowWarningPopup(false)
-				}}
-			>
-				<WarningDelete
-					title={'Вы действительно хотите удалить элемент?'}
-					confirmText={'Удалить'}
-					cancelText={'Отменить'}
-					onConfirm={handleDelete}
-					onCancel={setShowWarningPopup}
-					parametersRow={parametersRow}
-					setParametersRow={setParametersRow}
-				/>
-			</PopUp>
-		)
-	}
-
-	const onHandleWarning = () => {
-		setShowWarningPopup(true)
-	}
-
 	function onUpdateFilteredValue(key, value) {
 		filterValues[key] = value.trim().toLowerCase()
 
@@ -274,18 +236,10 @@ const ClientsPage = () => {
 		})
 	}, [filterValues, clientRow])
 
-	// PAGINATION
-	const PAGE_SIZE = 5
-
-	const [paginationModel, setPaginationModel] = React.useState({
-		pageSize: PAGE_SIZE,
-		page: 0,
-	})
-
 	// DELETE CLIENTS
 
 	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
-	// console.log(sizeSelectesRows)
+	console.log(sizeSelectesRows)
 
 	const getIdsSelectedRows = selectedRowData => {
 		return selectedRowData.map(item => {
@@ -302,6 +256,60 @@ const ClientsPage = () => {
 		dispatch(deleteAdminClients({ formStateClients }))
 	}
 
+	//WARNING DELETE
+
+	const handleDelete = (e, ids) => {
+		if (e) e.stopPropagation()
+		// console.log(id)
+		const formStateClients = {
+			bitrix_id: '225',
+			secret_key: 'Смородин Борис Борисович',
+			delete_ids: ids,
+		}
+
+		dispatch(deleteAdminClients({ formStateClients }))
+	}
+
+	const warningPopup = ({
+		handleDelete,
+		title,
+		ids,
+		e,
+		setShowWarningPopup,
+		setParametersRow,
+	}) => {
+		return (
+			<PopUp
+				onClose={() => {
+					setShowWarningPopup(false)
+				}}
+			>
+				<WarningDelete
+					title={title}
+					confirmText={'Удалить'}
+					cancelText={'Отменить'}
+					onConfirm={handleDelete}
+					onCancel={setShowWarningPopup}
+					ids={ids}
+					setParametersRow={setParametersRow}
+					e={e}
+				/>
+			</PopUp>
+		)
+	}
+
+	const onHandleWarning = () => {
+		setShowWarningPopup(true)
+	}
+
+	// PAGINATION
+	const PAGE_SIZE = 5
+
+	const [paginationModel, setPaginationModel] = React.useState({
+		pageSize: PAGE_SIZE,
+		page: 0,
+	})
+
 	return (
 		<div className='clients'>
 			<div className='table__container'>
@@ -312,11 +320,11 @@ const ClientsPage = () => {
 						text='Создать'
 						onClick={getCreatePopUp}
 					/>
-					{sizeSelectesRows.length > 0 ? (
+					{sizeSelectesRows.length > 1 ? (
 						<Button
 							className={'button-send__end'}
 							text='Удалить элементы'
-							onClick={onDeleteClients}
+							onClick={() => setShowWarningPopupAll(true)}
 						/>
 					) : null}
 				</div>
@@ -349,7 +357,24 @@ const ClientsPage = () => {
 				</div>
 			</div>
 			{showCreatePopup && renderCreatePopUp()}
-			{showWarningPopup && warningPopup()}
+			{showWarningPopup &&
+				warningPopup({
+					handleDelete,
+					title: 'Вы действительно хотите удалить элемент?',
+					ids: [parametersRow.params.row.id],
+					e: parametersRow.e,
+					setShowWarningPopup: setShowWarningPopup,
+					setParametersRow: () => setParametersRow({}),
+				})}
+
+			{showWarningPopupAll &&
+				warningPopup({
+					handleDelete,
+					title: 'Вы действительно хотите удалить элементы?',
+					ids: sizeSelectesRows,
+					setShowWarningPopup: setShowWarningPopupAll,
+					setParametersRow: () => setSizeSelectesRows([]),
+				})}
 		</div>
 	)
 }

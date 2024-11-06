@@ -19,6 +19,20 @@ export const getAdminUsers = createAsyncThunk(
 	}
 )
 
+export const getAdminLogin = createAsyncThunk(
+	'users/getAdminLogin',
+	async params => {
+		const { formStateLogins } = params
+		try {
+			const { data } = await getAPI.getLogin(formStateLogins)
+			return data
+		} catch (error) {
+			console.error('Ошибка при получении логинов', error)
+			throw error.response.status
+		}
+	}
+)
+
 export const createAdminUser = createAsyncThunk(
 	'users/createAdminUser',
 	async params => {
@@ -160,6 +174,19 @@ export const adminUsersReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(deleteAdminUsers.rejected, state => {
+			state.message = ERROR
+		})
+
+		//getAdminLogin
+		builder.addCase(getAdminLogin.pending, state => {
+			state.isFetching = true
+			state.message = null
+		})
+		builder.addCase(getAdminLogin.fulfilled, (state, action) => {
+			state.isFetching = false
+			state.message = null
+		})
+		builder.addCase(getAdminLogin.rejected, state => {
 			state.message = ERROR
 		})
 	},
