@@ -121,7 +121,7 @@ const ClientsPage = () => {
 		{
 			field: 'action',
 			headerName: 'Действия',
-			width: 150,
+			width: 200,
 			sortable: false,
 			editable: false,
 			hideable: false,

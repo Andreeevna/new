@@ -14,7 +14,6 @@ import PopUp from '../../components/PopUp/PopUp'
 import WarningDelete from '../../components/WarningDelete/WarningDelete'
 import {
 	createAdminLogin,
-	deteleAdminLogin,
 	deteleAdminLogins,
 } from '../../redux/slices/adminLoginSlice/adminLoginSlice'
 import './LoginPage.css'
@@ -34,6 +33,7 @@ const LoginPage = () => {
 
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
 	const [showWarningPopup, setShowWarningPopup] = useState(false)
+	const [showWarningPopupAll, setShowWarningPopupAll] = useState(false)
 
 	const [parametersRow, setParametersRow] = useState({})
 	console.log(parametersRow)
@@ -120,7 +120,7 @@ const LoginPage = () => {
 		{
 			field: 'action',
 			headerName: 'Действия',
-			width: 130,
+			width: 200,
 			sortable: false,
 			editable: false,
 			hideable: false,
@@ -163,41 +163,6 @@ const LoginPage = () => {
 			},
 		},
 	]
-
-	const handleDelete = (e, id) => {
-		const formStateDeleteLogin = {
-			bitrix_id: 225,
-			secret_key: 'Смородин Борис Борисович',
-			delete_id: id,
-		}
-		e.stopPropagation()
-		console.log(id)
-		dispatch(deteleAdminLogin({ formStateDeleteLogin }))
-	}
-
-	const warningPopup = () => {
-		return (
-			<PopUp
-				onClose={() => {
-					setShowWarningPopup(false)
-				}}
-			>
-				<WarningDelete
-					title={'Вы действительно хотите удалить элемент?'}
-					confirmText={'Удалить'}
-					cancelText={'Отменить'}
-					onConfirm={handleDelete}
-					onCancel={setShowWarningPopup}
-					parametersRow={parametersRow}
-					setParametersRow={setParametersRow}
-				/>
-			</PopUp>
-		)
-	}
-
-	const onHandleWarning = () => {
-		setShowWarningPopup(true)
-	}
 
 	function onUpdateFilteredValue(key, value) {
 		filterValues[key] = value.trim().toLowerCase()
@@ -290,7 +255,10 @@ const LoginPage = () => {
 		page: 0,
 	})
 
+	// LOGINS DELETE
+
 	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
+	console.log(sizeSelectesRows)
 
 	const getIdsSelectedRows = selectedRowData => {
 		return selectedRowData.map(item => {
@@ -307,6 +275,50 @@ const LoginPage = () => {
 		dispatch(deteleAdminLogins({ formStateDeleteLogins }))
 	}
 
+	// WARNING DELETE
+	const handleDelete = (e, ids) => {
+		if (e) e.stopPropagation()
+
+		const formStateDeleteLogins = {
+			bitrix_id: 225,
+			secret_key: 'Смородин Борис Борисович',
+			delete_ids: ids,
+		}
+		dispatch(deteleAdminLogins({ formStateDeleteLogins }))
+	}
+
+	const warningPopup = ({
+		handleDelete,
+		title,
+		ids,
+		e,
+		setShowWarningPopup,
+		setParametersRow,
+	}) => {
+		return (
+			<PopUp
+				onClose={() => {
+					setShowWarningPopup(false)
+				}}
+			>
+				<WarningDelete
+					title={title}
+					confirmText={'Удалить'}
+					cancelText={'Отменить'}
+					onConfirm={handleDelete}
+					onCancel={setShowWarningPopup}
+					ids={ids}
+					setParametersRow={setParametersRow}
+					e={e}
+				/>
+			</PopUp>
+		)
+	}
+
+	const onHandleWarning = () => {
+		setShowWarningPopup(true)
+	}
+
 	return (
 		<div className='login'>
 			<div className='table__container'>
@@ -317,11 +329,11 @@ const LoginPage = () => {
 						text='Создать'
 						onClick={getCreatePopUp}
 					/>
-					{sizeSelectesRows.length > 0 ? (
+					{sizeSelectesRows.length > 1 ? (
 						<Button
 							className={'button-send__end'}
 							text='Удалить элементы'
-							onClick={onDeletedLogins}
+							onClick={() => setShowWarningPopupAll(true)}
 						/>
 					) : null}
 				</div>
@@ -356,7 +368,25 @@ const LoginPage = () => {
 				</div>
 			</div>
 			{showCreatePopup && renderCreatePopUp()}
-			{showWarningPopup && warningPopup()}
+			{showCreatePopup && renderCreatePopUp()}
+			{showWarningPopup &&
+				warningPopup({
+					handleDelete,
+					title: 'Вы действительно хотите удалить элемент?',
+					ids: [parametersRow.params.row.id],
+					e: parametersRow.e,
+					setShowWarningPopup: setShowWarningPopup,
+					setParametersRow: () => setParametersRow({}),
+				})}
+
+			{showWarningPopupAll &&
+				warningPopup({
+					handleDelete,
+					title: 'Вы действительно хотите удалить элементы?',
+					ids: sizeSelectesRows,
+					setShowWarningPopup: setShowWarningPopupAll,
+					setParametersRow: () => setSizeSelectesRows([]),
+				})}
 		</div>
 	)
 }

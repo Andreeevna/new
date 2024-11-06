@@ -236,15 +236,6 @@ export default function UsersPage() {
 		})
 	}
 
-	// const onDeletedUsers = () => {
-	// 	const formStateUsers = {
-	// 		bitrix_id: 225,
-	// 		secret_key: 'Смородин Борис Борисович',
-	// 		delete_ids: sizeSelectesRows,
-	// 	}
-	// 	dispatch(deleteAdminUsers({ formStateUsers }))
-	// }
-
 	//WARNING DELETE
 
 	const handleDelete = (e, ids) => {
