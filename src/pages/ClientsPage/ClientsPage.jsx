@@ -8,6 +8,7 @@ import { CustomPagination } from '../../components/CustomPagination/CustomPagina
 import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../components/Button/Button'
 import CreateItem from '../../components/CreateItem/CreateItem'
+import Loader from '../../components/Loader/Loader'
 import PopUp from '../../components/PopUp/PopUp'
 import WarningDelete from '../../components/WarningDelete/WarningDelete'
 import usePopup from '../../hooks/usePopup'
@@ -25,8 +26,6 @@ const filterNames = {
 const ClientsPage = () => {
 	const dispatch = useDispatch()
 
-	const clientRow = useSelector(state => state.clients.clients)
-
 	const [filterValues, setFilterValues] = useState({})
 
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
@@ -37,6 +36,9 @@ const ClientsPage = () => {
 
 	const [parametersRow, setParametersRow] = useState({})
 	console.log(parametersRow)
+
+	const clientRow = useSelector(state => state.clients.clients)
+	const isFetching = useSelector(state => state.clients.isFetching)
 
 	const dayInMonthComparator = (v1, v2) => {
 		const newDa = formatDateForSorting(v1)
@@ -317,71 +319,77 @@ const ClientsPage = () => {
 	})
 
 	return (
-		<div className='clients'>
-			<div className='table__container'>
-				<div className='search__container'>{filters}</div>
-				<div className='clients__button-send'>
-					<Button
-						className={'button-send__end'}
-						text='Создать'
-						onClick={getCreatePopUp}
-					/>
-					{sizeSelectesRows.length > 1 ? (
-						<Button
-							className={'button-send__end'}
-							text='Удалить элементы'
-							onClick={() => setShowWarningPopupAll(true)}
-						/>
-					) : null}
-				</div>
+		<>
+			{isFetching ? (
+				<Loader />
+			) : (
+				<div className='clients'>
+					<div className='table__container'>
+						<div className='search__container'>{filters}</div>
+						<div className='clients__button-send'>
+							<Button
+								className={'button-send__end'}
+								text='Создать'
+								onClick={getCreatePopUp}
+							/>
+							{sizeSelectesRows.length > 1 ? (
+								<Button
+									className={'button-send__end'}
+									text='Удалить элементы'
+									onClick={() => setShowWarningPopupAll(true)}
+								/>
+							) : null}
+						</div>
 
-				<div className='clients-list'>
-					<DataGrid
-						columns={columnsClients}
-						rows={filteredRows}
-						paginationModel={paginationModel}
-						onPaginationModelChange={setPaginationModel}
-						pageSizeOptions={[PAGE_SIZE]}
-						slots={{
-							pagination: CustomPagination,
-						}}
-						checkboxSelection
-						disableColumnMenu
-						// disableColumnSelector
-						// disableDensitySelector
-						// disableSelectionOnClick
-						onRowSelectionModelChange={ids => {
-							const selectedIDs = new Set(ids)
-							const selectedRowData = clientRow.filter(row =>
-								selectedIDs.has(row.id)
-							)
-							// console.log(selectedRowData)
-							const idsSelected = getIdsSelectedRows(selectedRowData)
-							setSizeSelectesRows(idsSelected)
-						}}
-					/>
-				</div>
-			</div>
-			{showCreatePopup && renderCreatePopUp()}
-			{showWarningPopup &&
-				warningPopup({
-					handleDelete,
-					title: 'Вы действительно хотите удалить элемент?',
-					ids: [parametersRow.params.row.id],
-					e: parametersRow.e,
-					setShowWarningPopup: setShowWarningPopup,
-					setParametersRow: () => setParametersRow({}),
-				})}
+						<div className='clients-list'>
+							<DataGrid
+								columns={columnsClients}
+								rows={filteredRows}
+								paginationModel={paginationModel}
+								onPaginationModelChange={setPaginationModel}
+								pageSizeOptions={[PAGE_SIZE]}
+								slots={{
+									pagination: CustomPagination,
+								}}
+								checkboxSelection
+								disableColumnMenu
+								// disableColumnSelector
+								// disableDensitySelector
+								// disableSelectionOnClick
+								onRowSelectionModelChange={ids => {
+									const selectedIDs = new Set(ids)
+									const selectedRowData = clientRow.filter(row =>
+										selectedIDs.has(row.id)
+									)
+									// console.log(selectedRowData)
+									const idsSelected = getIdsSelectedRows(selectedRowData)
+									setSizeSelectesRows(idsSelected)
+								}}
+							/>
+						</div>
+					</div>
+					{showCreatePopup && renderCreatePopUp()}
+					{showWarningPopup &&
+						warningPopup({
+							handleDelete,
+							title: 'Вы действительно хотите удалить элемент?',
+							ids: [parametersRow.params.row.id],
+							e: parametersRow.e,
+							setShowWarningPopup: setShowWarningPopup,
+							setParametersRow: () => setParametersRow({}),
+						})}
 
-			{showWarningPopupAll &&
-				warningPopup({
-					handleDelete,
-					title: 'Вы действительно хотите удалить элементы?',
-					ids: sizeSelectesRows,
-					setShowWarningPopup: setShowWarningPopupAll,
-					setParametersRow: () => setSizeSelectesRows([]),
-				})}
-		</div>
+					{showWarningPopupAll &&
+						warningPopup({
+							handleDelete,
+							title: 'Вы действительно хотите удалить элементы?',
+							ids: sizeSelectesRows,
+							setShowWarningPopup: setShowWarningPopupAll,
+							setParametersRow: () => setSizeSelectesRows([]),
+						})}
+				</div>
+			)}{' '}
+		</>
 	)
 }
 
