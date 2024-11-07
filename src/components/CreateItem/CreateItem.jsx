@@ -61,7 +61,7 @@ const CreateItem = ({ columns, IGNORED_FIELD, onItemCreated }) => {
 			<h2 className='create-item__title'>Создание элемента таблицы</h2>
 			{itemTODO}
 			<Button
-				text='Создать'
+				text='Сохранить'
 				className={'button-send__center'}
 				onClick={sendItemHandler}
 				disabled={!isValid}

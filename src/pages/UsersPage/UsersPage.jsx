@@ -55,7 +55,7 @@ export default function UsersPage() {
 		{
 			field: `id`,
 			headerName: `ID`,
-			width: 100,
+			width: 70,
 			sortable: true,
 			editable: false,
 			filterable: false,
@@ -64,7 +64,8 @@ export default function UsersPage() {
 		{
 			field: `bitrix_id`,
 			headerName: `bitrix_ID`,
-			width: 130,
+			// width: 130,
+			flex: 1,
 			editable: false,
 			filterable: false,
 			hideable: false,
@@ -72,7 +73,8 @@ export default function UsersPage() {
 		{
 			field: `username`,
 			headerName: `Имя пользователя`,
-			width: 180,
+			// width: 180,
+			flex: 1,
 			editable: false,
 			filterable: false,
 			hideable: false,
@@ -80,7 +82,8 @@ export default function UsersPage() {
 		{
 			field: `creation_date`,
 			headerName: `Дата создания`,
-			width: 200,
+			// width: 200,
+			flex: 1,
 			editable: false,
 			filterable: false,
 			hideable: false,
@@ -89,7 +92,8 @@ export default function UsersPage() {
 		{
 			field: 'action',
 			headerName: 'Действия',
-			width: 250,
+			// width: 250,
+			flex: 1,
 			sortable: false,
 			editable: false,
 			hideable: false,
@@ -104,7 +108,7 @@ export default function UsersPage() {
 									getLoginId(e, params.row.id)
 								}}
 							>
-								Логин
+								Логины
 							</button>
 						</div>
 						<div>

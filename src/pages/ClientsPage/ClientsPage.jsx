@@ -63,7 +63,7 @@ const ClientsPage = () => {
 		{
 			field: `id`,
 			headerName: `ID`,
-			width: 100,
+			width: 70,
 			sortable: true,
 			editable: false,
 			filterable: false,
@@ -72,7 +72,8 @@ const ClientsPage = () => {
 		{
 			field: `name`,
 			headerName: `Имя клиента`,
-			width: 150,
+			flex: 1,
+			// width: 150,
 			sortable: true,
 			editable: false,
 			filterable: false,
@@ -81,7 +82,8 @@ const ClientsPage = () => {
 		{
 			field: `max_accounts`,
 			headerName: `Максимальное кол-во аккаунтов`,
-			width: 260,
+			// width: 260,
+			flex: 1,
 			sortable: false,
 			editable: false,
 			filterable: false,
@@ -90,7 +92,8 @@ const ClientsPage = () => {
 		{
 			field: `creation_date`,
 			headerName: `Дата создания`,
-			width: 170,
+			// width: 170,
+			flex: 1,
 			sortable: true,
 			editable: false,
 			filterable: false,
@@ -103,7 +106,8 @@ const ClientsPage = () => {
 		{
 			field: `instruction`,
 			headerName: `Инструкция`,
-			width: 300,
+			// width: 300,
+			flex: 1,
 			sortable: false,
 			editable: false,
 			filterable: false,
@@ -112,7 +116,8 @@ const ClientsPage = () => {
 		{
 			field: `login_type_id`,
 			headerName: `Тип логина`,
-			width: 300,
+			// width: 300,
+			flex: 1,
 			sortable: false,
 			editable: false,
 			filterable: false,
@@ -121,7 +126,8 @@ const ClientsPage = () => {
 		{
 			field: 'action',
 			headerName: 'Действия',
-			width: 200,
+			// width: 200,
+			flex: 1,
 			sortable: false,
 			editable: false,
 			hideable: false,

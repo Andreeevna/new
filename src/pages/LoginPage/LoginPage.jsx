@@ -51,6 +51,7 @@ const LoginPage = () => {
 			field: `id`,
 			headerName: `ID`,
 			width: 70,
+			// flex: 1,
 			sortable: true,
 			editable: false,
 			hideable: false,
@@ -59,7 +60,8 @@ const LoginPage = () => {
 		{
 			field: `login_type_id`,
 			headerName: `Тип логина`,
-			width: 140,
+			// width: 140,
+			flex: 1,
 			sortable: true,
 			editable: false,
 			hideable: false,
@@ -67,6 +69,7 @@ const LoginPage = () => {
 		{
 			field: `secret`,
 			headerName: `Секретный ключ`,
+			flex: 1,
 			sortable: true,
 			editable: false,
 			hideable: false,
@@ -74,6 +77,7 @@ const LoginPage = () => {
 		{
 			field: `login`,
 			headerName: `Логин`,
+			flex: 1,
 			// width: 100,
 			sortable: true,
 			editable: false,
@@ -82,6 +86,7 @@ const LoginPage = () => {
 		{
 			field: `password`,
 			headerName: `Пароль`,
+			flex: 1,
 			// width: 100,
 			sortable: true,
 			editable: false,
@@ -90,6 +95,7 @@ const LoginPage = () => {
 		{
 			field: `login_two_fa`,
 			headerName: `Клиентский логин`,
+			flex: 1,
 			sortable: false,
 			editable: false,
 			hideable: false,
@@ -97,6 +103,7 @@ const LoginPage = () => {
 		{
 			field: `password_two_fa`,
 			headerName: `Клиентский пароль`,
+			flex: 1,
 			sortable: false,
 			editable: false,
 			hideable: false,
@@ -104,7 +111,8 @@ const LoginPage = () => {
 		{
 			field: `creation_date`,
 			headerName: `Дата создания`,
-			width: 120,
+			flex: 1,
+			// width: 120,
 			sortable: true,
 			editable: false,
 			hideable: false,
@@ -112,7 +120,8 @@ const LoginPage = () => {
 		{
 			field: `last_used`,
 			headerName: `Дата последнего использования`,
-			width: 120,
+			flex: 1,
+			// width: 120,
 			sortable: true,
 			editable: false,
 			hideable: false,
@@ -120,7 +129,8 @@ const LoginPage = () => {
 		{
 			field: 'action',
 			headerName: 'Действия',
-			width: 200,
+			flex: 1,
+			// width: 200,
 			sortable: false,
 			editable: false,
 			hideable: false,
@@ -367,7 +377,6 @@ const LoginPage = () => {
 					/>
 				</div>
 			</div>
-			{showCreatePopup && renderCreatePopUp()}
 			{showCreatePopup && renderCreatePopUp()}
 			{showWarningPopup &&
 				warningPopup({
