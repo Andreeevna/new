@@ -135,19 +135,6 @@ export const adminUsersReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(updateAdminUser.fulfilled, (state, action) => {
-			// "message": "Updated",
-			// "records": {
-			// 		"updated": [
-			// 				{
-			// 						"id": 46,
-			// 						"bitrix_id": 200,
-			// 						"username": "Test12",
-			// 						"creation_date": "06-11-2024 10:02:10"
-			// 				}
-			// 		],
-			// 		"not_found": []
-			// }
-			// console.log()
 			if (action.payload.records) {
 				state.users = state.users.map(item => {
 					if (item.id === action.payload.records?.updated[0].id) {
