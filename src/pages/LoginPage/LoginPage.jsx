@@ -30,21 +30,30 @@ const LoginPage = () => {
 
 	const dispatch = useDispatch()
 
-	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
+	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup(false, [
+		'login.creation_date',
+		'login.last_used',
+	])
 
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
 	const [showWarningPopup, setShowWarningPopup] = useState(false)
 	const [showWarningPopupAll, setShowWarningPopupAll] = useState(false)
 
 	const [parametersRow, setParametersRow] = useState({})
-	console.log(parametersRow)
+	// console.log(parametersRow)
 
 	const loginRow = useSelector(state => state.logins.logins)
+	// console.log(loginRow)
 	const isFetching = useSelector(state => state.logins.isFetching)
 
 	const rows = useMemo(() => {
 		return loginRow?.map((item, index) => {
-			return { ...item.login, index }
+			return {
+				...item.login,
+				index,
+				client: item.client.id,
+				user: item.user.id,
+			}
 		})
 	}, [loginRow])
 
@@ -58,7 +67,24 @@ const LoginPage = () => {
 			editable: false,
 			hideable: false,
 		},
-
+		{
+			field: `client`,
+			headerName: `ID Клиента`,
+			width: 70,
+			// flex: 1,
+			sortable: true,
+			editable: false,
+			hideable: false,
+		},
+		{
+			field: `user`,
+			headerName: `ID Пользователя`,
+			width: 70,
+			// flex: 1,
+			sortable: true,
+			editable: false,
+			hideable: false,
+		},
 		{
 			field: `login_type_id`,
 			headerName: `Тип логина`,
@@ -270,7 +296,7 @@ const LoginPage = () => {
 	// LOGINS DELETE
 
 	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
-	console.log(sizeSelectesRows)
+	// console.log(sizeSelectesRows)
 
 	const getIdsSelectedRows = selectedRowData => {
 		return selectedRowData.map(item => {

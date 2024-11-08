@@ -1,26 +1,45 @@
 import React, { useMemo, useState } from 'react'
 
 import { useDispatch } from 'react-redux'
-import usePopup from '../../hooks/usePopup'
 import { updateAdminClient } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import { updateAdminUser } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
 import { clientsDict, LoginDict, usersDict } from '../../utils/dicts'
 import Button from '../Button/Button'
 import './EditComponent.css'
 
-const EditComponent = ({ item, chapter, onClose }) => {
+const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 	const dispatch = useDispatch()
 
-	const { togglePopup } = usePopup()
-
 	const [isEditing, setIsEditing] = useState({})
-	// console.log(item, chapter)
 
-	const itemNeededFields = { ...item }
-	delete itemNeededFields.creation_date
+	const itemNeededFields = useMemo(() => {
+		return IGNORE_FIELDS.reduce((acc, current) => {
+			const result = current.split('.').reduce(
+				(accum, key, index, array) => {
+					if (array.length - 1 === index) {
+						accum.key = key
+						return accum
+					}
+					accum.value = accum.value[key]
+
+					return accum
+				},
+				{ key: '', value: acc }
+			)
+
+			delete result.value[result.key]
+			return acc
+		}, JSON.parse(JSON.stringify(item)))
+	}, [IGNORE_FIELDS, item])
 
 	const filedNameCollection = Object.entries(
-		chapter === 'login' ? itemNeededFields.login : itemNeededFields
+		chapter === 'login'
+			? {
+					...itemNeededFields.login,
+					client: itemNeededFields.client.id,
+					user: itemNeededFields.user.id,
+			  }
+			: itemNeededFields
 	)
 
 	const findvalue = (key, dict) => {
@@ -56,10 +75,14 @@ const EditComponent = ({ item, chapter, onClose }) => {
 
 	const [newvalue, setNewValue] = useState(
 		chapter === 'login'
-			? { ...itemNeededFields.login }
+			? {
+					...itemNeededFields.login,
+					client: itemNeededFields.client.id,
+					user: itemNeededFields.user.id,
+			  }
 			: { ...itemNeededFields }
 	)
-	console.log(newvalue)
+	// console.log(newvalue)
 
 	const onHandleUpdate = () => {
 		if (chapter === 'clients') {

@@ -30,7 +30,9 @@ const filterNames = {
 }
 
 export default function UsersPage() {
-	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup()
+	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup(false, [
+		'creation_date',
+	])
 
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
 	const [showWarningPopup, setShowWarningPopup] = useState(false)

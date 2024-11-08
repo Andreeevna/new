@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PopUp from '../components/PopUp/PopUp'
 import EditPage from '../pages/EditPage/EditPage'
 
-const usePopup = (initialState = false) => {
+const usePopup = (initialState = false, IGNORE_FIELDS = []) => {
 	const [showPopup, setShowPopup] = useState(initialState)
 	const [parameter, setParameter] = useState(null)
 
@@ -19,6 +19,7 @@ const usePopup = (initialState = false) => {
 							id={id}
 							chapter={chapter}
 							onClose={() => setShowPopup(false)}
+							IGNORE_FIELDS={IGNORE_FIELDS}
 						/>
 					)}
 				</PopUp>

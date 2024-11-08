@@ -42,6 +42,8 @@ export const clientsDict = [
 
 export const LoginDict = [
 	{ field: `id`, headerName: `ID` },
+	{ field: `client`, headerName: `ID Клиента` },
+	{ field: `user`, headerName: `ID  Пользователя` },
 	{
 		field: `login_type_id`,
 		headerName: `Тип логина`,
