@@ -33,6 +33,7 @@ const LoginPage = () => {
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup(false, [
 		'login.creation_date',
 		'login.last_used',
+		'clientID',
 	])
 
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
@@ -43,7 +44,7 @@ const LoginPage = () => {
 	// console.log(parametersRow)
 
 	const loginRow = useSelector(state => state.logins.logins)
-	// console.log(loginRow)
+	console.log(loginRow, 'logins')
 	const isFetching = useSelector(state => state.logins.isFetching)
 
 	const rows = useMemo(() => {
@@ -53,6 +54,7 @@ const LoginPage = () => {
 				index,
 				client: item.client.id,
 				user: item.user.id,
+				clientName: item.client.name,
 			}
 		})
 	}, [loginRow])

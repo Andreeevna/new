@@ -9,6 +9,7 @@ import Button from '../Button/Button'
 import './EditComponent.css'
 
 const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
+	console.log(item)
 	const dispatch = useDispatch()
 
 	const [isEditing, setIsEditing] = useState({})
@@ -37,7 +38,8 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		chapter === 'login'
 			? {
 					...itemNeededFields.login,
-					client: itemNeededFields.client.id,
+					client: `${itemNeededFields.client.id}, ${itemNeededFields.client.name}`,
+					clientID: itemNeededFields.client.id,
 					user: itemNeededFields.user.id,
 			  }
 			: itemNeededFields
@@ -78,7 +80,8 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		chapter === 'login'
 			? {
 					...itemNeededFields.login,
-					client: itemNeededFields.client.id,
+					client: `${itemNeededFields.client.id}, ${itemNeededFields.client.name}`,
+					clientID: itemNeededFields.client.id,
 					user: itemNeededFields.user.id,
 			  }
 			: { ...itemNeededFields }
@@ -132,7 +135,7 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 						login_2fa: newvalue.login_two_fa,
 						password_2fa: newvalue.password_two_fa,
 						secret: newvalue.secret,
-						client_id: +newvalue.client,
+						client_id: +newvalue.clientID,
 						user_id: +newvalue.user,
 					},
 				],
@@ -145,13 +148,15 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 
 	const renderingItem = useMemo(() => {
 		return filedNameCollection.map(([key, value], index) => {
+			const header = setNeededDict(key, chapter)
+			if (!header.length) return null
 			return (
 				<div
 					className='edit-item'
 					key={index}
 					onClick={() => handleClickOutside()}
 				>
-					<span className='edit-item__key'>{setNeededDict(key, chapter)}:</span>
+					<span className='edit-item__key'>{header}:</span>
 					{!isEditing[key] ? (
 						<span
 							className='edit-item__value'
