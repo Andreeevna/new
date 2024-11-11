@@ -9,7 +9,7 @@ export const usersDict = [
 	},
 	{
 		field: `username`,
-		headerName: `Имя пользователя`,
+		headerName: `Пользователь`,
 	},
 	{
 		field: `creation_date`,
@@ -23,7 +23,7 @@ export const usersDict = [
 
 export const clientsDict = [
 	{ field: `id`, headerName: `ID` },
-	{ field: `name`, headerName: `Имя клиента` },
+	{ field: `name`, headerName: `Клиент` },
 	{ field: `max_accounts`, headerName: `Максимальное кол-во аккаунтов` },
 	{ field: `creation_date`, headerName: `Дата создания` },
 	{

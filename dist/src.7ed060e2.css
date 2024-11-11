@@ -37,7 +37,7 @@ ul {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	/* max-width: 1330px; */
+	width: 1450px;
 }
 
 /* search */
@@ -663,8 +663,13 @@ td {
 	overflow-wrap: break-word;
 }
 
+.logins-info__user {
+	color: #0832de;
+}
+
 .users {
 	flex: 4;
+	/* width: 1350px; */
 	height: 100vh;
 }
 .users__container {

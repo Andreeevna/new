@@ -1,5 +1,6 @@
 .users {
 	flex: 4;
+	/* width: 1350px; */
 	height: 100vh;
 }
 .users__container {

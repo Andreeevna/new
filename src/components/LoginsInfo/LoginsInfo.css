@@ -62,3 +62,7 @@ td {
 	word-break: break-all;
 	overflow-wrap: break-word;
 }
+
+.logins-info__user {
+	color: #0832de;
+}

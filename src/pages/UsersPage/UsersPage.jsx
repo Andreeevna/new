@@ -77,7 +77,7 @@ export default function UsersPage() {
 		},
 		{
 			field: `username`,
-			headerName: `Имя пользователя`,
+			headerName: `Пользователь`,
 			// width: 180,
 			flex: 1,
 			editable: false,

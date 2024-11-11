@@ -3,23 +3,22 @@ import React from 'react'
 import './LoginsInfo.css'
 
 const LoginsInfo = ({ title, items }) => {
+	console.log(items)
 	if (items.length < 1)
 		return <div className='logins-info__empty'>Информация не найдена</div>
 	const headers = [
-		'имя пользователя',
-		'имя клиента',
-		'логин ID',
-		'тип логина',
-		'секретный ключ',
-		'логин',
-		'пароль',
-		'клиентский логин',
-		'клиентский  пароль',
+		'Клиент',
+		'Логин ID',
+		'Тип логина',
+		'Секретный ключ',
+		'Логин',
+		'Пароль',
+		'Логин на PUSH сервере',
+		'Пароль на PUSH сервере',
 	]
 
 	const rows = items?.map((item, index) => (
 		<tr key={index}>
-			<td className='ellipsis'>{item?.user?.username}</td>
 			<td className='ellipsis'>{item?.client?.name}</td>
 			<td className='ellipsis'>{item?.login?.id}</td>
 			<td className='ellipsis'>{item?.login.login_type_id}</td>
@@ -33,7 +32,12 @@ const LoginsInfo = ({ title, items }) => {
 
 	return (
 		<div>
-			<h1 className='logins-info__title'>{title}</h1>
+			<h1 className='logins-info__title'>
+				{title}{' '}
+				<span className='logins-info__user'>
+					{items ? items[0].user.username : null}
+				</span>
+			</h1>
 			<table className='styled-table'>
 				<thead>
 					<tr>

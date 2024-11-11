@@ -75,7 +75,7 @@ const ClientsPage = () => {
 		},
 		{
 			field: `name`,
-			headerName: `Имя клиента`,
+			headerName: `Клиент`,
 			flex: 1,
 			// width: 150,
 			sortable: true,
