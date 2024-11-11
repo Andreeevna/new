@@ -39,8 +39,15 @@ const ClientsPage = () => {
 	const [parametersRow, setParametersRow] = useState({})
 	// console.log(parametersRow)
 
-	const clientRow = useSelector(state => state.clients.clients)
+	const clientRows = useSelector(state => state.clients.clients)
 	const isFetching = useSelector(state => state.clients.isFetching)
+
+	const getClientRow = clients => {
+		return clients?.map(el => {
+			return el.client
+		})
+	}
+	const clientRow = getClientRow(clientRows)
 
 	const dayInMonthComparator = (v1, v2) => {
 		const newDa = formatDateForSorting(v1)

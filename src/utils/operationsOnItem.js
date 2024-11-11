@@ -14,7 +14,7 @@ export const getProductById = (itemId, chapter) => {
 	}
 	if (chapter === 'clients') {
 		return clientRows?.find(row => {
-			if (row.id === Number(itemId)) {
+			if (row.client.id === Number(itemId)) {
 				return row
 			}
 		})

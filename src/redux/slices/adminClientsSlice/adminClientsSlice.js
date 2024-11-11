@@ -93,7 +93,7 @@ export const adminClientsReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(getAdminClients.fulfilled, (state, action) => {
-			console.log(action.payload.response, 'clients')
+			// console.log(action.payload.response, 'clients')
 			state.isFetching = false
 			state.message = null
 			state.clients = action.payload.response
@@ -111,7 +111,10 @@ export const adminClientsReducer = createSlice({
 		builder.addCase(createAdminClient.fulfilled, (state, action) => {
 			state.isFetching = false
 			state.message = null
-			state.clients.push(action.payload.record)
+			state.clients.push({
+				client: action.payload.client,
+				login_type: action.payload.login_type,
+			})
 		})
 		builder.addCase(createAdminClient.rejected, state => {
 			state.message = ERROR
@@ -126,13 +129,16 @@ export const adminClientsReducer = createSlice({
 		builder.addCase(updateAdminClient.fulfilled, (state, action) => {
 			state.isFetching = false
 			state.message = null
-			state.clients = state.clients.map(item => {
-				if (item.id === action.payload.records?.updated[0].id) {
-					return (item = { ...action.payload.records?.updated[0] })
-				} else {
-					return item
-				}
-			})
+			console.log(action.payload.records.updated)
+			if (action.payload.records.updated) {
+				state.clients = state.clients.map(item => {
+					if (item.client.id === action.payload.records?.updated[0].client.id) {
+						return (item = { ...action.payload.records?.updated[0] })
+					} else {
+						return item
+					}
+				})
+			}
 		})
 		builder.addCase(updateAdminClient.rejected, state => {
 			state.message = ERROR
@@ -146,7 +152,7 @@ export const adminClientsReducer = createSlice({
 		})
 		builder.addCase(deleteAdminClient.fulfilled, (state, action) => {
 			state.clients = state.clients.filter(
-				item => item.id !== action.payload.record.id
+				item => item.client.id !== action.payload.record.id
 			)
 
 			state.isFetching = false
@@ -163,13 +169,14 @@ export const adminClientsReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(deleteAdminClients.fulfilled, (state, action) => {
-			state.clients = state.clients.filter(row => {
-				return !action.payload.record.some(rowResp => {
-					return rowResp.id === row.id
-				})
-			})
 			state.isFetching = false
 			state.message = null
+			console.log(action.payload)
+			state.clients = state.clients.filter(row => {
+				return !action.payload.record.some(rowResp => {
+					return rowResp.id === row.client.id
+				})
+			})
 		})
 		builder.addCase(deleteAdminClients.rejected, state => {
 			state.message = ERROR

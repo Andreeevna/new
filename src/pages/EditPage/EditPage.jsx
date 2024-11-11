@@ -6,6 +6,7 @@ const EditPage = ({ id, chapter, onClose, IGNORE_FIELDS }) => {
 	// const { id, chapter } = useParams()
 
 	const item = getProductById(id, chapter)
+	console.log(item)
 	return (
 		<div className='edit-page'>
 			<h1 className='edit-page__title'>Редактирование элемента таблицы</h1>

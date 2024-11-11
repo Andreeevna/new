@@ -123,7 +123,7 @@ const LoginPage = () => {
 		},
 		{
 			field: `login_two_fa`,
-			headerName: `Клиентский логин`,
+			headerName: `Логин на PUSH сервере`,
 			flex: 1,
 			sortable: false,
 			editable: false,
@@ -131,7 +131,7 @@ const LoginPage = () => {
 		},
 		{
 			field: `password_two_fa`,
-			headerName: `Клиентский пароль`,
+			headerName: `Пароль на PUSH сервере`,
 			flex: 1,
 			sortable: false,
 			editable: false,

@@ -106,7 +106,7 @@ export const adminUsersReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(getAdminUsers.fulfilled, (state, action) => {
-			console.log(action.payload.response, 'users')
+			// console.log(action.payload.response, 'users')
 			state.isFetching = false
 			state.message = null
 			state.users = action.payload.response

@@ -56,11 +56,11 @@ export const LoginDict = [
 	{ field: `password`, headerName: `Пароль` },
 	{
 		field: `login_two_fa`,
-		headerName: `Клиентский логин`,
+		headerName: `Логин на PUSH сервере`,
 	},
 	{
 		field: `password_two_fa`,
-		headerName: `Клиентский пароль`,
+		headerName: `Пароль на PUSH сервере`,
 	},
 	{ field: `creation_date`, headerName: `Дата создания` },
 	{ field: `last_used`, headerName: `Дата последнего использования` },

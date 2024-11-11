@@ -30,8 +30,8 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 
 			delete result.value[result.key]
 			return acc
-		}, JSON.parse(JSON.stringify(item)))
-	}, [IGNORE_FIELDS, item])
+		}, JSON.parse(JSON.stringify(item.client)))
+	}, [IGNORE_FIELDS, item.client])
 
 	const filedNameCollection = Object.entries(
 		chapter === 'login'
