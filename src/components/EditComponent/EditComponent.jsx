@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react'
 
 import { useDispatch } from 'react-redux'
 import { updateAdminClient } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
+import { updateAdminLogin } from '../../redux/slices/adminLoginSlice/adminLoginSlice'
 import { updateAdminUser } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
 import { clientsDict, LoginDict, usersDict } from '../../utils/dicts'
 import Button from '../Button/Button'
@@ -82,7 +83,8 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 			  }
 			: { ...itemNeededFields }
 	)
-	// console.log(newvalue)
+
+	console.log(newvalue)
 
 	const onHandleUpdate = () => {
 		if (chapter === 'clients') {
@@ -116,6 +118,27 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 			}
 
 			dispatch(updateAdminUser({ formStateUpdate }))
+		}
+
+		if (chapter === 'login') {
+			const formStateUpdate = {
+				bitrix_id: 225,
+				secret_key: 'Смородин Борис Борисович',
+				login_info: [
+					{
+						id: +newvalue.id,
+						login: newvalue.login,
+						password: newvalue.password,
+						login_2fa: newvalue.login_two_fa,
+						password_2fa: newvalue.password_two_fa,
+						secret: newvalue.secret,
+						client_id: +newvalue.client,
+						user_id: +newvalue.user,
+					},
+				],
+			}
+			console.log(formStateUpdate)
+			dispatch(updateAdminLogin({ formStateUpdate }))
 		}
 		onClose()
 	}

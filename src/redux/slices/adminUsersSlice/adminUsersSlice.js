@@ -113,6 +113,7 @@ export const adminUsersReducer = createSlice({
 		})
 		builder.addCase(getAdminUsers.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 
 		//createAdminUser
@@ -127,6 +128,7 @@ export const adminUsersReducer = createSlice({
 		})
 		builder.addCase(createAdminUser.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 
 		//updateAdminUser
@@ -150,6 +152,7 @@ export const adminUsersReducer = createSlice({
 		})
 		builder.addCase(updateAdminUser.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 
 		//deleteAdminUser
@@ -167,6 +170,7 @@ export const adminUsersReducer = createSlice({
 		})
 		builder.addCase(deleteAdminUser.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 
 		//deleteAdminUsers
@@ -186,6 +190,7 @@ export const adminUsersReducer = createSlice({
 		})
 		builder.addCase(deleteAdminUsers.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 
 		//getAdminLogin
@@ -200,6 +205,7 @@ export const adminUsersReducer = createSlice({
 		})
 		builder.addCase(getAdminLogin.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 	},
 })

@@ -100,6 +100,7 @@ export const adminClientsReducer = createSlice({
 		})
 		builder.addCase(getAdminClients.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 
 		//createAdminClient
@@ -114,6 +115,7 @@ export const adminClientsReducer = createSlice({
 		})
 		builder.addCase(createAdminClient.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 
 		//updateAdminClient
@@ -134,6 +136,7 @@ export const adminClientsReducer = createSlice({
 		})
 		builder.addCase(updateAdminClient.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 
 		//deleteAdminClient
@@ -151,6 +154,7 @@ export const adminClientsReducer = createSlice({
 		})
 		builder.addCase(deleteAdminClient.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 
 		//deleteAdminClients
@@ -169,6 +173,7 @@ export const adminClientsReducer = createSlice({
 		})
 		builder.addCase(deleteAdminClients.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 	},
 })

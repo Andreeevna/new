@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { createAPI } from '../../../api/createApi'
 import { deleteAPI } from '../../../api/deleteApi'
 import { getAPI } from '../../../api/getApi'
+import { updateApi } from '../../../api/updateApi'
 import { ERROR } from '../../../constants/api'
 
 export const getAdminLogins = createAsyncThunk(
@@ -28,6 +29,20 @@ export const createAdminLogin = createAsyncThunk(
 		} catch (error) {
 			console.error('Ошибка при создании логина', error)
 			// throw error.response.status
+		}
+	}
+)
+
+export const updateAdminLogin = createAsyncThunk(
+	'users/updateAdminLogin',
+	async params => {
+		const { formStateUpdate } = params
+		try {
+			const { data } = await updateApi.updateLogin(formStateUpdate)
+			return data
+		} catch (error) {
+			console.error('Ошибка при изменении логина', error)
+			throw error.response.status
 		}
 	}
 )
@@ -82,6 +97,7 @@ export const adminLoginsReducer = createSlice({
 		})
 		builder.addCase(getAdminLogins.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 
 		//createAdminLogin
@@ -98,6 +114,21 @@ export const adminLoginsReducer = createSlice({
 		})
 		builder.addCase(createAdminLogin.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
+		})
+
+		//updateAdminLogin
+		builder.addCase(updateAdminLogin.pending, state => {
+			state.isFetching = true
+			state.message = null
+		})
+		builder.addCase(updateAdminLogin.fulfilled, (state, action) => {
+			state.isFetching = false
+			state.message = null
+		})
+		builder.addCase(updateAdminLogin.rejected, state => {
+			state.message = ERROR
+			state.isFetching = false
 		})
 
 		//deteleAdminLogin
@@ -114,6 +145,7 @@ export const adminLoginsReducer = createSlice({
 		})
 		builder.addCase(deteleAdminLogin.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 
 		//deteleAdminLogins
@@ -132,6 +164,7 @@ export const adminLoginsReducer = createSlice({
 		})
 		builder.addCase(deteleAdminLogins.rejected, state => {
 			state.message = ERROR
+			state.isFetching = false
 		})
 	},
 })

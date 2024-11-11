@@ -251,8 +251,8 @@ const LoginPage = () => {
 			login_2fa: formState.login_two_fa,
 			password_2fa: formState.password_two_fa,
 			secret: formState.secret,
-			client_id: +formState.client_id,
-			user_id: +formState.user_id,
+			client_id: +formState.client,
+			user_id: +formState.user,
 		}
 
 		dispatch(createAdminLogin({ formStateCreateLogin }))
@@ -264,8 +264,8 @@ const LoginPage = () => {
 				<CreateItem
 					columns={[
 						...columnsLogins,
-						{ field: 'client_id', headerName: 'Id Клиента' },
-						{ field: 'user_id', headerName: 'Id Пользователя' },
+						// { field: 'client_id', headerName: 'Id Клиента' },
+						// { field: 'user_id', headerName: 'Id Пользователя' },
 					]}
 					IGNORED_FIELD={[
 						'id',

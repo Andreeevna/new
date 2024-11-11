@@ -5,6 +5,7 @@ import './CreateItem.css'
 
 const CreateItem = ({ columns, IGNORED_FIELD, onItemCreated }) => {
 	const [formState, setFormState] = useState({})
+	console.log(formState)
 
 	const updateFormState = (key, value) => {
 		formState[key] = value
