@@ -25,8 +25,8 @@
 }
 
 .modal-logins-info {
-	min-width: 1000px;
-	/* max-width: 1300px; */
+	/* min-width: 1000px; */
+	max-width: 1600px;
 }
 
 .popup__content {

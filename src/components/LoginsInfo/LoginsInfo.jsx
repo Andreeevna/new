@@ -8,7 +8,7 @@ const LoginsInfo = ({ title, items }) => {
 		return <div className='logins-info__empty'>Информация не найдена</div>
 	const headers = [
 		'Клиент',
-		'Логин ID',
+		// 'ID',
 		'Тип логина',
 		'Секретный ключ',
 		'Логин',
@@ -20,7 +20,7 @@ const LoginsInfo = ({ title, items }) => {
 	const rows = items?.map((item, index) => (
 		<tr key={index}>
 			<td className='ellipsis'>{item?.client?.name}</td>
-			<td className='ellipsis'>{item?.login?.id}</td>
+			{/* <td className='ellipsis'>{item?.login?.id}</td> */}
 			<td className='ellipsis'>{item?.login.login_type_id}</td>
 			<td className='ellipsis'>{item?.login?.secret}</td>
 			<td className='ellipsis'>{item?.login?.login}</td>

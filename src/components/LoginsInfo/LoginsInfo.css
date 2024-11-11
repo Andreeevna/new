@@ -6,7 +6,7 @@
 }
 
 .styled-table {
-	/* width: 1400px; */
+	width: 1450px;
 	border-collapse: collapse;
 	margin-bottom: 20px;
 	table-layout: fixed;
@@ -26,6 +26,16 @@
 .styled-table th {
 	width: 50px;
 } */
+
+.styled-table td:nth-child(1),
+.styled-table th:nth-child(1) {
+	width: 200px;
+}
+
+.styled-table td:nth-child(2),
+.styled-table th:nth-child(2) {
+	width: 150px;
+}
 
 /* .styled-table td:nth-child(2),
 .styled-table th:nth-child(2) {
@@ -61,6 +71,7 @@
 td {
 	word-break: break-all;
 	overflow-wrap: break-word;
+	font-size: 14px;
 }
 
 .logins-info__user {
