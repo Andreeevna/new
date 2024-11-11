@@ -156,7 +156,6 @@ export default function UsersPage() {
 	const getLoginId = (e, id) => {
 		if (e) e.stopPropagation()
 
-		console.log(id)
 		const formStateLogins = {
 			bitrix_id: 225,
 			secret_key: 'Смородин Борис Борисович',

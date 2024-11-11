@@ -29,7 +29,7 @@
 
 .styled-table td:nth-child(1),
 .styled-table th:nth-child(1) {
-	width: 200px;
+	width: 210px;
 }
 
 .styled-table td:nth-child(2),
@@ -60,6 +60,7 @@
 
 /* EMPTY */
 .logins-info__empty {
+	width: 600px;
 	font-size: 26px;
 	font-weight: 600;
 	height: 100px;

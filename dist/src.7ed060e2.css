@@ -229,12 +229,12 @@ F1F1F1 */
 .create-item__header {
 	flex-shrink: 0;
 	display: block;
-	width: 220px;
+	width: 200px;
 	font-size: 18px;
 	font-weight: 500;
-	white-space: nowrap;
+	/* white-space: nowrap;
 	overflow: hidden;
-	text-overflow: ellipsis;
+	text-overflow: ellipsis; */
 }
 
 .create-item__input {
@@ -401,7 +401,7 @@ F1F1F1 */
 }
 
 .modal-classic {
-	width: 650px;
+	width: 750px;
 }
 
 .modal-logins-info {
@@ -629,7 +629,7 @@ F1F1F1 */
 
 .styled-table td:nth-child(1),
 .styled-table th:nth-child(1) {
-	width: 200px;
+	width: 210px;
 }
 
 .styled-table td:nth-child(2),
@@ -660,6 +660,7 @@ F1F1F1 */
 
 /* EMPTY */
 .logins-info__empty {
+	width: 600px;
 	font-size: 26px;
 	font-weight: 600;
 	height: 100px;
