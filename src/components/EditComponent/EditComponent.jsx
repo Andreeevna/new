@@ -186,7 +186,10 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 						</span>
 					) : (
 						<>
-							<span>{newvalue[key]?.readOnly || ''}</span>
+							{newvalue[key]?.readOnly ? (
+								<span>{newvalue[key]?.readOnly || ''}</span>
+							) : null}
+
 							<input
 								className='edit-item__input'
 								type='text'
