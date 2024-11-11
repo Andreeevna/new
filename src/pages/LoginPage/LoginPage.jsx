@@ -44,7 +44,6 @@ const LoginPage = () => {
 	// console.log(parametersRow)
 
 	const loginRow = useSelector(state => state.logins.logins)
-	console.log(loginRow, 'logins')
 	const isFetching = useSelector(state => state.logins.isFetching)
 
 	const rows = useMemo(() => {

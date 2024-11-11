@@ -38,7 +38,10 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		chapter === 'login'
 			? {
 					...itemNeededFields.login,
-					client: `${itemNeededFields.client.id}, ${itemNeededFields.client.name}`,
+					client: {
+						edit: itemNeededFields.client.id,
+						readOnly: itemNeededFields.client.name,
+					},
 					clientID: itemNeededFields.client.id,
 					user: itemNeededFields.user.id,
 			  }
@@ -80,12 +83,26 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		chapter === 'login'
 			? {
 					...itemNeededFields.login,
-					client: `${itemNeededFields.client.id}, ${itemNeededFields.client.name}`,
+					client: {
+						edit: itemNeededFields.client.id,
+						readOnly: itemNeededFields.client.name,
+					},
 					clientID: itemNeededFields.client.id,
 					user: itemNeededFields.user.id,
 			  }
 			: { ...itemNeededFields }
 	)
+
+	const updateNewValue = ({ key, value, isEdit }) => {
+		const newState = { ...newvalue }
+		console.log(key)
+		if (isEdit) {
+			newState[key].edit = value
+		} else {
+			newState[key] = value
+		}
+		setNewValue(newState)
+	}
 
 	console.log(newvalue)
 
@@ -135,7 +152,7 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 						login_2fa: newvalue.login_two_fa,
 						password_2fa: newvalue.password_two_fa,
 						secret: newvalue.secret,
-						client_id: +newvalue.clientID,
+						client_id: +newvalue.client.edit,
 						user_id: +newvalue.user,
 					},
 				],
@@ -150,6 +167,7 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		return filedNameCollection.map(([key, value], index) => {
 			const header = setNeededDict(key, chapter)
 			if (!header.length) return null
+
 			return (
 				<div
 					className='edit-item'
@@ -162,19 +180,28 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 							className='edit-item__value'
 							onClick={e => handleEditClick(key)}
 						>
-							{newvalue[key]}
+							{newvalue[key]?.readOnly
+								? `${newvalue[key].readOnly}, ${newvalue[key].edit}`
+								: newvalue[key]}
 						</span>
 					) : (
-						<input
-							className='edit-item__input'
-							type='text'
-							value={newvalue[key]}
-							onChange={e => {
-								setNewValue({ ...newvalue, [key]: e.target.value })
-							}}
-							onBlur={() => setIsEditing({ ...isEditing, [key]: false })}
-							autoFocus
-						/>
+						<>
+							<span>{newvalue[key]?.readOnly || ''}</span>
+							<input
+								className='edit-item__input'
+								type='text'
+								value={newvalue[key]?.edit || newvalue[key]}
+								onChange={e => {
+									updateNewValue({
+										value: e.target.value,
+										key,
+										isEdit: newvalue[key]?.edit,
+									})
+								}}
+								onBlur={() => setIsEditing({ ...isEditing, [key]: false })}
+								autoFocus
+							/>
+						</>
 					)}
 				</div>
 			)

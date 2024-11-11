@@ -41,7 +41,7 @@ export default function UsersPage() {
 	const [showLoginInfo, setsSowLoginInfo] = useState(false)
 
 	const [parametersRow, setParametersRow] = useState({})
-	console.log(parametersRow)
+	// console.log(parametersRow)
 
 	const dispatch = useDispatch()
 
@@ -241,7 +241,7 @@ export default function UsersPage() {
 	// DELETE USERS
 
 	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
-	console.log(sizeSelectesRows)
+	// console.log(sizeSelectesRows)
 
 	const getIdsSelectedRows = selectedRowData => {
 		return selectedRowData.map(item => {
