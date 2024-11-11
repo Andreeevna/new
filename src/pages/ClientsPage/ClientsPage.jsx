@@ -37,7 +37,7 @@ const ClientsPage = () => {
 	const [showWarningPopupAll, setShowWarningPopupAll] = useState(false)
 
 	const [parametersRow, setParametersRow] = useState({})
-	console.log(parametersRow)
+	// console.log(parametersRow)
 
 	const clientRow = useSelector(state => state.clients.clients)
 	const isFetching = useSelector(state => state.clients.isFetching)
@@ -249,7 +249,7 @@ const ClientsPage = () => {
 	// DELETE CLIENTS
 
 	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
-	console.log(sizeSelectesRows)
+	// console.log(sizeSelectesRows)
 
 	const getIdsSelectedRows = selectedRowData => {
 		return selectedRowData.map(item => {

@@ -9,7 +9,6 @@ import Button from '../Button/Button'
 import './EditComponent.css'
 
 const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
-	console.log(item)
 	const dispatch = useDispatch()
 
 	const [isEditing, setIsEditing] = useState({})
@@ -187,7 +186,9 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 					) : (
 						<>
 							{newvalue[key]?.readOnly ? (
-								<span>{newvalue[key]?.readOnly || ''}</span>
+								<span className='edit-item__span-read'>
+									{newvalue[key]?.readOnly || ''}
+								</span>
 							) : null}
 
 							<input

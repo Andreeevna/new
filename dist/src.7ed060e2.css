@@ -505,7 +505,8 @@ F1F1F1 */
 }
 
 .edit-item__value {
-	display: block;
+	flex-shrink: 0;
+	/* display: block; */
 	font-size: 16px;
 	font-weight: 300;
 	opacity: 0.8;
@@ -519,6 +520,10 @@ F1F1F1 */
 	border: none;
 	outline: none;
 	color: #0832de;
+}
+
+.edit-item__span-read {
+	flex-shrink: 0;
 }
 
 /* btn */
