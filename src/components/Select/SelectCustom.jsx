@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Box, FormControl, MenuItem } from '@mui/material'
 import Select from '@mui/material/Select'
 
 import './Select.css'
 
-const SelectCustom = ({ options, onChange }) => {
+const SelectCustom = ({ options, onChange, value }) => {
 	// const options = [
 	// 	{ label: 31, name: 'Тестовый клиент PUSH' },
 	// 	{ label: 32, name: 'Тестовый клиент' },
@@ -16,22 +16,24 @@ const SelectCustom = ({ options, onChange }) => {
 	// 		name: 'Тестовый клиент PUSH Тестовый клиент PUSHТестовый клиент PUSHТестовый клиент PUSHТестовый клиент PUSHТестовый клиент PUSHТестовый клиент PUSHТестовый клиент PUSHТестовый клиент PUSHv',
 	// 	},
 	// ]
-	const [selectedOption, setSelectedOption] = useState(options[0].label)
-	console.log(selectedOption)
+	// const [selectedOption, setSelectedOption] = useState()
+	// console.log(selectedOption)
 
 	const handleChange = e => {
 		e.stopPropagation()
-		setSelectedOption(e.target.value)
+		// setSelectedOption(e.target.value.toString())
 		onChange(e)
 	}
 
+	if (!options.find(item => `${item.label}` === `${value}`)) return
 	return (
 		<Box sx={{ width: 300 }}>
 			<FormControl fullWidth>
 				<Select
 					labelId='demo-simple-select-label'
 					id='demo-simple-select'
-					value={selectedOption}
+					value={options.length > 0 ? `${value}` : ''}
+					defaultValue=''
 					onChange={handleChange}
 					sx={{ height: '25px' }}
 					MenuProps={{
@@ -41,8 +43,8 @@ const SelectCustom = ({ options, onChange }) => {
 						},
 					}}
 				>
-					{options.map(option => (
-						<MenuItem key={option.label} value={option.label}>
+					{options.map((option, index) => (
+						<MenuItem key={index} value={`${option.label}`}>
 							{option.name}
 						</MenuItem>
 					))}

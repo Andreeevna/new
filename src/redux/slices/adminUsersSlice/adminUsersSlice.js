@@ -124,7 +124,7 @@ export const adminUsersReducer = createSlice({
 		builder.addCase(createAdminUser.fulfilled, (state, action) => {
 			state.isFetching = false
 			state.message = null
-			state.users.push(action.payload.record)
+			state.users.push(action.payload.user)
 		})
 		builder.addCase(createAdminUser.rejected, state => {
 			state.message = ERROR
@@ -137,7 +137,7 @@ export const adminUsersReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(updateAdminUser.fulfilled, (state, action) => {
-			if (action.payload.records) {
+			if (action.payload?.records?.updated) {
 				state.users = state.users.map(item => {
 					if (item.id === action.payload.records?.updated[0].id) {
 						return (item = { ...action.payload.records?.updated[0] })

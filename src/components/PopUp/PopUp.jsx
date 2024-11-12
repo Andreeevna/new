@@ -7,7 +7,7 @@ import './PopUp.css'
 
 const PopUp = ({ onClose = null, children, className = 'modal-classic' }) => {
 	const handleClick = e => {
-		const inModal = e.target.closest('.popup')
+		const inModal = e.target.classList.contains('popup')
 		if (!inModal) return
 		onClose()
 	}

@@ -1,26 +1,41 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { updateAdminClient } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import { updateAdminLogin } from '../../redux/slices/adminLoginSlice/adminLoginSlice'
 import { updateAdminUser } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
 import { clientsDict, LoginDict, usersDict } from '../../utils/dicts'
-import { createOptionsForClients } from '../../utils/searchOptions'
+import {
+	createOptionsForClients,
+	createOptionsForUsers,
+} from '../../utils/searchOptions'
 import Button from '../Button/Button'
 import SelectCustom from '../Select/SelectCustom'
 import './EditComponent.css'
 
 const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 	const dispatch = useDispatch()
+	// console.log(item)
 
 	const [isEditing, setIsEditing] = useState({})
 	const logins = useSelector(state => state.logins.logins)
 
-	const options = {
-		client: createOptionsForClients({ logins, essence: 'client' }),
-	}
+	// const options = {
+	// 	client: createOptionsForClients({ logins, essence: 'client' }),
+	// 	user: createOptionsForUsers({
+	// 		logins,
+	// 		id: item?.client.id,
+	// 		essence: 'user',
+	// 	}),
+	// }
 
-	console.log(options)
+	// const usersOptions = createOptionsForUsers({
+	// 	logins,
+	// 	id: item?.client.id,
+	// 	essence: 'user',
+	// })
+
+	// console.log(usersOptions)
 
 	const itemNeededFields = useMemo(() => {
 		return IGNORE_FIELDS.reduce((acc, current) => {
@@ -117,7 +132,6 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 
 	const updateNewValue = ({ key, value, isEdit }) => {
 		const newState = { ...newvalue }
-		console.log(key)
 		if (isEdit) {
 			newState[key].edit = value
 		} else {
@@ -126,7 +140,20 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		setNewValue(newState)
 	}
 
-	console.log(newvalue)
+	const options = {
+		client: createOptionsForClients({ logins, essence: 'client' }),
+		user: createOptionsForUsers({
+			logins,
+			id: newvalue.client,
+			essence: 'user',
+		}),
+	}
+
+	useEffect(() => {
+		updateNewValue({ key: 'user', value: options.user[0].label })
+	}, [newvalue.client])
+
+	// console.log(newvalue)
 
 	const onHandleUpdate = () => {
 		if (chapter === 'clients') {
@@ -199,6 +226,7 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 					<span className='edit-item__key'>{header}:</span>
 					{options[key] ? (
 						<SelectCustom
+							key={key}
 							options={options[key]}
 							onChange={e => {
 								updateNewValue({
@@ -206,6 +234,7 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 									key,
 								})
 							}}
+							value={newvalue[key]}
 						/>
 					) : !isEditing[key] ? (
 						<span

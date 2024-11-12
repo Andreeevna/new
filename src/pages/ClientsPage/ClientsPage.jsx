@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../components/Button/Button'
 import CreateItem from '../../components/CreateItem/CreateItem'
 import Loader from '../../components/Loader/Loader'
+import LoginsInfo from '../../components/LoginsInfo/LoginsInfo'
 import PopUp from '../../components/PopUp/PopUp'
 import WarningDelete from '../../components/WarningDelete/WarningDelete'
 import usePopup from '../../hooks/usePopup'
@@ -16,6 +17,7 @@ import {
 	createAdminClient,
 	deleteAdminClients,
 } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
+import { getAdminLogin } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
 import './ClientsPage.css'
 
 const filterNames = {
@@ -35,6 +37,8 @@ const ClientsPage = () => {
 	const [showCreatePopup, setShowCreatePopup] = useState(false)
 	const [showWarningPopup, setShowWarningPopup] = useState(false)
 	const [showWarningPopupAll, setShowWarningPopupAll] = useState(false)
+
+	const [showLoginInfo, setsSowLoginInfo] = useState(false)
 
 	const [parametersRow, setParametersRow] = useState({})
 	// console.log(parametersRow)
@@ -145,7 +149,18 @@ const ClientsPage = () => {
 			renderCell: params => {
 				return (
 					<div className='action-group'>
-						<div className=''>
+						<div className='action-group__login'>
+							<button
+								className='action-group__login--btn'
+								onClick={e => {
+									setsSowLoginInfo(true)
+									getLoginId(e, params.row.id)
+								}}
+							>
+								Логины
+							</button>
+						</div>
+						<div>
 							<button
 								className='productListEdit'
 								onClick={e => {
@@ -181,6 +196,20 @@ const ClientsPage = () => {
 			},
 		},
 	]
+
+	const getLoginId = (e, id) => {
+		if (e) e.stopPropagation()
+
+		const formStateLogins = {
+			bitrix_id: 225,
+			secret_key: 'Смородин Борис Борисович',
+			login_type: null,
+			users_list: null,
+			clients_list: [id],
+		}
+
+		dispatch(getAdminLogin({ formStateLogins }))
+	}
 
 	const onItemCreated = React.useCallback(formState => {
 		const formStateCreate = {
@@ -327,6 +356,25 @@ const ClientsPage = () => {
 		page: 0,
 	})
 
+	const clientsLogins = useSelector(state => state.clients.clientsLogin)
+
+	//LOGIN INFO
+	const loginInfoPopup = () => {
+		return (
+			<PopUp
+				onClose={() => {
+					setsSowLoginInfo(false)
+				}}
+				className='modal-logins-info'
+			>
+				<LoginsInfo
+					title={'Cведения о логинах клиента'}
+					items={clientsLogins}
+				/>
+			</PopUp>
+		)
+	}
+
 	return (
 		<>
 			{isFetching ? (
@@ -396,6 +444,8 @@ const ClientsPage = () => {
 							setShowWarningPopup: setShowWarningPopupAll,
 							setParametersRow: () => setSizeSelectesRows([]),
 						})}
+
+					{showLoginInfo && loginInfoPopup()}
 				</div>
 			)}{' '}
 		</>
