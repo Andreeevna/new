@@ -370,6 +370,7 @@ const ClientsPage = () => {
 				<LoginsInfo
 					title={'Cведения о логинах клиента'}
 					items={clientsLogins}
+					entity={'clients'}
 				/>
 			</PopUp>
 		)
