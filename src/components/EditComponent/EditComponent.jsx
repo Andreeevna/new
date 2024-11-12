@@ -20,23 +20,6 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 	const [isEditing, setIsEditing] = useState({})
 	const logins = useSelector(state => state.logins.logins)
 
-	// const options = {
-	// 	client: createOptionsForClients({ logins, essence: 'client' }),
-	// 	user: createOptionsForUsers({
-	// 		logins,
-	// 		id: item?.client.id,
-	// 		essence: 'user',
-	// 	}),
-	// }
-
-	// const usersOptions = createOptionsForUsers({
-	// 	logins,
-	// 	id: item?.client.id,
-	// 	essence: 'user',
-	// })
-
-	// console.log(usersOptions)
-
 	const itemNeededFields = useMemo(() => {
 		return IGNORE_FIELDS.reduce((acc, current) => {
 			const result = current.split('.').reduce(
@@ -70,20 +53,6 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 			  }
 			: itemNeededFields
 	)
-
-	// const filedNameCollection = Object.entries(
-	// 	chapter === 'login'
-	// 		? {
-	// 				...itemNeededFields.login,
-	// 				client: {
-	// 					edit: itemNeededFields.client.id,
-	// 					readOnly: itemNeededFields.client.name,
-	// 				},
-	// 				clientID: itemNeededFields.client.id,
-	// 				user: itemNeededFields.user.id,
-	// 		  }
-	// 		: itemNeededFields
-	// )
 
 	const findvalue = (key, dict) => {
 		return dict
@@ -269,7 +238,6 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 							/>
 						</>
 					)}
-					{/* {} */}
 				</div>
 			)
 		})
