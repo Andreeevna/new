@@ -1,11 +1,11 @@
-const createOptionsForClients = ({ logins, essence }) => {
+export const createOptionsForClients = ({ logins, essence }) => {
 	return logins.reduce((acc, item) => {
-		const id = item[essence].id
+		const label = item[essence].id
 		const name = item[essence].name
 
-		const existingItem = acc.find(i => i.id === id)
+		const existingItem = acc.find(i => i.label === label)
 		if (!existingItem) {
-			acc.push({ id, name })
+			acc.push({ label, name })
 		}
 
 		return acc

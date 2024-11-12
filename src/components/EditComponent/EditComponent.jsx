@@ -1,17 +1,26 @@
 import React, { useMemo, useState } from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateAdminClient } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import { updateAdminLogin } from '../../redux/slices/adminLoginSlice/adminLoginSlice'
 import { updateAdminUser } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
 import { clientsDict, LoginDict, usersDict } from '../../utils/dicts'
+import { createOptionsForClients } from '../../utils/searchOptions'
 import Button from '../Button/Button'
+import SelectCustom from '../Select/SelectCustom'
 import './EditComponent.css'
 
 const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 	const dispatch = useDispatch()
 
 	const [isEditing, setIsEditing] = useState({})
+	const logins = useSelector(state => state.logins.logins)
+
+	const options = {
+		client: createOptionsForClients({ logins, essence: 'client' }),
+	}
+
+	console.log(options)
 
 	const itemNeededFields = useMemo(() => {
 		return IGNORE_FIELDS.reduce((acc, current) => {
@@ -37,15 +46,29 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		chapter === 'login'
 			? {
 					...itemNeededFields.login,
-					client: {
-						edit: itemNeededFields.client.id,
-						readOnly: itemNeededFields.client.name,
-					},
-					clientID: itemNeededFields.client.id,
+					// client: {
+					// 	edit: itemNeededFields.client.id,
+					// 	readOnly: itemNeededFields.client.name,
+					// },
+					client: itemNeededFields.client.id,
 					user: itemNeededFields.user.id,
 			  }
 			: itemNeededFields
 	)
+
+	// const filedNameCollection = Object.entries(
+	// 	chapter === 'login'
+	// 		? {
+	// 				...itemNeededFields.login,
+	// 				client: {
+	// 					edit: itemNeededFields.client.id,
+	// 					readOnly: itemNeededFields.client.name,
+	// 				},
+	// 				clientID: itemNeededFields.client.id,
+	// 				user: itemNeededFields.user.id,
+	// 		  }
+	// 		: itemNeededFields
+	// )
 
 	const findvalue = (key, dict) => {
 		return dict
@@ -82,11 +105,11 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		chapter === 'login'
 			? {
 					...itemNeededFields.login,
-					client: {
-						edit: itemNeededFields.client.id,
-						readOnly: itemNeededFields.client.name,
-					},
-					clientID: itemNeededFields.client.id,
+					// client: {
+					// 	edit: itemNeededFields.client.id,
+					// 	readOnly: itemNeededFields.client.name,
+					// },
+					client: itemNeededFields.client.id,
 					user: itemNeededFields.user.id,
 			  }
 			: { ...itemNeededFields }
@@ -151,7 +174,7 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 						login_2fa: newvalue.login_two_fa,
 						password_2fa: newvalue.password_two_fa,
 						secret: newvalue.secret,
-						client_id: +newvalue.client.edit,
+						client_id: +newvalue.client,
 						user_id: +newvalue.user,
 					},
 				],
@@ -174,7 +197,17 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 					onClick={() => handleClickOutside()}
 				>
 					<span className='edit-item__key'>{header}:</span>
-					{!isEditing[key] ? (
+					{options[key] ? (
+						<SelectCustom
+							options={options[key]}
+							onChange={e => {
+								updateNewValue({
+									value: e.target.value,
+									key,
+								})
+							}}
+						/>
+					) : !isEditing[key] ? (
 						<span
 							className='edit-item__value'
 							onClick={e => handleEditClick(key)}
@@ -207,6 +240,7 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 							/>
 						</>
 					)}
+					{/* {} */}
 				</div>
 			)
 		})

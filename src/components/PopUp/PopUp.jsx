@@ -7,8 +7,8 @@ import './PopUp.css'
 
 const PopUp = ({ onClose = null, children, className = 'modal-classic' }) => {
 	const handleClick = e => {
-		const inModal = e.target.closest('[data-id=modal]')
-		if (inModal) return
+		const inModal = e.target.closest('.popup')
+		if (!inModal) return
 		onClose()
 	}
 

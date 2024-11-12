@@ -481,6 +481,20 @@ F1F1F1 */
 	background-color: #91919170;
 }
 
+.ne {
+	margin: 100px auto;
+}
+
+.custom-select {
+	width: 100%;
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	font-size: 16px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
 .edit {
 	width: 100%;
 	/* background-color: antiquewhite; */
