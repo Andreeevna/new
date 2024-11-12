@@ -11,7 +11,6 @@ import EditPage from './pages/EditPage/EditPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import UsersPage from './pages/UsersPage/UsersPage'
 
-import SelectCustom from './components/Select/SelectCustom'
 import { getAdminClients } from './redux/slices/adminClientsSlice/adminClientsSlice'
 import { getAdminLogins } from './redux/slices/adminLoginSlice/adminLoginSlice'
 import { getAdminUsers } from './redux/slices/adminUsersSlice/adminUsersSlice'
@@ -53,10 +52,6 @@ function App() {
 			element: <Layout />,
 
 			children: [
-				{
-					path: '/',
-					element: <SelectCustom />,
-				},
 				{
 					path: '/users',
 					element: <UsersPage />,
