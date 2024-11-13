@@ -26,7 +26,7 @@ const LoginsInfo = ({ title, items, entity = '' }) => {
 			)}
 
 			{/* <td className='ellipsis'>{item?.login?.id}</td> */}
-			<td className='ellipsis'>{item?.login.login_type_id}</td>
+			<td className='ellipsis'>{item?.login_type?.login_type}</td>
 			<td className='ellipsis'>{item?.login?.secret}</td>
 			<td className='ellipsis'>{item?.login?.login}</td>
 			<td className='ellipsis'>{item?.login?.password}</td>
