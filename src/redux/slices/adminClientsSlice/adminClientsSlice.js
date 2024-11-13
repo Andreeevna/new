@@ -37,7 +37,7 @@ export const updateAdminClient = createAsyncThunk(
 	'clients/updateAdminClient',
 	async params => {
 		const { formStateUpdate } = params
-		console.log(formStateUpdate)
+		// console.log(formStateUpdate)
 
 		try {
 			const { data } = await updateApi.updateClients(formStateUpdate)

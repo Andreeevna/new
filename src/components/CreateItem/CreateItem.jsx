@@ -10,7 +10,7 @@ const CreateItem = ({ columns, IGNORED_FIELD, onItemCreated }) => {
 		formState[key] = value
 		setFormState({ ...formState })
 	}
-	console.log(formState)
+	// console.log(formState)
 
 	const itemTODO = useMemo(() => {
 		return columns

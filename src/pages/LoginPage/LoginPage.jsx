@@ -31,6 +31,7 @@ const LoginPage = () => {
 	const dispatch = useDispatch()
 
 	const { showPopup, parameter, renderPopUp, togglePopup } = usePopup(false, [
+		`login.login_type_id`,
 		'login.creation_date',
 		'login.last_used',
 		'clientID',
@@ -54,6 +55,7 @@ const LoginPage = () => {
 				client: item.client.id,
 				user: item.user.id,
 				clientName: item.client.name,
+				login_type: item.login_type.login_type,
 			}
 		})
 	}, [loginRow])
@@ -87,7 +89,7 @@ const LoginPage = () => {
 			hideable: false,
 		},
 		{
-			field: `login_type_id`,
+			field: `login_type`,
 			headerName: `Тип логина`,
 			// width: 140,
 			flex: 1,
@@ -270,7 +272,7 @@ const LoginPage = () => {
 					]}
 					IGNORED_FIELD={[
 						'id',
-						`login_type_id`,
+						`login_type`,
 						'creation_date',
 						`last_used`,
 						'action',
