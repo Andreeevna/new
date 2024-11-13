@@ -119,10 +119,12 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 	}
 
 	useEffect(() => {
-		updateNewValue({ key: 'user', value: options.user[0].label })
+		if (chapter === 'login') {
+			updateNewValue({ key: 'user', value: options.user[0].label })
+		}
 	}, [newvalue.client])
 
-	// console.log(newvalue)
+	console.log(newvalue)
 
 	const onHandleUpdate = () => {
 		if (chapter === 'clients') {
@@ -134,7 +136,7 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 						id: +newvalue.id,
 						name: newvalue.name,
 						max_accounts: +newvalue.max_accounts,
-						login_type: +newvalue.login_type_id,
+						login_type: +newvalue.login_type,
 						instruction: newvalue.instruction,
 					},
 				],

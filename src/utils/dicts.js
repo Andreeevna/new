@@ -31,7 +31,7 @@ export const clientsDict = [
 		headerName: `Инструкция`,
 	},
 	{
-		field: `login_type_id`,
+		field: `login_type`,
 		headerName: `Тип логина`,
 	},
 	{

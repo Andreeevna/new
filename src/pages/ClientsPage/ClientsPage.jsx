@@ -48,10 +48,14 @@ const ClientsPage = () => {
 
 	const getClientRow = clients => {
 		return clients?.map(el => {
-			return el.client
+			// console.log(el)
+			// console.log(el.client)
+			return { ...el.client, login_type: el.login_type.login_type }
 		})
 	}
+
 	const clientRow = getClientRow(clientRows)
+	// console.log(clientRow)
 
 	const dayInMonthComparator = (v1, v2) => {
 		const newDa = formatDateForSorting(v1)
@@ -129,7 +133,7 @@ const ClientsPage = () => {
 			hideable: false,
 		},
 		{
-			field: `login_type_id`,
+			field: `login_type`,
 			headerName: `Тип логина`,
 			// width: 300,
 			flex: 1,
@@ -217,7 +221,7 @@ const ClientsPage = () => {
 			secret_key: 'Смородин Борис Борисович',
 			name: formState.name,
 			max_accounts: +formState?.max_accounts,
-			login_type: +formState?.login_type_id,
+			login_type: +formState?.login_type,
 			instruction: formState?.instruction,
 		}
 
@@ -291,15 +295,6 @@ const ClientsPage = () => {
 		return selectedRowData.map(item => {
 			return item.id
 		})
-	}
-
-	const onDeleteClients = () => {
-		const formStateClients = {
-			bitrix_id: 225,
-			secret_key: 'Смородин Борис Борисович',
-			delete_ids: sizeSelectesRows,
-		}
-		dispatch(deleteAdminClients({ formStateClients }))
 	}
 
 	//WARNING DELETE
