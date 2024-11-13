@@ -1,9 +1,9 @@
 import React from 'react'
 
+import { loginTypeDict } from '../../utils/dicts'
 import './LoginsInfo.css'
 
 const LoginsInfo = ({ title, items, entity = '' }) => {
-	console.log(items)
 	if (items.length < 1)
 		return <div className='logins-info__empty'>Информация не найдена</div>
 	const headers = [
@@ -26,7 +26,9 @@ const LoginsInfo = ({ title, items, entity = '' }) => {
 			)}
 
 			{/* <td className='ellipsis'>{item?.login?.id}</td> */}
-			<td className='ellipsis'>{item?.login_type?.login_type}</td>
+			<td className='ellipsis'>
+				{loginTypeDict[item?.login_type?.login_type]}
+			</td>
 			<td className='ellipsis'>{item?.login?.secret}</td>
 			<td className='ellipsis'>{item?.login?.login}</td>
 			<td className='ellipsis'>{item?.login?.password}</td>

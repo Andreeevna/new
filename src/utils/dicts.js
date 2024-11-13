@@ -1,3 +1,11 @@
+export const loginTypeDict = {
+	0: 'По SMS',
+	1: 'По коду TOTP',
+	2: 'По PUSH уведомлению',
+	3: 'По ЗВОНКУ',
+	4: 'Без 2FA',
+}
+
 export const usersDict = [
 	{
 		field: `id`,

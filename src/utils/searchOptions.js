@@ -13,23 +13,32 @@ export const createOptionsForClients = ({ logins, essence }) => {
 }
 // console.log(createOptionsForClients({ logins, essence: 'client' }))
 
-export const createOptionsForUsers = ({ logins, id, essence }) => {
+export const createOptionsForUsers = ({ users, id }) => {
 	let options = []
 
-	logins.forEach(item => {
+	users.forEach(item => {
 		const existingItem = options.find(i => {
-			// console.log(+i.label, item[essence].id)
-			return +i.label === item[essence].id
+			return +i.label === item.id
 		})
-		if (+item.client.id === +id && !existingItem) {
+		if (!existingItem) {
+			// if (+item.client.id === +id && !existingItem) {
+
 			options.push({
-				label: `${item[essence].id}`,
-				name: `${item[essence].id}, ${item[essence].username}`,
+				label: `${item.id}`,
+				name: `${item.id}, ${item.username}`,
 			})
 		}
 	})
 
-	return options
+	return options.slice().sort((a, b) => {
+		if (a.label === id.toString()) {
+			return -1
+		}
+		if (b.label === id.toString()) {
+			return 1
+		}
+		return a.label.localeCompare(b.label)
+	})
 }
 
 // console.log(createOptionsForUsers({ logins, id: 38, essence: 'user' }))

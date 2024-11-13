@@ -109,12 +109,13 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		setNewValue(newState)
 	}
 
+	const users = useSelector(state => state.users.users)
+
 	const options = {
 		client: createOptionsForClients({ logins, essence: 'client' }),
 		user: createOptionsForUsers({
-			logins,
-			id: newvalue.client,
-			essence: 'user',
+			users,
+			id: itemNeededFields.user.id,
 		}),
 	}
 
@@ -187,7 +188,8 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		return filedNameCollection.map(([key, value], index) => {
 			const header = setNeededDict(key, chapter)
 			if (!header.length) return null
-
+			// console.log(key, value)
+			const userID = key === 'user' && value
 			return (
 				<div
 					className='edit-item'
@@ -206,6 +208,7 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 								})
 							}}
 							value={newvalue[key]}
+							userId={userID}
 						/>
 					) : !isEditing[key] ? (
 						<span

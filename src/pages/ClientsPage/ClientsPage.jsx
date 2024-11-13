@@ -18,6 +18,7 @@ import {
 	deleteAdminClients,
 } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import { getAdminLogin } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
+import { loginTypeDict } from '../../utils/dicts'
 import './ClientsPage.css'
 
 const filterNames = {
@@ -141,6 +142,9 @@ const ClientsPage = () => {
 			editable: false,
 			filterable: false,
 			hideable: false,
+			renderCell: params => {
+				return <span>{loginTypeDict[params.row.login_type]}</span>
+			},
 		},
 		{
 			field: 'action',

@@ -6,7 +6,7 @@ const EditPage = ({ id, chapter, onClose, IGNORE_FIELDS }) => {
 	// const { id, chapter } = useParams()
 
 	const item = getProductById(id, chapter)
-	console.log(item)
+	// console.log(item)
 
 	const renderItem = () => {
 		if (chapter === 'clients') {

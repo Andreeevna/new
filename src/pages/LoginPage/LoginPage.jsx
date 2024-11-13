@@ -17,6 +17,7 @@ import {
 	createAdminLogin,
 	deteleAdminLogins,
 } from '../../redux/slices/adminLoginSlice/adminLoginSlice'
+import { loginTypeDict } from '../../utils/dicts'
 import './LoginPage.css'
 
 const filterNames = {
@@ -73,7 +74,7 @@ const LoginPage = () => {
 		{
 			field: `client`,
 			headerName: `ID Клиента`,
-			width: 70,
+			// width: 0,
 			// flex: 1,
 			sortable: true,
 			editable: false,
@@ -82,7 +83,7 @@ const LoginPage = () => {
 		{
 			field: `user`,
 			headerName: `ID Пользователя`,
-			width: 70,
+			// width: 0,
 			// flex: 1,
 			sortable: true,
 			editable: false,
@@ -96,6 +97,9 @@ const LoginPage = () => {
 			sortable: true,
 			editable: false,
 			hideable: false,
+			renderCell: params => {
+				return <span>{loginTypeDict[params.row.login_type]}</span>
+			},
 		},
 		{
 			field: `secret`,
