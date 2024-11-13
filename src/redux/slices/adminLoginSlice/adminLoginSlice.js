@@ -126,6 +126,13 @@ export const adminLoginsReducer = createSlice({
 		builder.addCase(updateAdminLogin.fulfilled, (state, action) => {
 			state.isFetching = false
 			state.message = null
+			state.logins = state.logins.map(item => {
+				if (item.login.id === action.payload.records.updated[0].login.id) {
+					return (item = action.payload.records.updated[0])
+				} else {
+					return item
+				}
+			})
 		})
 		builder.addCase(updateAdminLogin.rejected, state => {
 			state.message = ERROR

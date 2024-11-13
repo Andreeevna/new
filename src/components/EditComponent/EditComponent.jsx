@@ -124,7 +124,7 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		}
 	}, [newvalue.client])
 
-	console.log(newvalue)
+	// console.log(newvalue)
 
 	const onHandleUpdate = () => {
 		if (chapter === 'clients') {
