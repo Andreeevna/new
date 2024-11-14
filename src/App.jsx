@@ -14,6 +14,7 @@ import UsersPage from './pages/UsersPage/UsersPage'
 import { getAdminClients } from './redux/slices/adminClientsSlice/adminClientsSlice'
 import { getAdminLogins } from './redux/slices/adminLoginSlice/adminLoginSlice'
 import { getAdminUsers } from './redux/slices/adminUsersSlice/adminUsersSlice'
+import getCurrentUser from './utils/bx/current'
 
 function App() {
 	const dispatch = useDispatch()
@@ -39,6 +40,12 @@ function App() {
 		users_list: null,
 		clients_list: null,
 	}
+
+	useEffect(() => {
+		getCurrentUser().then(response => {
+			console.log(response)
+		})
+	}, [])
 
 	useEffect(() => {
 		dispatch(getAdminClients({ formState }))
