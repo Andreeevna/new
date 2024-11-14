@@ -6,6 +6,7 @@ import Select from '@mui/material/Select'
 import './Select.css'
 
 const SelectCustom = ({ options, onChange, value }) => {
+	console.log(value)
 	// const options = [
 	// 	{ label: 31, name: 'Тестовый клиент PUSH' },
 	// 	{ label: 32, name: 'Тестовый клиент' },

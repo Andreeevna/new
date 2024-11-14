@@ -206,6 +206,20 @@ F1F1F1 */
 	cursor: pointer;
 }
 
+.ne {
+	margin: 100px auto;
+}
+
+.custom-select {
+	width: 100%;
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	font-size: 16px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
 .create-item__title {
 	margin-top: 10px;
 	margin-bottom: 40px;
@@ -583,20 +597,6 @@ td {
 
 .warning-delete__cancellation {
 	background-color: #91919170;
-}
-
-.ne {
-	margin: 100px auto;
-}
-
-.custom-select {
-	width: 100%;
-	padding: 8px 12px;
-	border: 1px solid #ccc;
-	font-size: 16px;
-	border-radius: 4px;
-	cursor: pointer;
-	transition: all 0.3s ease;
 }
 
 .edit {

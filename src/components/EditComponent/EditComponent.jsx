@@ -115,8 +115,15 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		client: createOptionsForClients({ logins, essence: 'client' }),
 		user: createOptionsForUsers({
 			users,
-			id: itemNeededFields.user.id,
+			id: itemNeededFields?.user?.id,
 		}),
+		login_type: [
+			{ label: 0, name: 'По SMS' },
+			{ label: 1, name: 'По коду TOTP' },
+			{ label: 2, name: 'По PUSH уведомлению' },
+			{ label: 3, name: 'По ЗВОНКУ' },
+			{ label: 4, name: 'Без 2FA' },
+		],
 	}
 
 	useEffect(() => {

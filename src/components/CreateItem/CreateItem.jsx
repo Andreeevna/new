@@ -1,16 +1,28 @@
 import React, { useMemo, useState } from 'react'
 
 import Button from '../Button/Button'
+import SelectCustom from '../Select/SelectCustom'
 import './CreateItem.css'
 
 const CreateItem = ({ columns, IGNORED_FIELD, onItemCreated }) => {
-	const [formState, setFormState] = useState({})
+	const options = {
+		login_type: [
+			{ label: 0, name: 'По SMS' },
+			{ label: 1, name: 'По коду TOTP' },
+			{ label: 2, name: 'По PUSH уведомлению' },
+			{ label: 3, name: 'По ЗВОНКУ' },
+			{ label: 4, name: 'Без 2FA' },
+		],
+	}
+	const [formState, setFormState] = useState({
+		login_type: options.login_type[0].label,
+	})
 
 	const updateFormState = (key, value) => {
 		formState[key] = value
 		setFormState({ ...formState })
 	}
-	// console.log(formState)
+	console.log(formState)
 
 	const itemTODO = useMemo(() => {
 		return columns
@@ -24,14 +36,23 @@ const CreateItem = ({ columns, IGNORED_FIELD, onItemCreated }) => {
 							{column?.field !== 'action' && column?.headerName}
 						</span>
 						{column?.field !== 'action' ? (
-							<input
-								className='create-item__input'
-								type='text'
-								value={formState[column?.field]}
-								name={column?.field}
-								placeholder={'Введите необходимые данные..'}
-								onChange={e => updateFormState(column?.field, e.target.value)}
-							/>
+							options[column.field] ? (
+								<SelectCustom
+									// key={key}
+									options={options[column.field]}
+									onChange={e => updateFormState(column?.field, e.target.value)}
+									value={formState[column?.field]}
+								/>
+							) : (
+								<input
+									className='create-item__input'
+									type='text'
+									value={formState[column?.field]}
+									name={column?.field}
+									placeholder={'Введите необходимые данные..'}
+									onChange={e => updateFormState(column?.field, e.target.value)}
+								/>
+							)
 						) : null}
 					</div>
 				)

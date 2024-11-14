@@ -31,10 +31,10 @@ export const createOptionsForUsers = ({ users, id }) => {
 	})
 
 	return options.slice().sort((a, b) => {
-		if (a.label === id.toString()) {
+		if (a.label === id?.toString()) {
 			return -1
 		}
-		if (b.label === id.toString()) {
+		if (b.label === id?.toString()) {
 			return 1
 		}
 		return a.label.localeCompare(b.label)
