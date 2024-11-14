@@ -122,9 +122,13 @@ export const adminUsersReducer = createSlice({
 			state.message = null
 		})
 		builder.addCase(createAdminUser.fulfilled, (state, action) => {
+			console.log(action.payload)
 			state.isFetching = false
 			state.message = null
-			state.users.push(action.payload.user)
+
+			if (action.payload.message === 'Created') {
+				state.users.push(action.payload.user)
+			}
 		})
 		builder.addCase(createAdminUser.rejected, state => {
 			state.message = ERROR
