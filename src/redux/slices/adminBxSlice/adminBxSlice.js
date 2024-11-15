@@ -14,7 +14,7 @@ export const adminBxSlice = createSlice({
 			state.userId = action.payload
 		},
 		changeUserInitials: (state, action) => {
-			state.userId = action.payload
+			state.initials = action.payload
 		},
 	},
 	extraReducers: builder => {},
