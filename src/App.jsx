@@ -25,14 +25,15 @@ function App() {
 	const dispatch = useDispatch()
 	const userID = useSelector(state => state.bx.userId)
 	const initials = useSelector(state => state.bx.initials)
-	console.log(userID)
-	console.log(initials)
 
 	const secretKey = getUserInitials(
 		initials.NAME,
 		initials.LAST_NAME,
 		initials.SECOND_NAME
 	)
+
+	console.log(userID)
+	console.log(initials)
 
 	console.log(secretKey)
 

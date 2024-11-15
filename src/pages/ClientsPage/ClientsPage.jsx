@@ -18,6 +18,7 @@ import {
 	deleteAdminClients,
 } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import { getAdminLogin } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
+import { getUserInitials } from '../../utils/bx/bxEmploee'
 import { loginTypeDict } from '../../utils/dicts'
 import './ClientsPage.css'
 
@@ -49,14 +50,11 @@ const ClientsPage = () => {
 
 	const getClientRow = clients => {
 		return clients?.map(el => {
-			// console.log(el)
-			// console.log(el.client)
 			return { ...el.client, login_type: el.login_type.login_type }
 		})
 	}
 
 	const clientRow = getClientRow(clientRows)
-	// console.log(clientRow)
 
 	const dayInMonthComparator = (v1, v2) => {
 		const newDa = formatDateForSorting(v1)
@@ -205,12 +203,21 @@ const ClientsPage = () => {
 		},
 	]
 
+	const userID = useSelector(state => state.bx.userId)
+	const initials = useSelector(state => state.bx.initials)
+
+	const secretKey = getUserInitials(
+		initials.NAME,
+		initials.LAST_NAME,
+		initials.SECOND_NAME
+	)
+
 	const getLoginId = (e, id) => {
 		if (e) e.stopPropagation()
 
 		const formStateLogins = {
-			bitrix_id: 225,
-			secret_key: 'Смородин Борис Борисович',
+			bitrix_id: +userID,
+			secret_key: `${secretKey}`,
 			login_type: null,
 			users_list: null,
 			clients_list: [id],
@@ -219,18 +226,20 @@ const ClientsPage = () => {
 		dispatch(getAdminLogin({ formStateLogins }))
 	}
 
-	const onItemCreated = React.useCallback(formState => {
-		const formStateCreate = {
-			bitrix_id: 225,
-			secret_key: 'Смородин Борис Борисович',
-			name: formState.name,
-			max_accounts: +formState?.max_accounts,
-			login_type: +formState?.login_type,
-			instruction: formState?.instruction,
-		}
-
-		dispatch(createAdminClient({ formStateCreate }))
-	}, [])
+	const onItemCreated = React.useCallback(
+		formState => {
+			const formStateCreate = {
+				bitrix_id: +userID,
+				secret_key: `${secretKey}`,
+				name: formState.name,
+				max_accounts: +formState?.max_accounts,
+				login_type: +formState?.login_type,
+				instruction: formState?.instruction,
+			}
+			dispatch(createAdminClient({ formStateCreate }))
+		},
+		[secretKey]
+	)
 
 	const renderCreatePopUp = () => {
 		return (
@@ -307,8 +316,8 @@ const ClientsPage = () => {
 		if (e) e.stopPropagation()
 		// console.log(id)
 		const formStateClients = {
-			bitrix_id: '225',
-			secret_key: 'Смородин Борис Борисович',
+			bitrix_id: userID,
+			secret_key: `${secretKey}`,
 			delete_ids: ids,
 		}
 
