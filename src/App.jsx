@@ -14,10 +14,13 @@ import UsersPage from './pages/UsersPage/UsersPage'
 import { getAdminClients } from './redux/slices/adminClientsSlice/adminClientsSlice'
 import { getAdminLogins } from './redux/slices/adminLoginSlice/adminLoginSlice'
 import { getAdminUsers } from './redux/slices/adminUsersSlice/adminUsersSlice'
+import { getUserInitials } from './utils/bx/bxEmploee'
 import getCurrentUser from './utils/bx/current'
 
 function App() {
 	const dispatch = useDispatch()
+
+	console.log(getUserInitials('Светаланa', 'Малашенко', 'Андреевна'))
 
 	const formState = {
 		bitrix_id: '225',
