@@ -20,6 +20,7 @@ import {
 	deleteAdminUsers,
 	getAdminLogin,
 } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
+import { getUserInitials } from '../../utils/bx/bxEmploee'
 import './UsersPage.css'
 
 const filterNames = {
@@ -153,12 +154,21 @@ export default function UsersPage() {
 		},
 	]
 
+	const userID = useSelector(state => state.bx.userId)
+	const initials = useSelector(state => state.bx.initials)
+
+	const secretKey = getUserInitials(
+		initials.NAME,
+		initials.LAST_NAME,
+		initials.SECOND_NAME
+	)
+
 	const getLoginId = (e, id) => {
 		if (e) e.stopPropagation()
 
 		const formStateLogins = {
-			bitrix_id: 225,
-			secret_key: 'Смородин Борис Борисович',
+			bitrix_id: userID,
+			secret_key: `${secretKey}`,
 			login_type: null,
 			users_list: [id],
 			clients_list: null,
@@ -167,16 +177,19 @@ export default function UsersPage() {
 		dispatch(getAdminLogin({ formStateLogins }))
 	}
 
-	const onItemCreated = React.useCallback(formState => {
-		const formStateCreate = {
-			bitrix_id: 225,
-			secret_key: 'Смородин Борис Борисович',
-			user_bitrix_id: formState.bitrix_id,
-			username: formState.username,
-		}
+	const onItemCreated = React.useCallback(
+		formState => {
+			const formStateCreate = {
+				bitrix_id: +userID,
+				secret_key: `${secretKey}`,
+				user_bitrix_id: formState.bitrix_id,
+				username: formState.username,
+			}
 
-		dispatch(createAdminUser({ formStateCreate }))
-	}, [])
+			dispatch(createAdminUser({ formStateCreate }))
+		},
+		[secretKey]
+	)
 
 	const renderCreatePopUp = () => {
 		return (
@@ -253,8 +266,8 @@ export default function UsersPage() {
 	const handleDelete = (e, ids) => {
 		if (e) e.stopPropagation()
 		const formStateUsers = {
-			bitrix_id: '225',
-			secret_key: 'Смородин Борис Борисович',
+			bitrix_id: userID,
+			secret_key: `${secretKey}`,
 			delete_ids: ids,
 		}
 		dispatch(deleteAdminUsers({ formStateUsers }))

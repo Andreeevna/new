@@ -60,6 +60,7 @@ const CreateItem = ({ columns, IGNORED_FIELD, onItemCreated }) => {
 
 	const sendItemHandler = () => {
 		onItemCreated(formState)
+		console.log(formState)
 		const data = Object.keys(formState).reduce((acc, key) => {
 			acc[key] = ''
 			return acc

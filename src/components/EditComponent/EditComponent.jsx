@@ -164,8 +164,8 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 		}
 		if (chapter === 'users') {
 			const formStateUpdate = {
-				bitrix_id: 225,
-				secret_key: 'Смородин Борис Борисович',
+				bitrix_id: +userID,
+				secret_key: `${secretKey}`,
 				user_info: [
 					{
 						id: +newvalue.id,
