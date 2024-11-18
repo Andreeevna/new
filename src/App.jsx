@@ -32,10 +32,9 @@ function App() {
 		initials.SECOND_NAME
 	)
 
-	console.log(userID)
-	console.log(initials)
-
-	console.log(secretKey)
+	// console.log(userID)
+	// console.log(initials)
+	// console.log(secretKey)
 
 	const formState = {
 		bitrix_id: userID,

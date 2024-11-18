@@ -302,7 +302,7 @@ const ClientsPage = () => {
 	// DELETE CLIENTS
 
 	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
-	// console.log(sizeSelectesRows)
+	console.log(sizeSelectesRows)
 
 	const getIdsSelectedRows = selectedRowData => {
 		return selectedRowData.map(item => {
@@ -321,7 +321,11 @@ const ClientsPage = () => {
 			delete_ids: ids,
 		}
 
-		dispatch(deleteAdminClients({ formStateClients }))
+		dispatch(deleteAdminClients({ formStateClients })).then(resp => {
+			if (resp.payload.message === 'Deleted') {
+				setSizeSelectesRows([])
+			}
+		})
 	}
 
 	const warningPopup = ({
