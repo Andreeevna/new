@@ -424,15 +424,12 @@ const ClientsPage = () => {
 								}}
 								checkboxSelection
 								disableColumnMenu
-								// disableColumnSelector
-								// disableDensitySelector
-								// disableSelectionOnClick
+								rowSelectionModel={sizeSelectesRows}
 								onRowSelectionModelChange={ids => {
 									const selectedIDs = new Set(ids)
 									const selectedRowData = clientRow.filter(row =>
 										selectedIDs.has(row.id)
 									)
-									// console.log(selectedRowData)
 									const idsSelected = getIdsSelectedRows(selectedRowData)
 									setSizeSelectesRows(idsSelected)
 								}}

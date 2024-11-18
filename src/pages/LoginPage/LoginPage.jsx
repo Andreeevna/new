@@ -400,9 +400,6 @@ const LoginPage = () => {
 							<DataGrid
 								columns={columnsLogins}
 								rows={filteredRows}
-								// columnVisibilityModel={{
-								// 	id: false,
-								// }}
 								paginationModel={paginationModel}
 								onPaginationModelChange={setPaginationModel}
 								pageSizeOptions={[PAGE_SIZE]}
@@ -411,9 +408,7 @@ const LoginPage = () => {
 								}}
 								checkboxSelection
 								disableColumnMenu
-								// disableColumnSelector
-								// disableDensitySelector
-								// disableSelectionOnClick
+								rowSelectionModel={sizeSelectesRows}
 								onRowSelectionModelChange={ids => {
 									const selectedIDs = new Set(ids)
 									const selectedRowData = rows.filter(row =>

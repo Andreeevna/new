@@ -346,8 +346,6 @@ export default function UsersPage() {
 					<div className='table__container'>
 						<div className='search__container'>{filters}</div>
 						<div className='clients__button-send'>
-							{' '}
-							{/* <Button className={'button-send__end'} text='Снять' onClick={onset} /> */}
 							<Button
 								className={'button-send__end'}
 								text='Создать'
@@ -374,15 +372,13 @@ export default function UsersPage() {
 								}}
 								checkboxSelection
 								disableColumnMenu
-								// disableColumnSelector
-								// disableDensitySelector
-								// disableSelectionOnClick
+								rowSelectionModel={sizeSelectesRows}
 								onRowSelectionModelChange={ids => {
+									console.log(ids)
 									const selectedIDs = new Set(ids)
 									const selectedRowData = userRows.filter(row =>
 										selectedIDs.has(row.id)
 									)
-									// console.log(selectedRowData)
 									const idsSelected = getIdsSelectedRows(selectedRowData)
 									setSizeSelectesRows(idsSelected)
 								}}
