@@ -23,6 +23,7 @@ import getCurrentUser from './utils/bx/current'
 
 function App() {
 	const dispatch = useDispatch()
+
 	const userID = useSelector(state => state.bx.userId)
 	const initials = useSelector(state => state.bx.initials)
 
@@ -58,43 +59,47 @@ function App() {
 		clients_list: null,
 	}
 
-	useEffect(() => {
-		getCurrentUser().then(response => {
-			console.log(response)
-			// dispatch(changeUserId(response.ID))
-			// dispatch(
-			// 	changeUserInitials({
-			// 		NAME: response.NAME,
-			// 		LAST_NAME: response.LAST_NAME,
-			// 		SECOND_NAME: response.SECOND_NAME,
-			// 	})
-			// )
-		})
-	}, [])
-
 	const [dataReady, setDataReady] = useState(false)
 
-	const initProject = async () => {
-		await dispatch(changeUserId('225'))
+	const initProject = async response => {
+		await dispatch(changeUserId(response.ID))
 		await dispatch(
 			changeUserInitials({
-				NAME: 'Борис',
-				LAST_NAME: 'Смородин',
-				SECOND_NAME: 'Борисович',
+				NAME: response.NAME,
+				LAST_NAME: response.LAST_NAME,
+				SECOND_NAME: response.SECOND_NAME,
 			})
 		)
 		setDataReady(true)
 	}
 
 	useEffect(() => {
-		initProject()
+		initProject({
+			ID: '225',
+			NAME: 'Борис',
+			LAST_NAME: 'Смородин',
+			SECOND_NAME: 'Борисович',
+		})
+	}, [])
+
+	useEffect(() => {
+		getCurrentUser().then(response => {
+			// console.log(response)
+			// initProject(response)
+		})
 	}, [])
 
 	useEffect(() => {
 		if (dataReady) {
 			dispatch(getAdminClients({ formState }))
 			dispatch(getAdminUsers({ formStateUsers }))
-			dispatch(getAdminLogins({ formStateLogins }))
+			dispatch(getAdminLogins({ formStateLogins })).then(resp => {
+				if (resp.payload) {
+					console.log(resp)
+					window.alert('Загрузка прошла')
+				}
+				// console.log(resp)
+			})
 		}
 	}, [dataReady])
 
