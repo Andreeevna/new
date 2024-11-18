@@ -251,7 +251,6 @@ export default function UsersPage() {
 	}, [filterValues, userRows])
 
 	// DELETE USERS
-
 	const [sizeSelectesRows, setSizeSelectesRows] = useState([])
 	// console.log(sizeSelectesRows)
 
@@ -270,7 +269,11 @@ export default function UsersPage() {
 			secret_key: `${secretKey}`,
 			delete_ids: ids,
 		}
-		dispatch(deleteAdminUsers({ formStateUsers }))
+		dispatch(deleteAdminUsers({ formStateUsers })).then(resp => {
+			if (resp.payload.message === 'Deleted') {
+				setSizeSelectesRows([])
+			}
+		})
 	}
 
 	const warningPopup = ({
@@ -285,6 +288,7 @@ export default function UsersPage() {
 			<PopUp
 				onClose={() => {
 					setShowWarningPopup(false)
+					setSizeSelectesRows([])
 				}}
 			>
 				<WarningDelete
