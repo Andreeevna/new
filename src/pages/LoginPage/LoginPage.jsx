@@ -17,6 +17,7 @@ import {
 	createAdminLogin,
 	deteleAdminLogins,
 } from '../../redux/slices/adminLoginSlice/adminLoginSlice'
+import { getUserInitials } from '../../utils/bx/bxEmploee'
 import { loginTypeDict } from '../../utils/dicts'
 import './LoginPage.css'
 
@@ -249,21 +250,33 @@ const LoginPage = () => {
 		})
 	}, [filterValues, rows])
 
-	const onItemCreated = React.useCallback(formState => {
-		const formStateCreateLogin = {
-			bitrix_id: 225,
-			secret_key: 'Смородин Борис Борисович',
-			login: formState.login,
-			password: formState.password,
-			login_2fa: formState.login_two_fa,
-			password_2fa: formState.password_two_fa,
-			secret: formState.secret,
-			client_id: +formState.client,
-			user_id: +formState.user,
-		}
+	const userID = useSelector(state => state.bx.userId)
+	const initials = useSelector(state => state.bx.initials)
 
-		dispatch(createAdminLogin({ formStateCreateLogin }))
-	}, [])
+	const secretKey = getUserInitials(
+		initials.NAME,
+		initials.LAST_NAME,
+		initials.SECOND_NAME
+	)
+
+	const onItemCreated = React.useCallback(
+		formState => {
+			const formStateCreateLogin = {
+				bitrix_id: +userID,
+				secret_key: `${secretKey}`,
+				login: formState.login,
+				password: formState.password,
+				login_2fa: formState.login_two_fa,
+				password_2fa: formState.password_two_fa,
+				secret: formState.secret,
+				client_id: +formState.client,
+				user_id: +formState.user,
+			}
+
+			dispatch(createAdminLogin({ formStateCreateLogin }))
+		},
+		[secretKey]
+	)
 
 	const renderCreatePopUp = () => {
 		return (
@@ -311,25 +324,20 @@ const LoginPage = () => {
 		})
 	}
 
-	const onDeletedLogins = () => {
-		const formStateDeleteLogins = {
-			bitrix_id: 225,
-			secret_key: 'Смородин Борис Борисович',
-			delete_ids: sizeSelectesRows,
-		}
-		dispatch(deteleAdminLogins({ formStateDeleteLogins }))
-	}
-
 	// WARNING DELETE
 	const handleDelete = (e, ids) => {
 		if (e) e.stopPropagation()
 
 		const formStateDeleteLogins = {
-			bitrix_id: 225,
-			secret_key: 'Смородин Борис Борисович',
+			bitrix_id: +userID,
+			secret_key: `${secretKey}`,
 			delete_ids: ids,
 		}
-		dispatch(deteleAdminLogins({ formStateDeleteLogins }))
+		dispatch(deteleAdminLogins({ formStateDeleteLogins })).then(resp => {
+			if (resp.payload.message === 'Deleted') {
+				setSizeSelectesRows([])
+			}
+		})
 	}
 
 	const warningPopup = ({
@@ -344,6 +352,7 @@ const LoginPage = () => {
 			<PopUp
 				onClose={() => {
 					setShowWarningPopup(false)
+					setSizeSelectesRows([])
 				}}
 			>
 				<WarningDelete

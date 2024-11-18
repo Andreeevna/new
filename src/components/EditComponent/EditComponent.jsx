@@ -180,8 +180,8 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 
 		if (chapter === 'login') {
 			const formStateUpdate = {
-				bitrix_id: 225,
-				secret_key: 'Смородин Борис Борисович',
+				bitrix_id: +userID,
+				secret_key: `${secretKey}`,
 				login_info: [
 					{
 						id: +newvalue.id,
