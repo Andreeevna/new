@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateAdminClient } from '../../redux/slices/adminClientsSlice/adminClientsSlice'
 import { updateAdminLogin } from '../../redux/slices/adminLoginSlice/adminLoginSlice'
 import { updateAdminUser } from '../../redux/slices/adminUsersSlice/adminUsersSlice'
+import { getUserInitials } from '../../utils/bx/bxEmploee'
 import { clientsDict, LoginDict, usersDict } from '../../utils/dicts'
 import {
 	createOptionsForClients,
@@ -134,11 +135,20 @@ const EditComponent = ({ item, chapter, onClose, IGNORE_FIELDS = [] }) => {
 
 	// console.log(newvalue)
 
+	const userID = useSelector(state => state.bx.userId)
+	const initials = useSelector(state => state.bx.initials)
+
+	const secretKey = getUserInitials(
+		initials.NAME,
+		initials.LAST_NAME,
+		initials.SECOND_NAME
+	)
+
 	const onHandleUpdate = () => {
 		if (chapter === 'clients') {
 			const formStateUpdate = {
-				bitrix_id: 225,
-				secret_key: 'Смородин Борис Борисович',
+				bitrix_id: +userID,
+				secret_key: `${secretKey}`,
 				client_info: [
 					{
 						id: +newvalue.id,
