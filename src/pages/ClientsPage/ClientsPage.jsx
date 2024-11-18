@@ -340,6 +340,7 @@ const ClientsPage = () => {
 			<PopUp
 				onClose={() => {
 					setShowWarningPopup(false)
+					setSizeSelectesRows([])
 				}}
 			>
 				<WarningDelete
