@@ -84,7 +84,7 @@ function App() {
 
 	useEffect(() => {
 		getCurrentUser().then(response => {
-			// console.log(response)
+			console.log(response)
 			// initProject(response)
 		})
 	}, [])
@@ -95,8 +95,8 @@ function App() {
 			dispatch(getAdminUsers({ formStateUsers }))
 			dispatch(getAdminLogins({ formStateLogins })).then(resp => {
 				if (resp.payload) {
-					console.log(resp)
-					window.alert('Загрузка прошла')
+					// console.log(resp)
+					// window.alert('Загрузка прошла')
 				}
 				// console.log(resp)
 			})
